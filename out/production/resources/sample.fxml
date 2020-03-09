@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.shape.Line?>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Temperatura powietrza">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox>
+                           <children>
+                              <Label text="Wybierz miasto">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="citiesListView" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                        <TableView fx:id="measuresTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="minTemp" prefWidth="75.0" text="tempmin" />
+                            <TableColumn fx:id="maxTemp" prefWidth="75.0" text="tempmax" />
+                              <TableColumn fx:id="windSpeed" prefWidth="75.0" text="predkosc" />
+                              <TableColumn fx:id="humidity" prefWidth="75.0" text="wilgotnosc" />
+                              <TableColumn fx:id="dateOfMeasure" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="data" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </HBox>
+               </content>
+          </Tab>
+          <Tab text="Kalendarz pylenia roślin">
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <TableView accessibleRole="NODE" maxHeight="0.0">
+                            <placeholder>
+                              <Line></Line>
+                                
+                            </placeholder>
+                           <columns>
+                              <TableColumn editable="false" prefWidth="75.0" sortable="false">
+                                 <columns>
+                                    <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Leszczyna">
+                                       <columns>
+                                          <TableColumn editable="false" prefWidth="75.0" sortable="false" text="Bylica" />
+                                       </columns>
+                                    </TableColumn>
+                                 </columns>
+                              </TableColumn>
+                              <TableColumn editable="false" minWidth="50.0" prefWidth="100.0" sortable="false" text="Styczeń">
+                                 <columns>
+                                    <TableColumn editable="false" minWidth="20.0" prefWidth="-1.0" sortable="false">
+                                       <columns>
+                                          <TableColumn minWidth="20.0" prefWidth="-1.0" />
+                                       </columns>
+                                    </TableColumn>
+                                    <TableColumn editable="false" minWidth="20.0" prefWidth="10.0" sortable="false">
+                                       <columns>
+                                          <TableColumn editable="false" minWidth="20.0" prefWidth="10.0" sortable="false" style="-fx-background-color: #00ff00;" />
+                                       </columns>
+                                    </TableColumn>
+                                    <TableColumn editable="false" minWidth="20.0" prefWidth="10.0" sortable="false">
+                                       <columns>
+                                          <TableColumn editable="false" minWidth="20.0" prefWidth="-1.0" sortable="false" style="-fx-background-color: #00ff00;" />
+                                       </columns>
+                                    </TableColumn>
+                                 </columns>
+                              </TableColumn>
+                              <TableColumn editable="false" minWidth="50.0" prefWidth="100.0" sortable="false" text="Luty">
+                                 <columns>
+                                    <TableColumn editable="false" minWidth="20.0" prefWidth="-1.0" sortable="false" style="-fx-background-color: yellow;">
+                                       <columns>
+                                          <TableColumn editable="false" minWidth="20.0" prefWidth="-1.0" sortable="false" />
+                                       </columns>
+                                    </TableColumn>
+                                    <TableColumn minWidth="20.0" prefWidth="10.0" style="-fx-background-color: yellow;">
+                                       <columns>
+                                          <TableColumn editable="false" minWidth="20.0" prefWidth="10.0" sortable="false" />
+                                       </columns>
+                                    </TableColumn>
+                                    <TableColumn editable="false" minWidth="20.0" prefWidth="10.0" sortable="false" style="-fx-background-color: yellow;">
+                                       <columns>
+                                          <TableColumn editable="false" minWidth="20.0" prefWidth="-1.0" sortable="false" />
+                                       </columns>
+                                    </TableColumn>
+                                 </columns>
+                              </TableColumn>
+                           </columns>
+                        </TableView>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Aktualnie pylące rośliny to:" />
+                              <Label layoutX="10.0" layoutY="10.0" text="Bylica(Przykładowo jeśli mamy luty)" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</StackPane>

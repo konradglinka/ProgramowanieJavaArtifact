@@ -2,6 +2,7 @@ plugins {
     id 'java'
 }
 
+
 group 'ProgramowanieJava'
 version '1.0-SNAPSHOT'
 
