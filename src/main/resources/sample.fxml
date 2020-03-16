@@ -1,20 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.shape.Line?>
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <StackPane fx:id="registerAndLoginStackPane" prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <VBox fx:id="loginVBox" alignment="CENTER" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Logowanie" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="badEmailOrPasswordLabel" text="Nieprawidłowy E-mail lub hasło" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="E-mail" />
+                        <TextField fx:id="emailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
+                        <Label text="Hasło" />
+                        <PasswordField fx:id="passwordPasswordField" text="password" />
+                        <Button mnemonicParsing="false" onAction="#fakeLoginButton" text="Zaloguj" />
+                     </children></VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Nie posiadasz konta ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnRegisterButton" text="Rejestracja" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="registerVBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Rejestracja" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="registrationAlertLabel" text="Hasła nie są jednakowe" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="E-mail" />
+                        <TextField fx:id="registrationEmailTextField" maxWidth="300.0" text="januszkowalski@gmail.com" />
+                        <Label text="Hasło" />
+                        <PasswordField fx:id="registrationPasswordPasswordField" text="wojak" />
+                        <Label layoutX="145.0" layoutY="64.0" text="Powtórz hasło" />
+                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" layoutX="10.0" layoutY="73.0" text="wojak" />
+                        <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#registerButton" text="Zarejestruj" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Masz już konto ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Logowanie" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
+      <TabPane fx:id="mainViewTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
         <tabs>
           <Tab text="Temperatura powietrza">
                <content>
@@ -47,9 +121,9 @@
                <content>
                   <VBox prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <TableView accessibleRole="NODE" maxHeight="0.0">
+                        <TableView accessibleRole="NODE" maxHeight="0.0" VBox.vgrow="ALWAYS">
                             <placeholder>
-                              <Line></Line>
+                              <Line />
                                 
                             </placeholder>
                            <columns>
@@ -102,12 +176,16 @@
                               </TableColumn>
                            </columns>
                         </TableView>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER">
                            <children>
-                              <Label text="Aktualnie pylące rośliny to:" />
-                              <Label layoutX="10.0" layoutY="10.0" text="Bylica(Przykładowo jeśli mamy luty)" />
+                              <Label text="Aktualnie pylące rośliny">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </HBox>
+                        <ListView prefHeight="200.0" prefWidth="200.0" />
                      </children>
                   </VBox>
                </content>
