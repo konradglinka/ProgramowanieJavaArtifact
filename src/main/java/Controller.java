@@ -56,7 +56,7 @@ public class Controller {
         actualDustyPlantsListView.getItems().addAll(actualDustyPlants.listOfActualDustyPlants());
 
        // jdbc.getDbConnection();
-// jdbcQuery= new JDBCQuery(jdbc);
+        // jdbcQuery= new JDBCQuery(jdbc);
 
     }
     @FXML
