@@ -186,7 +186,7 @@
                                           </TableColumn>
                                        </columns>
                                     </TableColumn>
-                                    <TableColumn editable="false" minWidth="-1.0" prefWidth="-1.0" sortable="false" text="Styczeń">
+                                    <TableColumn fx:id="styczenColumn" editable="false" minWidth="-1.0" prefWidth="-1.0" sortable="false" text="Styczeń">
                                        <columns>
                                           <TableColumn editable="false" minWidth="-1.0" prefWidth="-1.0" sortable="false">
                                              <columns>
@@ -2390,7 +2390,7 @@
                         </HBox>
                         <VBox VBox.vgrow="ALWAYS">
                            <children>
-                              <ListView minHeight="100.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="actualDustyPlantsListView" minHeight="100.0" style="-fx-fixed-cell-size: 60;" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <Label text="dane: Ośrodek Badania Alergenów Środowiskowych Sp. z.o.o" />
