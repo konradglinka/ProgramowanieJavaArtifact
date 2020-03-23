@@ -1,15 +1,17 @@
+import DustyPlants.ActualDustyPlants;
+import DustyPlants.DustyPlant;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.sql.SQLException;
 
 public class Controller {
-
+    ActualDustyPlants actualDustyPlants=new ActualDustyPlants();
     JDBC jdbc=new JDBC();
     JDBCQuery jdbcQuery;
-
 
 
 
@@ -28,9 +30,27 @@ public class Controller {
     TabPane mainViewTabPane;
     @FXML
     TextField emailTextField;
-
     @FXML
     TextField registrationEmailTextField;
+    @FXML
+    TextField temperatureTextField;
+    @FXML
+    TextField humidityTextField;
+    @FXML
+    TextField windSpeedTextField;
+    @FXML
+    TextField claudinessTextField;
+    @FXML
+    TextField pressureTextField;
+
+
+
+
+
+
+
+
+
 
     @FXML
     PasswordField passwordPasswordField;
@@ -39,14 +59,24 @@ public class Controller {
     PasswordField registrationPasswordPasswordField;
     @FXML
     PasswordField registrationConfirmedPasswordPasswordField;
-@FXML
-   Label badEmailOrPasswordLabel;
+    @FXML
+    Label badEmailOrPasswordLabel;
     @FXML
     Label registrationAlertLabel;
     @FXML
+    ListView actualDustyPlantsListView;
+    @FXML
+    ListView cityToAddMeasureListView;
+    @FXML
+    TableColumn<DustyPlant,String>styczenColumn;
+    @FXML
     void initialize()  {
-       // jdbc.getDbConnection();
-// jdbcQuery= new JDBCQuery(jdbc);
+
+        actualDustyPlantsListView.getItems().addAll(actualDustyPlants.listOfActualDustyPlants());
+cityToAddMeasureListView.getItems().add("Lublin");
+        cityToAddMeasureListView.getItems().add("Warka");
+        jdbc.getDbConnection();
+         jdbcQuery= new JDBCQuery(jdbc);
 
     }
     @FXML
@@ -89,7 +119,10 @@ public class Controller {
         registerAndLoginStackPane.setVisible(true);
         mainViewTabPane.setVisible(false);
     }
-
+@FXML
+void addMeasureFromUserButton(){
+        jdbcQuery.addMeasuresFromUserToDataBase(pressureTextField,temperatureTextField,windSpeedTextField,humidityTextField,claudinessTextField,cityToAddMeasureListView);
+}
 
 
 
