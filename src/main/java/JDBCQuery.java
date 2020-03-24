@@ -1,3 +1,6 @@
+import MeasuresFromUsers.MesureFromUser;
+import MeasuresFromUsers.TemperaturesFromUser;
+import MeasuresFromUsers.WindSpeedFromUser;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
@@ -10,16 +13,19 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 
 import static java.util.Calendar.getInstance;
 
 public class JDBCQuery {
     private String userNameToMeasures="USER";
+    ArrayList<MesureFromUser> listOfMeasures = new ArrayList<>();
     private static Connection connection; //Polaczenie z baza danych
 
-    public JDBCQuery(JDBC jdbc) { //Laczymy sie z baza
+    public JDBCQuery(JDBC jdbc) throws SQLException { //Laczymy sie z baza
         connection = jdbc.getConnection();
+        getMeasureFromUserListFromDataBase();
 
     }
 
@@ -148,29 +154,46 @@ public void addMeasuresFromUserToDataBase(TextField pressureTextField, TextField
 
 
 }
-    public void takeMeasuresFromUserFromDataBase (TextField emailTextField, PasswordField passwordFromUser) throws SQLException {
-        ResultSet resultSet = null;
-        String email = emailTextField.getText();
-        String password = passwordFromUser.getText();
-        String loginQuerySQL = "SELECT ,PASSWORD from users WHERE EMAIL = '"+email+"' AND PASSWORD ='"+password+"'";
 
-        Statement stmt = null;
-        try {
-            stmt = connection.createStatement();
-        } catch (SQLException e) {
-            System.out.println("ERROR:No connection with Database");
-        }
-        try {
-            resultSet = stmt.executeQuery(loginQuerySQL);
-        } catch (SQLException e) {
-            System.out.println("ERROR:Bad SQL query");
-        }
-        if (resultSet.next()) {
+
+    private ArrayList<MesureFromUser> getMeasureFromUserListFromDataBase() throws SQLException {
+        //Metoda zwraca liste rekordow z bazy danych
+
+
+        String takeAllMeasures = "SELECT * FROM measuresfromusers";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(takeAllMeasures);
+
+        while (rs.next()) {
+
+            listOfMeasures.add(new MesureFromUser(rs.getInt(1), rs.getString(2), rs.getString(3),rs.getDouble(4),rs.getDouble(5),rs.getDouble(6),rs.getString(7),rs.getDouble(8),rs.getString(9)));
 
         }
 
+
+        return listOfMeasures;
     }
 
+    public ArrayList<TemperaturesFromUser> getTemperaturesFromUserList(){
+        ArrayList temperaturesFromUserArrayList = new ArrayList();
+        for(int i=0;i<listOfMeasures.size();i++)
+        {
+            if(listOfMeasures.get(i).getTemperature()!=0){
+                temperaturesFromUserArrayList.add(new TemperaturesFromUser(listOfMeasures.get(i).getDate(),listOfMeasures.get(i).getUserName(),listOfMeasures.get(i).getTemperature(),listOfMeasures.get(i).getCity()));
+            }
+        }
+        return temperaturesFromUserArrayList;
+    }
+    public ArrayList<WindSpeedFromUser> getWindSpeedFromUserList(){
+        ArrayList windSpeedFromUserArrayList = new ArrayList();
+        for(int i=0;i<listOfMeasures.size();i++)
+        {
+            if(listOfMeasures.get(i).getWindSpeed()!=0){
+                windSpeedFromUserArrayList.add(new TemperaturesFromUser(listOfMeasures.get(i).getDate(),listOfMeasures.get(i).getUserName(),listOfMeasures.get(i).getWindSpeed(),listOfMeasures.get(i).getCity()));
+            }
+        }
+        return windSpeedFromUserArrayList;
+    }
 
 
 }

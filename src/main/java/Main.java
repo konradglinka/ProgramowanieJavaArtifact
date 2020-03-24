@@ -14,6 +14,9 @@ public class Main extends Application {
         primaryStage.setResizable(true);
 
         primaryStage.setTitle("Projekt zaliczeniowy Konrad Glinka, Adrian Żak, Michał Rus");
+
+
+
         primaryStage.show();
 
 

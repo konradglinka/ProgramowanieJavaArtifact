@@ -2407,25 +2407,30 @@
                            <children>
                               <Label text="Wybież miasto" />
                               <TextField text="Wyszukaj" />
-                              <ListView prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="cityToTakeMaeasureFromUserListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <ComboBox prefHeight="25.0" prefWidth="601.0" />
+                              <HBox VBox.vgrow="NEVER">
+                                 <children>
+                                    <ComboBox fx:id="measuresFromUserComboBox" prefWidth="600.0" HBox.hgrow="ALWAYS" />
+                                    <Button minWidth="100.0" mnemonicParsing="false" onAction="#showMeasuresFromUserButton" text="Pokaż pomiary" />
+                                 </children>
+                              </HBox>
                               <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TableView prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="temperatureTableView" prefHeight="200.0" prefWidth="200.0">
                                       <columns>
-                                        <TableColumn prefWidth="151.0" text="Data pomiaru" />
-                                        <TableColumn prefWidth="124.0" text="Autor pomiaru" />
-                                          <TableColumn minWidth="0.0" prefWidth="169.0" text="Wartość" />
+                                        <TableColumn fx:id="date" prefWidth="151.0" text="Data pomiaru" />
+                                        <TableColumn fx:id="userName" prefWidth="124.0" text="Autor pomiaru" />
+                                          <TableColumn fx:id="temperature" minWidth="0.0" prefWidth="169.0" text="Wartość" />
                                       </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="windSpeedTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
                                        <columns>
                                           <TableColumn prefWidth="151.0" text="Data pomiaru" />
                                           <TableColumn prefWidth="124.0" text="Autor pomiaru" />
@@ -2435,7 +2440,7 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="pressureTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
                                        <columns>
                                           <TableColumn prefWidth="151.0" text="Data pomiaru" />
                                           <TableColumn prefWidth="124.0" text="Autor pomiaru" />
@@ -2445,7 +2450,7 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="humidityTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
                                        <columns>
                                           <TableColumn prefWidth="151.0" text="Data pomiaru" />
                                           <TableColumn prefWidth="124.0" text="Autor pomiaru" />
@@ -2455,10 +2460,10 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="claudinessTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
                                        <columns>
-                                          <TableColumn prefWidth="151.0" text="Data pomiaru" />
-                                          <TableColumn prefWidth="124.0" text="Autor pomiaru" />
+                                          <TableColumn prefWidth="151.0" text="date" />
+                                          <TableColumn prefWidth="124.0" text="userName" />
                                           <TableColumn minWidth="0.0" prefWidth="169.0" text="Wartość" />
                                        </columns>
                                        <columnResizePolicy>

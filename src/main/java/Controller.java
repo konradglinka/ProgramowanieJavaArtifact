@@ -1,8 +1,10 @@
 import DustyPlants.ActualDustyPlants;
-import DustyPlants.DustyPlant;
+import MeasuresFromUsers.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
@@ -10,6 +12,8 @@ import java.sql.SQLException;
 
 public class Controller {
     ActualDustyPlants actualDustyPlants=new ActualDustyPlants();
+    TablesForCityFactory tablesForCityFactory = new TablesForCityFactory();
+    MeasuresPLNamesFactory measuresPLNamesFactory = new MeasuresPLNamesFactory();
     JDBC jdbc=new JDBC();
     JDBCQuery jdbcQuery;
 
@@ -43,7 +47,22 @@ public class Controller {
     @FXML
     TextField pressureTextField;
 
-
+    @FXML
+    TableColumn<TemperaturesFromUser,String> date;
+    @FXML
+    TableColumn<TemperaturesFromUser,String> userName;
+    @FXML
+    TableColumn<TablesForCityFactory,Double> temperature;
+    @FXML
+    TableView<TemperaturesFromUser> temperatureTableView;
+@FXML
+TableView<WindSpeedFromUser> windSpeedTableView;
+    @FXML
+    TableView<HumidityFromUser> humidityTableView;
+    @FXML
+    TableView<PressureFromUser> pressureTableView;
+    @FXML
+    TableView<ClaudinessFromUser> claudinessTableView;
 
 
 
@@ -66,17 +85,22 @@ public class Controller {
     @FXML
     ListView actualDustyPlantsListView;
     @FXML
-    ListView cityToAddMeasureListView;
+    ListView<String> cityToAddMeasureListView;
     @FXML
-    TableColumn<DustyPlant,String>styczenColumn;
+    ListView<String> cityToTakeMaeasureFromUserListView;
+@FXML
+ComboBox<String> measuresFromUserComboBox;
     @FXML
-    void initialize()  {
-
+    void initialize() throws SQLException {
+measuresFromUserComboBox.getItems().addAll(measuresPLNamesFactory.getNamesOfMeasuresArraylist());
         actualDustyPlantsListView.getItems().addAll(actualDustyPlants.listOfActualDustyPlants());
 cityToAddMeasureListView.getItems().add("Lublin");
         cityToAddMeasureListView.getItems().add("Warka");
-        jdbc.getDbConnection();
-         jdbcQuery= new JDBCQuery(jdbc);
+        cityToTakeMaeasureFromUserListView.getItems().add("Lublin");
+      cityToTakeMaeasureFromUserListView.getItems().add("Warka");
+        //jdbc.getDbConnection();
+         //jdbcQuery= new JDBCQuery(jdbc);
+
 
     }
     @FXML
@@ -123,7 +147,19 @@ cityToAddMeasureListView.getItems().add("Lublin");
 void addMeasureFromUserButton(){
         jdbcQuery.addMeasuresFromUserToDataBase(pressureTextField,temperatureTextField,windSpeedTextField,humidityTextField,claudinessTextField,cityToAddMeasureListView);
 }
+@FXML
+void showMeasuresFromUserButton(){
+    if(measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Temperatura powietrza")) {
+        ObservableList<TemperaturesFromUser> listOfTemperatureResults;
+        listOfTemperatureResults = FXCollections.observableArrayList(tablesForCityFactory.showTemperaturesFromUserInCity(cityToTakeMaeasureFromUserListView.getSelectionModel().getSelectedItem(), jdbcQuery.getTemperaturesFromUserList()));
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        userName.setCellValueFactory(new PropertyValueFactory<>("userName"));
+        temperature.setCellValueFactory(new PropertyValueFactory<>("temperature"));
+        temperatureTableView.setItems(listOfTemperatureResults);
+    }
 
+
+}
 
 
 
@@ -140,6 +176,29 @@ void addMeasureFromUserButton(){
     void fakeLoginButton(){
         registerAndLoginStackPane.setVisible(false);
         mainViewTabPane.setVisible(true);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void turnOffAllMeasuresFromUser(){
+        claudinessTableView.setVisible(false);
+        temperatureTableView.setVisible(false);
+        pressureTableView.setVisible(false);
+        windSpeedTableView.setVisible(false);
+        humidityTableView.setVisible(false);
     }
 }
 
