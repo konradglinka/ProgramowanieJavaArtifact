@@ -2421,6 +2421,15 @@
                               <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <TableView fx:id="temperatureTableView" prefHeight="200.0" prefWidth="200.0">
+                                       <placeholder>
+                                          <Label text="Brak dostępnych danych dla wybranego miasta">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                          </Label>
+
+
+                                       </placeholder>
                                       <columns>
                                         <TableColumn fx:id="dateTempUser" prefWidth="151.0" text="Data pomiaru" />
                                         <TableColumn fx:id="userNameTemp" prefWidth="124.0" text="Autor pomiaru" />

@@ -122,6 +122,8 @@ public class Controller {
         actualDustyPlantsListView.getItems().addAll(actualDustyPlantsFactory.listOfActualDustyPlants()); //Lista aktualnie pylących roślin
         cityToAddMeasureListView.getItems().addAll(listOfCitiesFactory.getCitiesArrayList()); //Lista miast do dodania pomiaru
         cityToTakeMaeasureFromUserListView.getItems().addAll(listOfCitiesFactory.getCitiesArrayList()); //Lista miast do pobrania pomiaru
+        measuresFromUserComboBox.getSelectionModel().select(0); //Wybieramy 1 z wartości combobox by nie byl pusty
+        cityToTakeMaeasureFromUserListView.getSelectionModel().select("Lublin");
     }
     private void startConectionWithDataBase() { //Połączenie aplikacji z bazą danych
         jdbc.getDbConnection();
