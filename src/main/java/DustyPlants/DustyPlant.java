@@ -1,24 +1,13 @@
 package DustyPlants;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+public class DustyPlant { //Klasa reprezentuje dowolną rośline pylącą
 
-public class DustyPlant {
+    private String name; //nazwa rośliny
+    private int startDustMonth; //Początek pylenia rośliny
+    private int endDustMonth; //Koniec pylenia rośliny
 
-    private String name;
-    private int startDustMonth;
-    private int endDustMonth;
+    //NIE ISTNIEJĄ ROŚLINY KTÓRE PYLĄ W KILKU OKRESACH CZASU.KAŻDA ROSLINA MA OKRES OD PEWNEGO MIESIACA DO INNEGO MIESIĄCA
 
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public DustyPlant(String name, int startDustMonth, int endDustMonth) {
         this.name = name;
@@ -26,11 +15,13 @@ public class DustyPlant {
         this.endDustMonth = endDustMonth;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public int getStartDustMonth() {
         return startDustMonth;
     }
-
-
 
     public int getEndDustMonth() {
         return endDustMonth;

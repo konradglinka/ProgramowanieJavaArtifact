@@ -1,15 +1,18 @@
 package MeasuresFromUsers;
 
-public class MesureFromUser {
-    private int id=0;
-    private String date=null;
-    private String userName=null;
-    private double temperature=0.0;
-    private double windSpeed=0.0;
-    private double humidity=0.0;
-    private String claudiness=null;
-    private double pressure=0.0;
-    private String city=null;
+public class MesureFromUser { //Klasa reprezentuje 1 dodany pomiar przez użytkownika
+
+    //POMIARY SĄ WCZYTWANE JAKO OBIEKTY TEJ KLASY A DOPIERO POTEM DZIELONE NA KONKRETNE RODZAJE POMIARÓW NP.PressureFromUser
+
+    private int id = 0;
+    private String date = null;
+    private String userName = null;
+    private double temperature = 0.0;
+    private double windSpeed = 0.0;
+    private double humidity = 0.0;
+    private String claudiness = null;
+    private double pressure = 0.0;
+    private String city = null;
 
 
     public MesureFromUser(int id, String date, String userName, double temperature, double windSpeed, double humidity, String claudiness, double pressure, String city) {
@@ -23,9 +26,6 @@ public class MesureFromUser {
         this.pressure = pressure;
         this.city = city;
     }
-
-
-
 
 
     public double getTemperature() {
@@ -60,7 +60,5 @@ public class MesureFromUser {
         return date;
     }
 
-    public int getId() {
-        return id;
-    }
+
 }
