@@ -17,6 +17,7 @@ import java.util.Date;
 import static java.util.Calendar.getInstance;
 
 public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
+   AnotherFunctions anotherFunctions=new AnotherFunctions();
     private String userNameToMeasures = "USER"; //Nazwa użytkownika do testów to USER w przypadku braku podania email
     ArrayList<MesureFromUser> listOfMeasures = new ArrayList<>(); //Lista wszystkich pomiarów od użytkownika
     private static Connection connection; //Polaczenie z baza danych
@@ -32,8 +33,9 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     public boolean loginCheck(TextField emailTextField, PasswordField passwordFromUser) throws SQLException {
         ResultSet resultSet = null;
         String email = emailTextField.getText();
-        String password = passwordFromUser.getText();
-        String loginQuerySQL = "SELECT EMAIL,PASSWORD from users WHERE EMAIL = '" + email + "' AND PASSWORD ='" + password + "'";
+        String password = anotherFunctions.getMD5Password(passwordFromUser.getText());
+        String loginQuerySQL = "SELECT EMAIL,PASSWORD from users " +
+                "WHERE EMAIL = '" + email + "' AND PASSWORD ='" + password + "'";
 
         Statement stmt = null;
         try {
@@ -47,27 +49,22 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             System.out.println("ERROR:Bad SQL query");
         }
         if (resultSet.next()) {
-            System.out.println("zalogowane");
             userNameToMeasures = email;
             return true;
         }
-
         return false;
     }
 
     //Funkcja odpowiada za rejestracje użytkownika
-    public boolean addNewUser(TextField emailTextField, PasswordField passwordFromUser, PasswordField confirmedPasswordFromUser, Label registrationAlertLabel) throws SQLException {
-
+    public boolean addNewUser(TextField emailTextField, PasswordField passwordFromUser, PasswordField confirmedPasswordFromUser,
+                              Label registrationAlertLabel) throws SQLException {
         String email = emailTextField.getText();
-        String password = passwordFromUser.getText();
-        String confirmedPassword = confirmedPasswordFromUser.getText();
+        String password = anotherFunctions.getMD5Password(passwordFromUser.getText());
+        String confirmedPassword = anotherFunctions.getMD5Password(confirmedPasswordFromUser.getText());
         if (isAccountAlreadyEmailInDataBase(email) == false) {
-
-
             if (password.equals(confirmedPassword)) {
                 String addUserQuerySQL =
                         "INSERT INTO users (EMAIL,PASSWORD) VALUES ('" + email + "', '" + password + "')";
-
                 Statement stmt = null;
                 try {
                     stmt = connection.createStatement();
@@ -90,8 +87,6 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             registrationAlertLabel.setVisible(true);
             registrationAlertLabel.setText("Podany adres e-mail jest juz w użyciu");
         }
-
-
         return false;
     }
     //Funkcja pomocnicza sprawdza czy adres email nie dubluje się w bazie
@@ -120,7 +115,8 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
 
     //FUNKCJE DOTYCZĄCE POMIARÓW OD UŻYTKOWNIKA
     //Funkcja dodaje pomiar od użytkownika
-    public void addMeasuresFromUserToDataBase(TextField pressureTextField, TextField temperatureTextField, TextField windTextField, TextField humidityTextField, TextField cloudinessTextField, ListView<String> cityListListView) {
+    public void addMeasuresFromUserToDataBase(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
+                                              TextField humidityTextField, TextField cloudinessTextField, ListView<String> cityListListView) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date actualDate = getInstance().getTime();
         String userName = userNameToMeasures;
@@ -131,10 +127,10 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         String claudiness = cloudinessTextField.getText();
         String pressure = pressureTextField.getText();
         String city = cityListListView.getSelectionModel().getSelectedItem();
-
-        String addUserQuerySQL =
-                "INSERT INTO measuresfromusers (DATE,USERNAME,TEMP,WINDSPEED,HUMIDITY,CLOUDINESS,PRESSURE,CITY) VALUES ('" + date + "', '" + userName + "', '" + temperature + "', '" + windSpeed + "', '" + humidity + "', '" + claudiness + "', '" + pressure + "', '" + city + "')";
-
+        String addMeasureFromUserQuerySQL =
+                "INSERT INTO measuresfromusers (DATE,USERNAME,TEMP,WINDSPEED,HUMIDITY,CLOUDINESS,PRESSURE,CITY) VALUES " +
+                        "('" + date + "', '" + userName + "', '" + temperature + "', '" + windSpeed + "', '" + humidity + "', '"
+                        + claudiness + "', '" + pressure + "', '" + city + "')";
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
@@ -142,7 +138,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             System.out.println("ERROR:No connection with Database");
         }
         try {
-            stmt.executeUpdate(addUserQuerySQL);
+            stmt.executeUpdate(addMeasureFromUserQuerySQL);
 
         } catch (SQLException e) {
             System.out.println("ERROR:Bad SQL query");
@@ -153,11 +149,13 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     public void getMeasureFromUserListFromDataBase() throws SQLException {
         listOfMeasures.clear(); //Usuwamy poprzednie pomiary
         //Metoda zwraca liste rekordow z bazy danych
-        String takeAllMeasures = "SELECT * FROM measuresfromusers";
+        String takeAllMeasuresQuerySQL = "SELECT * FROM measuresfromusers";
         Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(takeAllMeasures);
+        ResultSet rs = stmt.executeQuery(takeAllMeasuresQuerySQL);
         while (rs.next()) {
-            listOfMeasures.add(new MesureFromUser(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getDouble(4), rs.getDouble(5), rs.getDouble(6), rs.getString(7), rs.getDouble(8), rs.getString(9)));
+            listOfMeasures.add(new MesureFromUser(rs.getInt(1), rs.getString(2),
+                    rs.getString(3), rs.getDouble(4), rs.getDouble(5),
+                    rs.getDouble(6), rs.getString(7), rs.getDouble(8), rs.getString(9)));
         }
 
     }
@@ -168,7 +166,10 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         ArrayList<TemperatureFromUser> temperaturesFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
             if (listOfMeasures.get(i).getTemperature() != 0) {
-                temperaturesFromUserArrayList.add(new TemperatureFromUser(listOfMeasures.get(i).getDate(), listOfMeasures.get(i).getUserName(), listOfMeasures.get(i).getTemperature(), listOfMeasures.get(i).getCity()));
+                temperaturesFromUserArrayList.add(new TemperatureFromUser(listOfMeasures.get(i).getDate(),
+                        listOfMeasures.get(i).getUserName(),
+                        listOfMeasures.get(i).getTemperature(),
+                        listOfMeasures.get(i).getCity()));
             }
         }
         return temperaturesFromUserArrayList;

@@ -15,7 +15,8 @@ public class MesureFromUser { //Klasa reprezentuje 1 dodany pomiar przez użytko
     private String city = null;
 
 
-    public MesureFromUser(int id, String date, String userName, double temperature, double windSpeed, double humidity, String claudiness, double pressure, String city) {
+    public MesureFromUser(int id, String date, String userName, double temperature,
+                          double windSpeed, double humidity, String claudiness, double pressure, String city) {
         this.id = id;
         this.date = date;
         this.userName = userName;
