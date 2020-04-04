@@ -9,6 +9,13 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="javafx-swt" level="project" />
+    <orderEntry type="library" name="Gradle: mysql:mysql-connector-java:5.1.5" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-fxml:win:11" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:win:11" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-controls:11" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:win:11" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-graphics:11" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:win:11" level="project" />
+    <orderEntry type="library" name="Gradle: org.openjfx:javafx-base:11" level="project" />
   </component>
 </module>
