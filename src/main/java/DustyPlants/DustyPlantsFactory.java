@@ -4,7 +4,7 @@ import DustyPlants.DustyPlant;
 
 import java.util.ArrayList;
 
-public class DustyPlantsFactory {
+public class DustyPlantsFactory { //Klasa zawiera wszystkie rośliny pylące i umożliwia dostęp do nich
     ArrayList<DustyPlant>dustyPlantArraylist=new ArrayList<>();
 
 
