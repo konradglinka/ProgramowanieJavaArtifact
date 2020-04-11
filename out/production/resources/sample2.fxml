@@ -11,8 +11,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -42,17 +40,43 @@
                            </font>
                         </Label>
                         <Label text="E-mail" />
-                        <TextField fx:id="loginEmailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
+                        <TextField fx:id="emailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
                         <Label text="Hasło" />
                         <PasswordField fx:id="passwordPasswordField" text="password" />
                         <Button mnemonicParsing="false" onAction="#loginButton" text="Zaloguj" />
+                        <Button mnemonicParsing="false" text="Zapomniałem hasła" />
                      </children></VBox>
+                  <StackPane prefHeight="150.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+                           <children>
+                              <Label text="Podaj e-mail, dla którego ma być resetowane hasło" />
+                              <TextField />
+                              <Button mnemonicParsing="false" text="Zresetuj hasło" />
+                              <Button mnemonicParsing="false" text="Powrót do logowania" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+                           <children>
+                              <Label text="Wpisz kod do resetowania hasła otrzymany" />
+                              <Label text="w wiadomości e-mail" />
+                              <TextField />
+                              <Button mnemonicParsing="false" text="OK" />
+                           </children>
+                        </VBox>
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" visible="false">
+                           <children>
+                              <Label text="Podaj nowe hasło" />
+                              <TextField />
+                              <Label text="Powtórz hasło" />
+                              <TextField />
+                              <Button mnemonicParsing="false" text="Zatwierdź" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </StackPane>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#switchOnForgotPasswordButton" text="Zapomnialem hasła">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></Button>
                         <Label text="Nie posiadasz konta ?" />
                         <Button mnemonicParsing="false" onAction="#switchOnRegisterButton" text="Rejestracja" />
                      </children>
@@ -78,37 +102,11 @@
                            </font>
                         </Label>
                         <Label text="E-mail" />
-                        <TextField fx:id="registrationEmailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
+                        <TextField fx:id="registrationEmailTextField" maxWidth="300.0" text="januszkowalski@gmail.com" />
                         <Label text="Hasło" />
-                        <PasswordField fx:id="registrationPasswordPasswordField" text="zaq12wsX" />
+                        <PasswordField fx:id="registrationPasswordPasswordField" text="wojak" />
                         <Label layoutX="145.0" layoutY="64.0" text="Powtórz hasło" />
-                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" layoutX="10.0" layoutY="73.0" text="zaq12wsX" />
-                        <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#sendRegistrationCode" text="Zarejestruj" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Masz już konto ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Logowanie" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox fx:id="register2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Rejestracja" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Aby potwierdzić rejestracje wpisz kod przesłany na podany wcześniej adres e-mail" textAlignment="CENTER" wrapText="true" />
-                        <TextField fx:id="registrationCodeTextField" alignment="CENTER" maxWidth="300.0" />
+                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" layoutX="10.0" layoutY="73.0" text="wojak" />
                         <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#registerButton" text="Zarejestruj" />
                      </children>
                   </VBox>
@@ -120,96 +118,11 @@
                   </VBox>
                </children>
             </VBox>
-            <VBox fx:id="changePassword1VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Zresetuj hasło" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Podaj adres E-mail dla którego chcesz zresetować hasło, zostanie na niego wysłany kod do resetowania hasła" textAlignment="CENTER" wrapText="true" />
-                        <TextField fx:id="emailToResetPasswordTextField" alignment="CENTER" maxWidth="300.0" text="konradgjd@gmail.com" />
-                        <Button mnemonicParsing="false" onAction="#sendResetPasswordCode" text="Wyślij kod" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Znasz hasło ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox fx:id="changePassword2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Zresetuj hasło" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Wpisz otrzymany kod aby zresetować hasło" textAlignment="CENTER" wrapText="true" />
-                        <TextField fx:id="resetCodeTextField" alignment="CENTER" maxWidth="300.0" />
-                        <Button mnemonicParsing="false" onAction="#goToChangePasswordButton" text="Zresetuj hasło" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Znasz hasło ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox fx:id="changePassword3VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Zmiana hasła" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label fx:id="badPasswordLabel" text="Nieprawidłowy E-mail lub hasło" textFill="RED" visible="false">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Hasło" textAlignment="CENTER" wrapText="true" />
-                        <PasswordField fx:id="resetPasswordPasswordField" />
-                        <Label layoutX="145.0" layoutY="43.0" text="Powtórz hasło" textAlignment="CENTER" wrapText="true" />
-                        <PasswordField fx:id="conifrmedResetPasswordPasswordField" layoutX="10.0" layoutY="52.0" />
-                        <Button mnemonicParsing="false" onAction="#changePasswordButton" text="Zmień hasło" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Znasz hasło ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
          </children>
       </StackPane>
       <TabPane fx:id="mainViewTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
-        <tabs>
-          <Tab text="Temperatura powietrza">
+         <tabs>
+            <Tab text="Temperatura powietrza">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -220,38 +133,23 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <HBox prefWidth="200.0">
-                                 <children>
-                                    <TextField fx:id="nameOfCityToFindTextField" />
-                                    <Button mnemonicParsing="false" onAction="#findCityByNameButton" prefHeight="0.0" prefWidth="52.0">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
-                                 </children>
-                              </HBox>
-                              <ListView fx:id="cityToTakeMaeasureFromOWMListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="citiesListView" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
-                        <TableView fx:id="measuresFromOWMTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
-                          <columns>
-                            <TableColumn fx:id="tempColumn" prefWidth="100.0" text="Temperatura" />
-                            <TableColumn fx:id="windColumn" prefWidth="109.0" text="Prędkość wiatru" />
-                              <TableColumn fx:id="humidityColumn" prefWidth="91.0" text="Wilgotność" />
-                              <TableColumn fx:id="pressureColumn" minWidth="0.0" prefWidth="0.0" text="Ciśnienie" />
-                              <TableColumn fx:id="claudinessColumn" prefWidth="91.0" text="Zachmurzenie" />
-                              <TableColumn fx:id="dateOWMColumn" maxWidth="1.7976931348623157E308" prefWidth="184.0" text="Data" />
-                          </columns>
+                        <TableView fx:id="measuresTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="minTemp" prefWidth="75.0" text="tempmin" />
+                              <TableColumn fx:id="maxTemp" prefWidth="75.0" text="tempmax" />
+                              <TableColumn fx:id="windSpeed" prefWidth="75.0" text="predkosc" />
+                              <TableColumn fx:id="humidity" prefWidth="75.0" text="wilgotnosc" />
+                              <TableColumn fx:id="dateOfMeasure" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="data" />
+                           </columns>
                         </TableView>
                      </children>
                   </HBox>
                </content>
-          </Tab>
-          <Tab text="Kalendarz pylenia roślin">
+            </Tab>
+            <Tab text="Kalendarz pylenia roślin">
                <content>
                   <VBox>
                      <children>
@@ -2530,7 +2428,7 @@
                      </children>
                   </VBox>
                </content>
-          </Tab>
+            </Tab>
             <Tab text="Pomiary od użytkowników">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
@@ -2562,11 +2460,11 @@
 
 
                                        </placeholder>
-                                      <columns>
-                                        <TableColumn fx:id="dateTempUser" prefWidth="151.0" text="Data pomiaru" />
-                                        <TableColumn fx:id="userNameTemp" prefWidth="124.0" text="Autor pomiaru" />
+                                       <columns>
+                                          <TableColumn fx:id="dateTempUser" prefWidth="151.0" text="Data pomiaru" />
+                                          <TableColumn fx:id="userNameTemp" prefWidth="124.0" text="Autor pomiaru" />
                                           <TableColumn fx:id="temperature" minWidth="0.0" prefWidth="169.0" text="Wartość" />
-                                      </columns>
+                                       </columns>
                                        <columnResizePolicy>
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
@@ -2709,7 +2607,7 @@
                   </HBox>
                </content>
             </Tab>
-        </tabs>
+         </tabs>
       </TabPane>
    </children>
 </StackPane>

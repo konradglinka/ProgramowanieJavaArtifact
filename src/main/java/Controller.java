@@ -1,4 +1,6 @@
-import DustyPlants.ActualDustyPlantsFactory;
+import DustyPlants.ActualDustyPlants;
+import EmailActions.EmailToRegister;
+import EmailActions.EmailToResetPassword;
 import MeasuresFromUsers.MeasuresPLNamesFactory;
 import MeasuresFromUsers.TablesForCityFactory;
 import MeasuresFromUsers.TypeOfMeasure.*;
@@ -19,8 +21,11 @@ import java.sql.SQLException;
 import java.util.Date;
 
 public class Controller {
-    ActualDustyPlantsFactory actualDustyPlantsFactory = new ActualDustyPlantsFactory(); //Pobieramy listę aktualnie pylących roślin
-   WeatherMeasuresFactory weatherMeasuresFactory;
+
+    String resetPasswordCode;
+    String registerCode;
+    ActualDustyPlants actualDustyPlants = new ActualDustyPlants(); //Pobieramy listę aktualnie pylących roślin
+    WeatherMeasuresFactory weatherMeasuresFactory;
 
     TablesForCityFactory tablesForCityFactory = new TablesForCityFactory(); //Do tworzenia tabel z pomiarami dla wybranych miast
     MeasuresPLNamesFactory measuresPLNamesFactory = new MeasuresPLNamesFactory();//Pobieramy listę dostępnych pomiarów
@@ -36,7 +41,7 @@ public class Controller {
     @FXML
     VBox loginVBox;
     @FXML
-    TextField emailTextField;
+    TextField loginEmailTextField;
     @FXML
     PasswordField passwordPasswordField;
     //REJESTRACJA
@@ -122,6 +127,9 @@ public class Controller {
     @FXML
     TableColumn<ClaudinessFromUser, String> claudiness;
 
+
+
+    //OWM
     @FXML
     ListView<String> cityToTakeMaeasureFromOWMListView;
     @FXML
@@ -140,16 +148,43 @@ public class Controller {
     TableColumn<WeatherMeasureOWM,String>claudinessColumn;
     @FXML
     TableColumn<WeatherMeasureOWM, Date>dateOWMColumn;
+
+
+
+    //RESETOWANIE HASŁA
+    @FXML
+    VBox changePassword1VBox;
+    @FXML
+    VBox changePassword2VBox;
+    @FXML
+    VBox changePassword3VBox;
+    @FXML
+    TextField emailToResetPasswordTextField;
+    @FXML
+    TextField resetCodeTextField;
+    @FXML
+    PasswordField resetPasswordPasswordField;
+    @FXML
+    PasswordField conifrmedResetPasswordPasswordField;
+    @FXML
+    Label badPasswordLabel;
+    @FXML
+    VBox register2VBox;
+    @FXML
+    TextField registrationCodeTextField;
+
     @FXML
     void initialize() {
         startConectionWithDataBase(); //Łączymy się z bazą w celu uwierzytelnienia i dalszej pracy aplikacji
         measuresFromUserComboBox.getItems().addAll(measuresPLNamesFactory.getNamesOfMeasuresArraylist()); //Lista dostępnych pomiarów do wyboru
-        actualDustyPlantsListView.getItems().addAll(actualDustyPlantsFactory.listOfActualDustyPlants()); //Lista aktualnie pylących roślin
+        actualDustyPlantsListView.getItems().addAll(actualDustyPlants.listOfActualDustyPlants()); //Lista aktualnie pylących roślin
         cityToAddMeasureListView.getItems().addAll(listOfCitiesFactory.getCitiesArrayList()); //Lista miast do dodania pomiaru
         cityToTakeMaeasureFromUserListView.getItems().addAll(listOfCitiesFactory.getCitiesArrayList()); //Lista miast do pobrania pomiaru
         cityToTakeMaeasureFromOWMListView.getItems().addAll(listOfCitiesFactory.getCitiesArrayList());
         measuresFromUserComboBox.getSelectionModel().select(0); //Wybieramy 1 z wartości combobox by nie byl pusty
-
+        cityToAddMeasureListView.getSelectionModel().selectFirst();
+        cityToTakeMaeasureFromUserListView.getSelectionModel().selectFirst();
+        cityToTakeMaeasureFromOWMListView.getSelectionModel().selectFirst();
     }
     private void startConectionWithDataBase() { //Połączenie aplikacji z bazą danych
         jdbc.getDbConnection();
@@ -167,18 +202,14 @@ public class Controller {
         registrationAlertLabel.setVisible(false);
     }
 
-    @FXML
-    void switchOnLoginButton() { //Funkcja przełącza na okienko do logowania
-        loginVBox.setVisible(true);
-        registerVBox.setVisible(false);
-    }
+
 
     @FXML
     void loginButton() throws SQLException { //Funkcja zajmuje się uwierzytelnianiem i przełącza na główny ekran aplikacji
-        if (jdbcQuery.loginCheck(emailTextField, passwordPasswordField) == true) {
+        if (jdbcQuery.loginCheck(loginEmailTextField, passwordPasswordField) == true) {
             registerAndLoginStackPane.setVisible(false);
             mainViewTabPane.setVisible(true);
-        } else if (jdbcQuery.loginCheck(emailTextField, passwordPasswordField) == false) {
+        } else if (jdbcQuery.loginCheck(loginEmailTextField, passwordPasswordField) == false) {
             badEmailOrPasswordLabel.setVisible(true);
         }
     }
@@ -189,11 +220,14 @@ public class Controller {
     }
     @FXML
     void registerButton() throws SQLException { //Funkcja dodaje nowego użytkownika do bazy i przechodzi do logowania
-        if (jdbcQuery.addNewUser(registrationEmailTextField, registrationPasswordPasswordField, registrationConfirmedPasswordPasswordField, registrationAlertLabel) == true) {
-            loginVBox.setVisible(true);
-            registerVBox.setVisible(false);
-        } else if (jdbcQuery.addNewUser(registrationEmailTextField, registrationPasswordPasswordField, registrationConfirmedPasswordPasswordField, registrationAlertLabel) == false) { }
-    }
+
+       if(registerCode.equals(registrationCodeTextField.getText())) {
+           if (jdbcQuery.addNewUser(registrationEmailTextField, registrationPasswordPasswordField, registrationConfirmedPasswordPasswordField, registrationAlertLabel) == true) {
+               loginVBox.setVisible(true);
+               register2VBox.setVisible(false);
+           }
+       }
+}
 
     @FXML
     void logoutButton() { //Funkcja wylogowywuje z aplikacji i przełącza do logowania
@@ -302,6 +336,63 @@ String finalInput =firstInput.toUpperCase()+input.substring(1);
 
 
     }
+    @FXML
+    void sendRegistrationCode() throws SQLException {
+
+        if(jdbcQuery.isEmail(registrationEmailTextField,registrationAlertLabel)==true
+                &&jdbcQuery.isPasswordStrength(registrationPasswordPasswordField,registrationAlertLabel)==true
+                &&jdbcQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText())==false
+                &&registrationPasswordPasswordField.getText().equals(registrationConfirmedPasswordPasswordField.getText())==true) {
+            registerVBox.setVisible(false);
+            register2VBox.setVisible(true);
+            EmailToRegister emailToRegister = new EmailToRegister(registrationEmailTextField);
+            Thread threadRegisterEmail = new Thread(emailToRegister);
+            threadRegisterEmail.start();
+            registerCode = emailToRegister.getRegistrationCode();
+        }
+
+    }
+    @FXML
+    void sendResetPasswordCode(){
+        EmailToResetPassword emailToResetPassword=new EmailToResetPassword(emailToResetPasswordTextField);
+        Thread threadResetPasswordEmail=new Thread(emailToResetPassword);
+        threadResetPasswordEmail.start();
+        changePassword1VBox.setVisible(false);
+        changePassword2VBox.setVisible(true);
+
+        resetPasswordCode=emailToResetPassword.getResetPasswordCode();
+}
+@FXML
+void goToChangePasswordButton(){
+
+        if(resetCodeTextField.getText().equals(resetPasswordCode)){
+            changePassword2VBox.setVisible(false);
+            changePassword3VBox.setVisible(true);
+        }
+}
+@FXML
+void changePasswordButton() throws SQLException {
+        if(jdbcQuery.changeUserPassword(emailToResetPasswordTextField,resetPasswordPasswordField,conifrmedResetPasswordPasswordField,badPasswordLabel)==true)
+    {changePassword3VBox.setVisible(false);
+    loginVBox.setVisible(true);}
+    }
+
+    @FXML
+    void switchOnForgotPasswordButton(){
+        loginVBox.setVisible(false);
+        changePassword1VBox.setVisible(true);
+    }
+
+
+    @FXML
+    void switchOnLoginButton(){
+        changePassword1VBox.setVisible(false);
+        changePassword2VBox.setVisible(false);
+        changePassword3VBox.setVisible(false);
+        registerVBox.setVisible(false);
+        loginVBox.setVisible(true);
+    }
+
 }
 
 

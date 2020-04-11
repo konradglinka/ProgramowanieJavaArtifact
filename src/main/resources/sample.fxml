@@ -21,7 +21,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <StackPane fx:id="registerAndLoginStackPane" prefHeight="150.0" prefWidth="200.0" visible="false">
+      <StackPane fx:id="registerAndLoginStackPane" prefHeight="150.0" prefWidth="200.0">
          <children>
             <VBox fx:id="loginVBox" alignment="CENTER" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -42,13 +42,17 @@
                            </font>
                         </Label>
                         <Label text="E-mail" />
-                        <TextField fx:id="emailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
+                        <TextField fx:id="loginEmailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
                         <Label text="Hasło" />
                         <PasswordField fx:id="passwordPasswordField" text="password" />
                         <Button mnemonicParsing="false" onAction="#loginButton" text="Zaloguj" />
                      </children></VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#switchOnForgotPasswordButton" text="Zapomnialem hasła">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin></Button>
                         <Label text="Nie posiadasz konta ?" />
                         <Button mnemonicParsing="false" onAction="#switchOnRegisterButton" text="Rejestracja" />
                      </children>
@@ -74,11 +78,37 @@
                            </font>
                         </Label>
                         <Label text="E-mail" />
-                        <TextField fx:id="registrationEmailTextField" maxWidth="300.0" text="januszkowalski@gmail.com" />
+                        <TextField fx:id="registrationEmailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
                         <Label text="Hasło" />
-                        <PasswordField fx:id="registrationPasswordPasswordField" text="wojak" />
+                        <PasswordField fx:id="registrationPasswordPasswordField" text="zaq12wsX" />
                         <Label layoutX="145.0" layoutY="64.0" text="Powtórz hasło" />
-                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" layoutX="10.0" layoutY="73.0" text="wojak" />
+                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" layoutX="10.0" layoutY="73.0" text="zaq12wsX" />
+                        <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#sendRegistrationCode" text="Zarejestruj" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Masz już konto ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Logowanie" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="register2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Rejestracja" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Aby potwierdzić rejestracje wpisz kod przesłany na podany wcześniej adres e-mail" textAlignment="CENTER" wrapText="true" />
+                        <TextField fx:id="registrationCodeTextField" alignment="CENTER" maxWidth="300.0" />
                         <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#registerButton" text="Zarejestruj" />
                      </children>
                   </VBox>
@@ -90,9 +120,94 @@
                   </VBox>
                </children>
             </VBox>
+            <VBox fx:id="changePassword1VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zresetuj hasło" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Podaj adres E-mail dla którego chcesz zresetować hasło, zostanie na niego wysłany kod do resetowania hasła" textAlignment="CENTER" wrapText="true" />
+                        <TextField fx:id="emailToResetPasswordTextField" alignment="CENTER" maxWidth="300.0" text="konradgjd@gmail.com" />
+                        <Button mnemonicParsing="false" onAction="#sendResetPasswordCode" text="Wyślij kod" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Znasz hasło ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="changePassword2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zresetuj hasło" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Wpisz otrzymany kod aby zresetować hasło" textAlignment="CENTER" wrapText="true" />
+                        <TextField fx:id="resetCodeTextField" alignment="CENTER" maxWidth="300.0" />
+                        <Button mnemonicParsing="false" onAction="#goToChangePasswordButton" text="Zresetuj hasło" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Znasz hasło ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="changePassword3VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zmiana hasła" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="badPasswordLabel" text="Nieprawidłowy E-mail lub hasło" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Hasło" textAlignment="CENTER" wrapText="true" />
+                        <PasswordField fx:id="resetPasswordPasswordField" />
+                        <Label layoutX="145.0" layoutY="43.0" text="Powtórz hasło" textAlignment="CENTER" wrapText="true" />
+                        <PasswordField fx:id="conifrmedResetPasswordPasswordField" layoutX="10.0" layoutY="52.0" />
+                        <Button mnemonicParsing="false" onAction="#changePasswordButton" text="Zmień hasło" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Znasz hasło ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
          </children>
       </StackPane>
-      <TabPane fx:id="mainViewTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="mainViewTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
         <tabs>
           <Tab text="Temperatura powietrza">
                <content>
