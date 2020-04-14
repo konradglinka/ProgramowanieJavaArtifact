@@ -1,12 +1,30 @@
 package MeasuresFromUsers;
 
-
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
 
-public class VerificationDataFromUser {
-    public boolean verificationTemperature(TextField temperatureTextField){
+public class CheckDataBeforeAddMesure {
+
+    public boolean veryficicationComplete(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
+                                          TextField humidityTextField, TextField cloudinessTextField) {
+        boolean temperature= verificationTemperature(temperatureTextField);
+        boolean windSpeed = verificationWindSpeed(windTextField);
+        boolean pressure=verificationPressure(pressureTextField);
+        boolean claudiness=verificationClaudiness(cloudinessTextField);
+        boolean humidity=verificationHumidity(humidityTextField);
+        if(temperature==true&&windSpeed==true&&pressure==true&&claudiness==true&&humidity==true)
+        {
+            return true;
+        }
+
+        else if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0 && cloudinessTextField.getText().length()==0)
+        {
+            return false; // Nie można dodać pomiaru bez danych
+        }
+        return false;
+    }
+    private boolean verificationTemperature(TextField temperatureTextField){
+
         boolean maxValue=false;
         boolean minValue=false;
         if (temperatureTextField.getText().equals(""))
@@ -19,7 +37,7 @@ public class VerificationDataFromUser {
             if(temperature>60.0){
                 maxValue=true;
             }
-            if(minValue==true && maxValue==false) {
+            if(minValue==true && maxValue==false && allCharsAreDigits(temperatureTextField)==true) {
                 temperatureTextField.setStyle("");
                 return true;
             }
@@ -34,7 +52,8 @@ public class VerificationDataFromUser {
         }
 
     }
-    public boolean verificationWindSpeed(TextField windSpeedTextField){
+    private boolean verificationWindSpeed(TextField windSpeedTextField){
+
         boolean maxValue=false;
         boolean minValue=false;
         if (windSpeedTextField.getText().equals(""))
@@ -47,7 +66,7 @@ public class VerificationDataFromUser {
             if(windSpeed>63.0){
                 maxValue=true;
             }
-            if(minValue==true && maxValue==false) {
+            if(minValue==true && maxValue==false && allCharsAreDigits(windSpeedTextField)==true) {
                 windSpeedTextField.setStyle("");
                 return true;
             }
@@ -62,7 +81,8 @@ public class VerificationDataFromUser {
         }
 
     }
-    public boolean verificationPressure(TextField pressureTextField){
+   private boolean verificationPressure(TextField pressureTextField){
+
         boolean maxValue=false;
         boolean minValue=false;
         if (pressureTextField.getText().equals(""))
@@ -75,7 +95,7 @@ public class VerificationDataFromUser {
             if(pressure>1086.0){
                 maxValue=true;
             }
-            if(minValue==true && maxValue==false) {
+            if(minValue==true && maxValue==false && allCharsAreDigits(pressureTextField)==true) {
                 pressureTextField.setStyle("");
                 return true;
             }
@@ -90,7 +110,7 @@ public class VerificationDataFromUser {
         }
 
     }
-    public boolean verificationClaudiness(TextField claudinessTextField){
+   private boolean verificationClaudiness(TextField claudinessTextField){
         boolean haveNumber=false;
         if (claudinessTextField.getText().equals(""))
             return true;
@@ -116,7 +136,8 @@ public class VerificationDataFromUser {
         }
 
     }
-    public boolean verificationHumidity(TextField humidityTextField){
+    private boolean verificationHumidity(TextField humidityTextField){
+
         boolean maxValue=false;
         boolean minValue=false;
         if (humidityTextField.getText().equals(""))
@@ -129,7 +150,7 @@ public class VerificationDataFromUser {
             if(humidity>100.0){
                 maxValue=true;
             }
-            if(minValue==true && maxValue==false) {
+            if(minValue==true && maxValue==false && allCharsAreDigits(humidityTextField)==true) {
                 humidityTextField.setStyle("");
                 return true;
             }
@@ -145,4 +166,12 @@ public class VerificationDataFromUser {
 
     }
 
+    private boolean allCharsAreDigits (TextField mesureTextField){
+        for(int i=0; i<mesureTextField.getText().length();i++) {
+            if (!((int) (mesureTextField.getText().charAt(i)) >= 48 && (int) (mesureTextField.getText().charAt(i)) <= 57)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

@@ -2,7 +2,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class AnotherFunctions {
+public class MD5 {
     public String getMD5Password(String input)
     {
         try {
