@@ -1,12 +1,14 @@
 plugins {
     id 'java'
+    id "org.openjfx.javafxplugin" version "0.0.8"
+    
 }
 
 
 group 'ProgramowanieJava'
 version '1.0-SNAPSHOT'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()

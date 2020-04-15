@@ -10,12 +10,15 @@ import net.aksingh.owmjapis.model.HourlyWeatherForecast;
 import net.aksingh.owmjapis.model.param.WeatherData;
 
 import java.io.FileNotFoundException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DataFromOWM<HourlyWeatherForecast> {
     private OWM owm = new OWM("9893d21085d2622338d6efc7d92ed555");
     private String city;
     net.aksingh.owmjapis.model.HourlyWeatherForecast dailyWeatherForecast;
+    DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy       HH:mm");
     public DataFromOWM(String city) throws FileNotFoundException, APIException {
         this.city=city;
         owm.setUnit(OWM.Unit.METRIC); //Temperatura w stopniach celsjusza
@@ -41,9 +44,10 @@ public class DataFromOWM<HourlyWeatherForecast> {
 
         return dailyWeatherForecast.getDataList().get(timeOfMeasure).getMainData().getPressure();
     }
-    public Date dateOfMeasure(int timeOfMeasure)  { //funkcja zwraca date kiedy wykonano pomiar
+    public String dateOfMeasure(int timeOfMeasure)  { //funkcja zwraca date kiedy wykonano pomiar
+        Date date =dailyWeatherForecast.getDataList().get(timeOfMeasure).getDateTime();
 
-        return dailyWeatherForecast.getDataList().get(timeOfMeasure).getDateTime();
+        return dateFormat.format(date);
     }
     public String claudinessInCity(int timeOfMeasure) { //funkcja zwraca stan nieba w mieście (chmury,deszcz itp)
 

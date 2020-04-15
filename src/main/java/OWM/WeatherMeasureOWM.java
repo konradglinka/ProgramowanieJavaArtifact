@@ -1,5 +1,8 @@
 package OWM;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class WeatherMeasureOWM {
@@ -8,15 +11,16 @@ public class WeatherMeasureOWM {
     double humidity;
     double pressure;
     String claudiness;
-    Date dateOfMeasure;
+    String dateOfMeasure;
 
-    public WeatherMeasureOWM(double temp, double wind, double humidity, double pressure, String claudiness, Date dateOfMeasure) {
+    public WeatherMeasureOWM(double temp, double wind, double humidity, double pressure, String claudiness, String dateOfMeasure) throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         this.temp = temp;
         this.wind = wind;
         this.humidity = humidity;
         this.pressure = pressure;
         this.claudiness = claudiness;
-        this.dateOfMeasure = dateOfMeasure;
+        this.dateOfMeasure = dateOfMeasure.toString();
     }
 
     public double getTemp() {
@@ -59,11 +63,11 @@ public class WeatherMeasureOWM {
         this.claudiness = claudiness;
     }
 
-    public Date getDateOfMeasure() {
+    public String getDateOfMeasure() {
         return dateOfMeasure;
     }
 
-    public void setDateOfMeasure(Date dateOfMeasure) {
+    public void setDateOfMeasure(String dateOfMeasure) {
         this.dateOfMeasure = dateOfMeasure;
     }
 }

@@ -18,7 +18,9 @@ import javafx.scene.layout.VBox;
 import net.aksingh.owmjapis.api.APIException;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.Date;
 
 public class Controller {
@@ -149,7 +151,7 @@ public class Controller {
     @FXML
     TableColumn<WeatherMeasureOWM,String>claudinessColumn;
     @FXML
-    TableColumn<WeatherMeasureOWM, Date>dateOWMColumn;
+    TableColumn<WeatherMeasureOWM, String>dateOWMColumn;
 
 
 
@@ -189,6 +191,10 @@ public class Controller {
 
     @FXML
     TextField nameOfCityToAddMesureFromUserTextField;
+
+    public Controller() throws IOException {
+    }
+
     @FXML
     void initialize() {
         startConectionWithDataBase(); //Łączymy się z bazą w celu uwierzytelnienia i dalszej pracy aplikacji
@@ -328,7 +334,7 @@ public class Controller {
     }
 
     @FXML
-    void findCityToTakeOWMDataButton() throws FileNotFoundException, APIException {
+    void findCityToTakeOWMDataButton() throws FileNotFoundException, APIException, ParseException {
         String input = nameOfCityToFindTextField.getText().toLowerCase();
 String firstInput=input.substring(0,1);
 String finalInput =firstInput.toUpperCase()+input.substring(1); //Ostateczna nazwa miasta
@@ -380,7 +386,7 @@ void findCityToTakeMeasureFromUsersButton(){
         }
     }
 @FXML
-void onClickOWMCityListView() throws FileNotFoundException, APIException {
+void onClickOWMCityListView() throws FileNotFoundException, APIException, ParseException {
     weatherMeasuresFactory= new WeatherMeasuresFactory(cityToTakeMaeasureFromOWMListView.getSelectionModel().getSelectedItem(),39);
     ObservableList<WeatherMeasureOWM> listOfWeatherMeasures = FXCollections.observableArrayList(weatherMeasuresFactory.getWeatherMeasuresListOWM());
     tempColumn.setCellValueFactory(new PropertyValueFactory<>("temp") );
