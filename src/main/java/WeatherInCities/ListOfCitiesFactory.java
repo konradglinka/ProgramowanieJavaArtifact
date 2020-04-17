@@ -8,9 +8,9 @@ import java.util.Collections;
 public class ListOfCitiesFactory { //Klasa odpowiada za liste miast niezbędną w wielu aspektach
     //aplikacji takich jak pomiary z OWM, dodanie lub odbiór pomiaru przez użytkownika
     //klasa otrzymuje wcześniej przygotowny plik z dostępnymi miastami i za jej pomocą mamy dostęp do miast z pliku
+    String filepath="C:\\cities.txt";
     ClassLoader classLoader = getClass().getClassLoader();
-    //String filepath="C:\\cities.txt";
-   String filepath =classLoader.getResource("cities.txt").getPath();
+   //String filepath =classLoader.getResource("cities.txt").getPath();
 
     private ArrayList<String>citiesArrayList = new ArrayList<>();
 

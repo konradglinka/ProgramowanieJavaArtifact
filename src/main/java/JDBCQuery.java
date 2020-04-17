@@ -6,11 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import org.jetbrains.annotations.Nullable;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javax.crypto.NullCipher;
+import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -109,15 +108,28 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         String userName = userNameToMeasures;
         String date = dateFormat.format(actualDate);
         String temperature = temperatureTextField.getText();
+        if(temperature.length()==0){
+            temperature="999999999";
+        }
         String windSpeed = windTextField.getText();
+        if(windSpeed.length()==0){
+            windSpeed="999999999";
+        }
         String humidity = humidityTextField.getText();
+        if(humidity.length()==0){
+            humidity="999999999";
+        }
         String claudiness = cloudinessTextField.getText();
         String pressure = pressureTextField.getText();
+        if(pressure.length()==0){
+            pressure="999999999";
+        }
         String city = cityListListView.getSelectionModel().getSelectedItem();
         String addMeasureFromUserQuerySQL =
                 "INSERT INTO measuresfromusers (DATE,USERNAME,TEMP,WINDSPEED,HUMIDITY,CLOUDINESS,PRESSURE,CITY) VALUES " +
-                        "('" + date + "', '" + userName + "', '" + temperature + "', '" + windSpeed + "', '" + humidity + "', '"
-                        + claudiness + "', '" + pressure + "', '" + city + "')";
+                        "('" + date + "', '" + userName + "', " + temperature + ", " + windSpeed + ", " + humidity + ", '"
+                        + claudiness + "', " + pressure + ", '" + city + "')";
+
         Statement stmt = null;
         if(checkDataBeforeAddMesure.veryficicationComplete(pressureTextField,temperatureTextField,windTextField,
                 humidityTextField, cloudinessTextField)==true)  {
@@ -146,6 +158,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             listOfMeasures.add(new MesureFromUser(rs.getInt(1), rs.getString(2),
                     rs.getString(3), rs.getDouble(4), rs.getDouble(5),
                     rs.getDouble(6), rs.getString(7), rs.getDouble(8), rs.getString(9)));
+
         }
 
     }
@@ -155,7 +168,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     public ArrayList<TemperatureFromUser> getTemperaturesFromUserList() {
         ArrayList<TemperatureFromUser> temperaturesFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (listOfMeasures.get(i).getTemperature() != 0) {
+            if (listOfMeasures.get(i).getTemperature()!=999999999) {
                 temperaturesFromUserArrayList.add(new TemperatureFromUser(listOfMeasures.get(i).getDate(),
                         listOfMeasures.get(i).getUserName(),
                         listOfMeasures.get(i).getTemperature(),
@@ -168,7 +181,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     public ArrayList<WindSpeedFromUser> getWindSpeedFromUserList() {
         ArrayList<WindSpeedFromUser> windSpeedFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (listOfMeasures.get(i).getWindSpeed() != 0) {
+            if (listOfMeasures.get(i).getWindSpeed() != 999999999) {
                 windSpeedFromUserArrayList.add(new WindSpeedFromUser(listOfMeasures.get(i).getDate(), listOfMeasures.get(i).getUserName(), listOfMeasures.get(i).getWindSpeed(), listOfMeasures.get(i).getCity()));
             }
         }
@@ -178,7 +191,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     public ArrayList<HumidityFromUser> getHumidityFromUserList() {
         ArrayList<HumidityFromUser> humidityFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (listOfMeasures.get(i).getHumidity() != 0) {
+            if (listOfMeasures.get(i).getHumidity() != 999999999) {
                 humidityFromUserArrayList.add(new HumidityFromUser(listOfMeasures.get(i).getDate(), listOfMeasures.get(i).getUserName(), listOfMeasures.get(i).getHumidity(), listOfMeasures.get(i).getCity()));
             }
         }
@@ -188,7 +201,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     public ArrayList<PressureFromUser> getPressureFromUserList() {
         ArrayList<PressureFromUser> pressureFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (listOfMeasures.get(i).getPressure() != 0) {
+            if (listOfMeasures.get(i).getPressure() != 999999999) {
                 pressureFromUserArrayList.add(new PressureFromUser(listOfMeasures.get(i).getDate(), listOfMeasures.get(i).getUserName(), listOfMeasures.get(i).getPressure(), listOfMeasures.get(i).getCity()));
             }
         }

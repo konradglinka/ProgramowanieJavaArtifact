@@ -2,19 +2,14 @@ package OWM;
 
 import net.aksingh.owmjapis.api.APIException;
 import net.aksingh.owmjapis.core.OWM;
-import net.aksingh.owmjapis.model.CurrentWeather;
-import net.aksingh.owmjapis.api.APIException;
-import net.aksingh.owmjapis.core.OWM;
-import net.aksingh.owmjapis.model.CurrentWeather;
-import net.aksingh.owmjapis.model.HourlyWeatherForecast;
-import net.aksingh.owmjapis.model.param.WeatherData;
+
 
 import java.io.FileNotFoundException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DataFromOWM<HourlyWeatherForecast> {
+public class DataFromOWM {
     private OWM owm = new OWM("9893d21085d2622338d6efc7d92ed555");
     private String city;
     net.aksingh.owmjapis.model.HourlyWeatherForecast dailyWeatherForecast;

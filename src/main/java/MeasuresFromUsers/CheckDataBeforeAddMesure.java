@@ -28,7 +28,10 @@ public class CheckDataBeforeAddMesure {
         boolean maxValue=false;
         boolean minValue=false;
         if (temperatureTextField.getText().equals(""))
+        {
+            temperatureTextField.setStyle("");
             return true;
+        }
         try {
             Double temperature = Double.parseDouble(temperatureTextField.getText());
             if(temperature>-50.0){
@@ -56,8 +59,10 @@ public class CheckDataBeforeAddMesure {
 
         boolean maxValue=false;
         boolean minValue=false;
-        if (windSpeedTextField.getText().equals(""))
+        if (windSpeedTextField.getText().equals("")) {
+            windSpeedTextField.setStyle("");
             return true;
+        }
         try {
             Double windSpeed = Double.parseDouble(windSpeedTextField.getText());
             if(windSpeed>0.0){
@@ -85,8 +90,10 @@ public class CheckDataBeforeAddMesure {
 
         boolean maxValue=false;
         boolean minValue=false;
-        if (pressureTextField.getText().equals(""))
+        if (pressureTextField.getText().equals("")) {
+            pressureTextField.setStyle("");
             return true;
+        }
         try {
             Double pressure = Double.parseDouble(pressureTextField.getText());
             if(pressure>870.0){
@@ -112,9 +119,11 @@ public class CheckDataBeforeAddMesure {
     }
    private boolean verificationClaudiness(TextField claudinessTextField){
         boolean haveNumber=false;
-        if (claudinessTextField.getText().equals(""))
+        if (claudinessTextField.getText().equals("")) {
+            claudinessTextField.setStyle("");
             return true;
-        try {
+        }
+            try {
             String claudiness = claudinessTextField.getText();
             for(int i =0; i<claudiness.length();i++) {
                 if ((int) (claudiness.charAt(i)) >= 48 && (int) (claudiness.charAt(i)) <= 57) {
@@ -140,14 +149,16 @@ public class CheckDataBeforeAddMesure {
 
         boolean maxValue=false;
         boolean minValue=false;
-        if (humidityTextField.getText().equals(""))
+        if (humidityTextField.getText().equals("")) {
+            humidityTextField.setStyle("");
             return true;
+        }
         try {
             Double humidity = Double.parseDouble(humidityTextField.getText());
-            if(humidity>0.0){
+            if(humidity>=0.0){
                 minValue=true;
             }
-            if(humidity>100.0){
+            if(humidity>=100.0){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(humidityTextField)==true) {

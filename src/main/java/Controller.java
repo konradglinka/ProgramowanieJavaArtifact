@@ -21,7 +21,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.Date;
+
 
 public class Controller {
 
@@ -191,6 +191,14 @@ public class Controller {
 
     @FXML
     TextField nameOfCityToAddMesureFromUserTextField;
+
+
+
+    //ADRIAN ŻAK settingsMaxTemperatureTextField
+    // Ma byc ich 8 max oraz min do temperature pressure , wind speed oraz humidity bez caludines bo to wyraza text.
+    @FXML
+    TextField setingsMaxTemperatureTextField;
+
 
     public Controller() throws IOException {
     }
