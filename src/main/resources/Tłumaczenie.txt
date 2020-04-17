@@ -1,0 +1,129 @@
+clear sky
+czyste niebo
+few clouds
+kilka chmur
+scattered clouds
+ma³e zachmurzenie
+broken clouds
+du¿e zachmurzenie
+shower rain
+przelotny deszcz
+rain
+deszcz
+thunderstorm
+burza z piorunami
+snow
+œnieg
+mist
+mg³a
+thunderstorm with light rain
+burza z piorunami i lekkim deszczem
+thunderstorm with rain
+burza z piorunami i deszczem
+thunderstorm with heavy rain
+burza z piorunami i ulewnym deszczem
+light thunderstorm
+lekka burza z piorunami
+thunderstorm
+burza z piorunami
+heavy thunderstorm
+silna burza z piorunami
+ragged thunderstorm
+nawracaj¹ca burza z piorunami
+thunderstorm with light drizzle
+burza z piorunami i lekk¹ m¿awk¹
+thunderstorm with drizzle
+burza z piorunami i m¿awk¹
+thunderstorm with heavy drizzle
+burza z piorunami i du¿¹ m¿awk¹
+light intensity drizzle
+m¿awka z lekk¹ intensywnoœci¹
+drizzle
+m¿awka
+heavy intensity drizzle
+m¿awka z du¿¹ intensywnoœci¹
+light intensity drizzle rain
+d¿d¿ysty deszcz z lekk¹ intensywnoœci¹
+drizzle rain
+d¿d¿ysty deszcz
+heavy intensity drizzle rain
+d¿d¿ysty deszcz z du¿¹ intensywnoœci¹
+shower rain and drizzle
+przelotny deszcz i m¿awka
+heavy shower rain and drizzle
+ulewny przelotny deszcz i m¿awka
+shower drizzle
+przelotna m¿awka
+light rain
+lekki deszcz
+moderate rain
+umiarkowany deszcz
+heavy intensity rain
+ulewny deszcz z du¿¹ intensywnoœci¹
+very heavy rain
+bardzo ciê¿ka ulewa
+extreme rain
+oberwanie chmury
+freezing rain
+zamarzaj¹cy deszcz
+light intensity shower rain
+przelotny deszcz z lekk¹ intensywnoœci¹
+shower rain
+przelotny deszcz
+heavy intensity shower rain
+przelotny deszcz z du¿¹ intensywnoœci¹
+ragged shower rain
+nierównomierny deszcz
+light snow
+lekkie opady œniegu
+snow
+œnieg
+heavy snow
+du¿e opady œniegu
+sleet
+deszcz ze œniegiem
+light shower sleet
+lekki deszcz ze œniegiem
+shower sleet
+przelotny deszcz ze œniegiem
+light rain and snow
+lekki deszcz ze œniegiem
+rain and snow
+deszcz ze œniegiem
+light shower snow
+lekkie przelotne opady œniegu
+shower snow
+przelotne opady œniegu
+heavy shower snow
+du¿e przelotne opady œniegu
+mist
+mg³a
+smoke
+dym
+haze
+mgie³ka
+sand/ dust whirls
+wir piaskowy
+fog
+mg³a
+sand
+piasek
+dust
+kurz
+volcanic ash
+popió³ wulkaniczny
+squalls
+szkwa³
+tornado
+tornado
+clear sky
+czyste niebo
+few clouds: 11-25%
+kilka chmur
+scattered clouds: 25-50%
+ma³e zachmurzenie
+broken clouds: 51-84%
+du¿e zachmurzenie
+overcast clouds: 85-100%
+ca³kowite zachmurzenie
+
