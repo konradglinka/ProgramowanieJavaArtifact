@@ -7,16 +7,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d9cae06-15e2-45bb-9f50-bf3beda623fb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/OWM/OWMClaudinesTranslator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/WeatherInCities/OWMStation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendar8.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz1.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz10.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz11.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz12.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz2.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz3.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz4.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz5.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz6.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz7.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Kalendarz/kalendarz9.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/Tlumaczenie.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/ProgramowanieJavaArtifact_main_jar/ProgramowanieJavaArtifact_main.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/ProgramowanieJavaArtifact_main_jar/ProgramowanieJavaArtifact_main.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/OWM/DataFromOWM.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/OWM/DataFromOWM.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/JDBCQuery.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/JDBCQuery.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/MeasuresFromUsers/CheckDataBeforeAddMesure.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/MeasuresFromUsers/CheckDataBeforeAddMesure.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/OWM/WeatherMeasuresFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/OWM/WeatherMeasuresFactory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/WeatherInCities/ListOfCitiesFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/WeatherInCities/ListOfCitiesFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/cities.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/cities.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/sample2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/sample2.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/JDBCQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JDBCQuery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TablesForCityFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TablesForCityFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/HumidityFromUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/HumidityFromUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/PressureFromUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/PressureFromUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/OWM/DataFromOWM.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OWM/DataFromOWM.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/OWM/WeatherMeasuresFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/OWM/WeatherMeasuresFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/WeatherInCities/ListOfCitiesFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/WeatherInCities/ListOfCitiesFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cities.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cities.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/sample2.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sample2.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -78,62 +109,67 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="MF" value="9" />
-          <entry key="fxml" value="10" />
+          <entry key="fxml" value="22" />
           <entry key="gradle" value="6" />
-          <entry key="java" value="53" />
-          <entry key="txt" value="1" />
+          <entry key="java" value="91" />
+          <entry key="jpg" value="1" />
+          <entry key="txt" value="6" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Groovy" value="6" />
-          <entry key="JAVA" value="53" />
+          <entry key="Image" value="1" />
+          <entry key="JAVA" value="91" />
           <entry key="Manifest" value="9" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="XML" value="11" />
+          <entry key="PLAIN_TEXT" value="6" />
+          <entry key="XML" value="23" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="38" />
-          <entry key="fxml" value="1" />
+          <entry key="fxml" value="6" />
           <entry key="gradle" value="59" />
-          <entry key="java" value="11326" />
+          <entry key="java" value="17049" />
           <entry key="xml" value="1" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="59" />
-          <entry key="JAVA" value="11326" />
+          <entry key="JAVA" value="17049" />
           <entry key="PLAIN_TEXT" value="38" />
-          <entry key="XML" value="2" />
+          <entry key="XML" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="22" />
+          <entry key="project.closed" value="28" />
           <entry key="project.open.time.102" value="1" />
-          <entry key="project.open.time.13" value="1" />
+          <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.28" value="1" />
           <entry key="project.open.time.29" value="1" />
           <entry key="project.open.time.32" value="2" />
           <entry key="project.open.time.34" value="1" />
           <entry key="project.open.time.36" value="3" />
-          <entry key="project.open.time.37" value="1" />
+          <entry key="project.open.time.37" value="2" />
           <entry key="project.open.time.38" value="2" />
           <entry key="project.open.time.39" value="1" />
-          <entry key="project.open.time.43" value="1" />
+          <entry key="project.open.time.40" value="1" />
+          <entry key="project.open.time.43" value="2" />
           <entry key="project.open.time.46" value="1" />
+          <entry key="project.open.time.47" value="1" />
           <entry key="project.open.time.48" value="1" />
           <entry key="project.open.time.51" value="1" />
-          <entry key="project.open.time.52" value="1" />
+          <entry key="project.open.time.52" value="2" />
           <entry key="project.open.time.55" value="1" />
           <entry key="project.open.time.66" value="1" />
           <entry key="project.open.time.85" value="1" />
           <entry key="project.open.time.86" value="1" />
-          <entry key="project.opened" value="23" />
+          <entry key="project.opened" value="30" />
         </counts>
       </usages-collector>
     </session>
@@ -147,8 +183,8 @@
         <entry file="file://$PROJECT_DIR$/src/main/resources/sample.fxml">
           <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
           <provider editor-type-id="text-editor">
-            <state relative-caret-position="629">
-              <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
+            <state>
+              <caret column="38" selection-start-column="38" selection-end-column="38" />
             </state>
           </provider>
         </entry>
@@ -156,10 +192,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1844">
-              <caret line="335" selection-start-line="335" selection-end-line="335" />
+            <state relative-caret-position="342">
+              <caret line="400" selection-start-line="400" selection-end-line="400" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#25999#26000#0" expanded="true" />
+                <element signature="e#26051#26052#0" expanded="true" />
+                <element signature="e#26299#26300#0" expanded="true" />
+                <element signature="e#26338#26339#0" expanded="true" />
+                <element signature="e#26618#26619#0" expanded="true" />
+                <element signature="e#26682#26683#0" expanded="true" />
+                <element signature="e#27090#27091#0" expanded="true" />
+                <element signature="e#27132#27133#0" expanded="true" />
+                <element signature="e#27209#27210#0" expanded="true" />
+                <element signature="e#27275#27276#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -168,35 +213,34 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/JDBCQuery.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-501">
-              <caret line="131" selection-start-line="131" selection-end-line="131" />
+            <state relative-caret-position="313">
+              <caret line="102" column="68" selection-start-line="102" selection-start-column="68" selection-end-line="102" selection-end-column="68" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/WeatherInCities/OWMStation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-398">
-              <caret line="152" column="41" selection-start-line="152" selection-start-column="41" selection-end-line="152" selection-end-column="41" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/MeasuresPLNamesFactory.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/MesureFromUser.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+            <state relative-caret-position="255">
+              <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+              <folding>
+                <element signature="e#366#367#0" expanded="true" />
+                <element signature="e#399#400#0" expanded="true" />
+                <element signature="e#427#428#0" expanded="true" />
+                <element signature="e#458#459#0" expanded="true" />
+                <element signature="e#485#486#0" expanded="true" />
+                <element signature="e#525#526#0" expanded="true" />
+                <element signature="e#557#558#0" expanded="true" />
+                <element signature="e#587#588#0" expanded="true" />
+                <element signature="e#613#614#0" expanded="true" />
+                <element signature="e#651#652#0" expanded="true" />
+                <element signature="e#681#682#0" expanded="true" />
+                <element signature="e#711#712#0" expanded="true" />
+                <element signature="e#737#738#0" expanded="true" />
+                <element signature="e#775#776#0" expanded="true" />
+                <element signature="e#805#806#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -204,8 +248,45 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TablesForCityFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="31" selection-start-line="31" selection-end-line="31" />
+            <state relative-caret-position="850">
+              <caret line="52" column="76" selection-start-line="52" selection-start-column="76" selection-end-line="52" selection-end-column="76" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+              <folding>
+                <element signature="e#639#640#0" expanded="true" />
+                <element signature="e#666#667#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="207">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+              <folding>
+                <element signature="e#537#538#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="258">
+              <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+              <folding>
+                <element signature="e#640#641#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -213,17 +294,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/WeatherInCities/ListOfCitiesFactory.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+            <state relative-caret-position="429">
+              <caret line="78" column="52" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/MesureFromUser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
+            <state relative-caret-position="323">
+              <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
             </state>
           </provider>
         </entry>
@@ -233,8 +314,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="FxmlFile" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -247,6 +328,12 @@
       <find>HAVENUMB</find>
       <find>alrea</find>
       <find>badem</find>
+      <find>pressEnterToSe</find>
+      <find>dupa</find>
+      <find>add</find>
+      <find>light rain</find>
+      <find>few</find>
+      <find>tempe</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -660,12 +747,10 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/out/production/resources/sample.fxml" />
         <option value="$PROJECT_DIR$/src/main/resources/cities.txt" />
         <option value="$PROJECT_DIR$/.idea/workspace.xml" />
         <option value="$PROJECT_DIR$/src/main/java/OWM/WeatherMeasure.java" />
         <option value="$PROJECT_DIR$/src/main/java/EmailActions/Email.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/sample2.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/EmailActions/EmailToResetPassword.java" />
         <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataFromUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/EmailActions/EmailToRegister.java" />
@@ -678,24 +763,38 @@
         <option value="$PROJECT_DIR$/src/main/java/RegisterAndLoginActions/VerificateDataFromUser.java" />
         <option value="$PROJECT_DIR$/src/main/java/META-INF/MANIFEST.MF" />
         <option value="$PROJECT_DIR$/src/main/resources/sample3.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
-        <option value="$PROJECT_DIR$/src/main/java/OWM/WeatherMeasuresFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/OWM/WeatherMeasureOWM.java" />
         <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/main/java/michal.java" />
+        <option value="$PROJECT_DIR$/src/main/java/OWMClaudinesTranslator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java" />
+        <option value="C:/Tlumaczenie.txt" />
+        <option value="$PROJECT_DIR$/src/main/resources/Tlumaczenie.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/OWM/OWMClaudinesTranslator.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/sample2.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/WeatherInCities/OWMStation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/OWM/WeatherMeasuresFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/OWM/DataFromOWM.java" />
         <option value="$PROJECT_DIR$/src/main/java/WeatherInCities/ListOfCitiesFactory.java" />
         <option value="$PROJECT_DIR$/src/main/resources/sample.fxml" />
+        <option value="$PROJECT_DIR$/out/production/resources/sample.fxml" />
+        <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/PressureFromUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/HumidityFromUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.java" />
+        <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TablesForCityFactory.java" />
         <option value="$PROJECT_DIR$/src/main/java/Controller.java" />
         <option value="$PROJECT_DIR$/src/main/java/JDBCQuery.java" />
-        <option value="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1386" />
-    <option name="height" value="788" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="93" />
+    <option name="y" value="31" />
+    <option name="width" value="937" />
+    <option name="height" value="529" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -773,7 +872,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="META-INF" type="462c0819:PsiDirectoryNode" />
+              <item name="Kalendarz" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ProgramowanieJavaArtifact" type="b2602c69:ProjectViewProjectNode" />
@@ -786,7 +885,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587124971920" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587476571139" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
@@ -794,19 +893,20 @@
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources" />
-      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java\EmailActions" />
-      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java\OWM" />
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources\Kalendarz" />
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java" />
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources\view" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="EmailActions" />
       <recent name="OWM" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources" />
-      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java" />
-      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources\view" />
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java\EmailActions" />
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java\OWM" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -942,9 +1042,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1386" height="788" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4989339" visible="true" weight="0.2428356" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4989339" visible="true" weight="0.2700454" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -952,17 +1052,17 @@
       <window_info id="UI Designer" order="5" />
       <window_info id="Favorites" order="6" sideWeight="0.5010661" side_tool="true" weight="0.3494705" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49924126" weight="0.36525974" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7246596" weight="0.40095088" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49924126" weight="0.36682615" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.7246596" weight="0.29346094" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49848714" weight="0.32854864" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49848714" weight="0.3280507" />
       <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.4977307" weight="0.32854864" />
       <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5015129" side_tool="true" weight="0.32854864" />
       <window_info anchor="bottom" id="Version Control" order="9" sideWeight="0.49848714" weight="0.32854864" />
       <window_info anchor="bottom" id="Build" order="10" sideWeight="0.49924126" weight="0.32854864" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49319214" weight="0.32216907" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.49319214" weight="0.32057416" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="1" weight="0.25" />
       <window_info anchor="right" id="Palette" order="2" />
@@ -1022,70 +1122,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/RegisterAndLoginActions/VerificateDataFromUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="816">
-          <caret line="50" column="13" selection-start-line="48" selection-start-column="14" selection-end-line="50" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/sample3.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/production/resources/sample.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="116">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/sample2.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="44421">
-          <caret line="2613" selection-start-line="2613" selection-end-line="2613" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/cities.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/OWM/WeatherMeasuresFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="21" column="241" selection-start-line="21" selection-start-column="241" selection-end-line="21" selection-end-column="241" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/settings.gradle">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/OWM/DataFromOWM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/OWM/WeatherMeasureOWM.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="114" selection-start-line="15" selection-start-column="114" selection-end-line="15" selection-end-column="114" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/JDBC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
@@ -1097,42 +1138,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/META-INF/MANIFEST.MF">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MD5.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/sample.fxml">
-      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="31" selection-start-line="37" selection-start-column="31" selection-end-line="37" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TablesForCityFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="31" selection-start-line="31" selection-end-line="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="15" column="65" selection-start-line="15" selection-start-column="65" selection-end-line="15" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/MesureFromUser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/MeasuresPLNamesFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -1140,34 +1145,243 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MD5.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-398">
-          <caret line="152" column="41" selection-start-line="152" selection-start-column="41" selection-end-line="152" selection-end-column="41" />
+        <state relative-caret-position="549">
+          <caret line="80" column="28" selection-start-line="80" selection-start-column="28" selection-end-line="80" selection-end-column="28" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/WeatherInCities/ListOfCitiesFactory.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://C:/Tlumaczenie.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="11" column="58" selection-start-line="11" selection-start-column="58" selection-end-line="11" selection-end-column="58" />
+        <state relative-caret-position="321">
+          <caret line="127" column="6" selection-start-line="127" selection-start-column="6" selection-end-line="127" selection-end-column="6" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Controller.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/RegisterAndLoginActions/VerificateDataFromUser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1844">
-          <caret line="335" selection-start-line="335" selection-end-line="335" />
+        <state relative-caret-position="816">
+          <caret line="50" column="13" selection-start-line="48" selection-start-column="14" selection-end-line="50" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/Tlumaczenie.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2159">
+          <caret line="127" column="22" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sample2.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="4658">
+          <caret line="274" column="59" selection-start-line="274" selection-start-column="59" selection-end-line="274" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sample3.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/cities.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/OWM/WeatherMeasureOWM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="15" column="114" selection-start-line="15" selection-start-column="114" selection-end-line="15" selection-end-column="114" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/OWM/OWMClaudinesTranslator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="9" column="64" selection-start-line="9" selection-start-column="64" selection-end-line="9" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/OWM/DataFromOWM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="17" column="60" selection-start-line="17" selection-start-column="60" selection-end-line="17" selection-end-column="60" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/OWM/WeatherMeasuresFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4">
+          <caret line="17" column="38" selection-start-line="17" selection-start-column="38" selection-end-line="17" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/JDBC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="15" column="17" selection-start-line="15" selection-start-column="17" selection-end-line="15" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/out/production/resources/sample.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="387" column="83" selection-start-line="387" selection-start-column="83" selection-end-line="387" selection-end-column="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/PressureFromUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="28" column="24" selection-start-line="28" selection-start-column="24" selection-end-line="28" selection-end-column="24" />
+          <folding>
+            <element signature="e#704#705#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/HumidityFromUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding>
+            <element signature="e#625#626#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="258">
+          <caret line="23" column="24" selection-start-line="23" selection-start-column="24" selection-end-line="23" selection-end-column="24" />
+          <folding>
+            <element signature="e#640#641#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/WeatherInCities/ListOfCitiesFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="429">
+          <caret line="78" column="52" selection-start-line="78" selection-start-column="52" selection-end-line="78" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding>
+            <element signature="e#537#538#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+          <folding>
+            <element signature="e#639#640#0" expanded="true" />
+            <element signature="e#666#667#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/WeatherInCities/OWMStation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="24" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
+          <folding>
+            <element signature="e#366#367#0" expanded="true" />
+            <element signature="e#399#400#0" expanded="true" />
+            <element signature="e#427#428#0" expanded="true" />
+            <element signature="e#458#459#0" expanded="true" />
+            <element signature="e#485#486#0" expanded="true" />
+            <element signature="e#525#526#0" expanded="true" />
+            <element signature="e#557#558#0" expanded="true" />
+            <element signature="e#587#588#0" expanded="true" />
+            <element signature="e#613#614#0" expanded="true" />
+            <element signature="e#651#652#0" expanded="true" />
+            <element signature="e#681#682#0" expanded="true" />
+            <element signature="e#711#712#0" expanded="true" />
+            <element signature="e#737#738#0" expanded="true" />
+            <element signature="e#775#776#0" expanded="true" />
+            <element signature="e#805#806#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/TablesForCityFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="850">
+          <caret line="52" column="76" selection-start-line="52" selection-start-column="76" selection-end-line="52" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/sample.fxml">
+      <provider selected="true" editor-type-id="JavaFX-Scene-Builder" />
+      <provider editor-type-id="text-editor">
+        <state>
+          <caret column="38" selection-start-column="38" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Controller.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="400" selection-start-line="400" selection-end-line="400" />
+          <folding>
+            <element signature="e#25999#26000#0" expanded="true" />
+            <element signature="e#26051#26052#0" expanded="true" />
+            <element signature="e#26299#26300#0" expanded="true" />
+            <element signature="e#26338#26339#0" expanded="true" />
+            <element signature="e#26618#26619#0" expanded="true" />
+            <element signature="e#26682#26683#0" expanded="true" />
+            <element signature="e#27090#27091#0" expanded="true" />
+            <element signature="e#27132#27133#0" expanded="true" />
+            <element signature="e#27209#27210#0" expanded="true" />
+            <element signature="e#27275#27276#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/MeasuresFromUsers/MesureFromUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/JDBCQuery.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-501">
-          <caret line="131" selection-start-line="131" selection-end-line="131" />
+        <state relative-caret-position="313">
+          <caret line="102" column="68" selection-start-line="102" selection-start-column="68" selection-end-line="102" selection-end-column="68" />
         </state>
       </provider>
     </entry>

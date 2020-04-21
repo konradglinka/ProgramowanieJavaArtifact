@@ -5,13 +5,13 @@ public class WindSpeedFromUser { //Klasa reprezentuje pomiar prędkości wiatru 
     private String userName=null;
 
     private double windSpeed=0.0;
-    private String city=null;
+    private int id=0;
 
-    public WindSpeedFromUser(String date, String userName, double windSpeed, String city) {
+    public WindSpeedFromUser(String date, String userName, double windSpeed, int id) {
         this.date = date;
         this.userName = userName;
         this.windSpeed = windSpeed;
-        this.city = city;
+        this.id = id;
     }
 
     public String getDate() {
@@ -22,8 +22,8 @@ public class WindSpeedFromUser { //Klasa reprezentuje pomiar prędkości wiatru 
         return userName;
     }
 
-    public String getCity() {
-        return city;
+    public int getID() {
+        return id;
     }
 
     public double getWindSpeed() {

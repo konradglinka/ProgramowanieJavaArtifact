@@ -2,10 +2,7 @@ import MeasuresFromUsers.MesureFromUser;
 import MeasuresFromUsers.TypeOfMeasure.*;
 import MeasuresFromUsers.CheckDataBeforeAddMesure;
 import RegisterAndLoginActions.VerificateDataFromUser;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import org.jetbrains.annotations.Nullable;
 
 import javax.crypto.NullCipher;
@@ -27,7 +24,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
 
     public JDBCQuery(JDBC jdbc) throws SQLException { //Laczymy sie z baza
         connection = jdbc.getConnection();
-        getMeasureFromUserListFromDataBase();
+       // getMeasureFromUserListFromDataBase();
     }
 
     //FUNKCJE DOTYCZĄCE LOGOWANIA I REJESTRACJI
@@ -102,37 +99,40 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     //FUNKCJE DOTYCZĄCE POMIARÓW OD UŻYTKOWNIKA
     //Funkcja dodaje pomiar od użytkownika
     public void addMeasuresFromUserToDataBase(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                              TextField humidityTextField, TextField cloudinessTextField, ListView<String> cityListListView) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                                              TextField humidityTextField, ComboBox<String> cloudinessFromUserComboBox, int IDFromListView) {
+        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    HH:mm");
         Date actualDate = getInstance().getTime();
         String userName = userNameToMeasures;
         String date = dateFormat.format(actualDate);
         String temperature = temperatureTextField.getText();
         if(temperature.length()==0){
-            temperature="999999999";
+            temperature="NULL";
         }
         String windSpeed = windTextField.getText();
         if(windSpeed.length()==0){
-            windSpeed="999999999";
+            windSpeed="NULL";
         }
         String humidity = humidityTextField.getText();
         if(humidity.length()==0){
-            humidity="999999999";
+            humidity="NULL";
         }
-        String claudiness = cloudinessTextField.getText();
+        String claudiness = cloudinessFromUserComboBox.getSelectionModel().getSelectedItem();
+        if(claudiness.length()==0){
+            claudiness="NULL";
+        }
         String pressure = pressureTextField.getText();
         if(pressure.length()==0){
-            pressure="999999999";
+            pressure="NULL";
         }
-        String city = cityListListView.getSelectionModel().getSelectedItem();
+        int ID = IDFromListView;
         String addMeasureFromUserQuerySQL =
-                "INSERT INTO measuresfromusers (DATE,USERNAME,TEMP,WINDSPEED,HUMIDITY,CLOUDINESS,PRESSURE,CITY) VALUES " +
+                "INSERT INTO measuresfromusers (DATE,USERNAME,TEMP,WINDSPEED,HUMIDITY,CLOUDINESS,PRESSURE,IDCITY) VALUES " +
                         "('" + date + "', '" + userName + "', " + temperature + ", " + windSpeed + ", " + humidity + ", '"
-                        + claudiness + "', " + pressure + ", '" + city + "')";
+                        + claudiness + "', " + pressure + ", " + ID + ")";
 
         Statement stmt = null;
         if(checkDataBeforeAddMesure.veryficicationComplete(pressureTextField,temperatureTextField,windTextField,
-                humidityTextField, cloudinessTextField)==true)  {
+                humidityTextField, cloudinessFromUserComboBox)==true)  {
             try {
                 stmt = connection.createStatement();
             } catch (SQLException e) {
@@ -148,7 +148,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     }
 
     //Metoda pobiera pomiary od użytkowników
-    public void getMeasureFromUserListFromDataBase() throws SQLException {
+   /* public void getMeasureFromUserListFromDataBase() throws SQLException {
         listOfMeasures.clear(); //Usuwamy poprzednie pomiary
         //Metoda zwraca liste rekordow z bazy danych
         String takeAllMeasuresQuerySQL = "SELECT * FROM measuresfromusers";
@@ -162,10 +162,10 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         }
 
     }
-
+*/
     //TE FUNKCJE ZWRACAJĄ POMIARY DLA WSZYSTKICH MIAST ICH OBRÓBKĄ ZAJMUJE SIE TablesForCityFactory
     //Funkcja zwraca pomiary temperatury
-    public ArrayList<TemperatureFromUser> getTemperaturesFromUserList() {
+   /* public ArrayList<TemperatureFromUser> getTemperaturesFromUserList() {
         ArrayList<TemperatureFromUser> temperaturesFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
             if (listOfMeasures.get(i).getTemperature()!=999999999) {
@@ -176,9 +176,23 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             }
         }
         return temperaturesFromUserArrayList;
+    }*/
+    public ArrayList<TemperatureFromUser> getTemperaturesFromUserList() throws SQLException {
+        ArrayList<TemperatureFromUser> temperaturesFromUserArrayList = new ArrayList();
+        String takeTemperatureMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE TEMP IS NOT NULL";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(takeTemperatureMeasuresQuerySQL);
+         while (rs.next()){
+                temperaturesFromUserArrayList.add(new TemperatureFromUser(rs.getString(2),
+                        rs.getString(3),
+                        rs.getDouble(4),
+                        rs.getInt(9)));
+            }
+
+        return temperaturesFromUserArrayList;
     }
     //Funkcja zwraca pomiaru predkości wiatru
-    public ArrayList<WindSpeedFromUser> getWindSpeedFromUserList() {
+    /*public ArrayList<WindSpeedFromUser> getWindSpeedFromUserList() {
         ArrayList<WindSpeedFromUser> windSpeedFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
             if (listOfMeasures.get(i).getWindSpeed() != 999999999) {
@@ -186,9 +200,23 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             }
         }
         return windSpeedFromUserArrayList;
+    }*/
+    public ArrayList<WindSpeedFromUser> getWindSpeedFromUserList() throws SQLException {
+        ArrayList<WindSpeedFromUser> windSpeedFromUserArrayList = new ArrayList();
+        String takeWindSpeedMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE WINDSPEED IS NOT NULL";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(takeWindSpeedMeasuresQuerySQL);
+        while (rs.next()){
+            windSpeedFromUserArrayList.add(new WindSpeedFromUser(rs.getString(2),
+                    rs.getString(3),
+                    rs.getDouble(5),
+                    rs.getInt(9)));
+        }
+
+        return windSpeedFromUserArrayList;
     }
 //Funkcja zwraca pomiary wilgotności
-    public ArrayList<HumidityFromUser> getHumidityFromUserList() {
+    /*public ArrayList<HumidityFromUser> getHumidityFromUserList() {
         ArrayList<HumidityFromUser> humidityFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
             if (listOfMeasures.get(i).getHumidity() != 999999999) {
@@ -196,9 +224,23 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             }
         }
         return humidityFromUserArrayList;
+    } */
+public ArrayList<HumidityFromUser> getHumidityFromUserList() throws SQLException {
+    ArrayList<HumidityFromUser> humidityFromUserArrayList = new ArrayList();
+    String takeHumidityMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE HUMIDITY IS NOT NULL";
+    Statement stmt = connection.createStatement();
+    ResultSet rs = stmt.executeQuery(takeHumidityMeasuresQuerySQL);
+    while (rs.next()){
+        humidityFromUserArrayList.add(new HumidityFromUser(rs.getString(2),
+                rs.getString(3),
+                rs.getDouble(6),
+                rs.getInt(9)));
     }
+    return humidityFromUserArrayList;
+}
 //Funckja zwraca pomiary ciśnienia powietrza
-    public ArrayList<PressureFromUser> getPressureFromUserList() {
+
+    /*public ArrayList<PressureFromUser> getPressureFromUserList() {
         ArrayList<PressureFromUser> pressureFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
             if (listOfMeasures.get(i).getPressure() != 999999999) {
@@ -207,7 +249,22 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         }
         return pressureFromUserArrayList;
     }
+    */
+    public ArrayList<PressureFromUser> getPressureFromUserList() throws SQLException {
+        ArrayList<PressureFromUser> pressureFromUserArrayList = new ArrayList();
+        String takePressureMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE PRESSURE IS NOT NULL";
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery(takePressureMeasuresQuerySQL);
+        while (rs.next()){
+            pressureFromUserArrayList.add(new PressureFromUser(rs.getString(2),
+                    rs.getString(3),
+                    rs.getDouble(8),
+                    rs.getInt(9)));
+        }
+        return pressureFromUserArrayList;
+    }
 //Funkcja zwraca pomiary zachmurzenia
+    /*
     public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() {
         ArrayList<ClaudinessFromUser> claudinessFromUserArrayList = new ArrayList();
         for (int i = 0; i < listOfMeasures.size(); i++) {
@@ -217,8 +274,20 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         }
         return claudinessFromUserArrayList;
     }
-
-
+*/
+public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLException {
+    ArrayList<ClaudinessFromUser> claudinessFromUserArrayList = new ArrayList();
+    String takeClaudinessMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE CLOUDINESS IS NOT NULL";
+    Statement stmt = connection.createStatement();
+    ResultSet rs = stmt.executeQuery(takeClaudinessMeasuresQuerySQL);
+    while (rs.next()){
+        claudinessFromUserArrayList.add(new ClaudinessFromUser(rs.getString(2),
+                rs.getString(3),
+                rs.getString(7),
+                rs.getInt(9)));
+    }
+    return claudinessFromUserArrayList;
+}
 
     public boolean changeUserPassword(TextField emailToPasswordChange,PasswordField passwordFieldToChange,PasswordField confirmedPasswordFromUser,Label badPasswordLabel) throws SQLException {
         String password= MD5.getMD5Password(passwordFieldToChange.getText());

@@ -4,13 +4,13 @@ public class ClaudinessFromUser { //Klasa reprezentuje pomiar zachmurzenia od u≈
     private String date=null;
     private String userName=null;
     private String claudiness=null;
-    private String city=null;
+    private int id=0;
 
-    public ClaudinessFromUser(String date, String userName, String claudiness, String city) {
+    public ClaudinessFromUser(String date, String userName, String claudiness,int id) {
         this.date = date;
         this.userName = userName;
         this.claudiness = claudiness;
-        this.city = city;
+        this.id=id;
     }
 
     public String getDate() {
@@ -21,8 +21,8 @@ public class ClaudinessFromUser { //Klasa reprezentuje pomiar zachmurzenia od u≈
         return userName;
     }
 
-    public String getCity() {
-        return city;
+    public int getId() {
+        return id;
     }
 
     public String getClaudiness() {

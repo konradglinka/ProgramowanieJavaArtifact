@@ -11,13 +11,11 @@ import java.util.Date;
 
 public class DataFromOWM {
     private OWM owm = new OWM("9893d21085d2622338d6efc7d92ed555");
-    private String city;
     net.aksingh.owmjapis.model.HourlyWeatherForecast dailyWeatherForecast;
     DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy       HH:mm");
-    public DataFromOWM(String city) throws FileNotFoundException, APIException {
-        this.city=city;
+    public DataFromOWM(int id) throws FileNotFoundException, APIException {
         owm.setUnit(OWM.Unit.METRIC); //Temperatura w stopniach celsjusza
-   dailyWeatherForecast = owm.hourlyWeatherForecastByCityName(city);
+   dailyWeatherForecast = owm.hourlyWeatherForecastByCityId(id);
     }
     public double maxTempInCity(int timeOfMeasure)  { //funkcja zwraca maksymalną temperature w mieście
 

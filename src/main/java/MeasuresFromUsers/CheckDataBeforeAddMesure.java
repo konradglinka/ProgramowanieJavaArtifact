@@ -1,23 +1,64 @@
 package MeasuresFromUsers;
 
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 
 
 public class CheckDataBeforeAddMesure {
+    private double maxTemperature=60.0;
+    private double minTemperature=-50.0;
+    private double maxWindSpeed=63.0;
+    private double minWindSpeed=0.0;
+    private double minHumidity=0.0;
+    private double maxHumidity=100.00;
+    private double minPressure=870.00;
+    private double maxPressure=1086.00;
+
+    public void setMaxTemperature(double maxTemperature) {
+        this.maxTemperature = maxTemperature;
+    }
+
+    public void setMinTemperature(double minTemperature) {
+        this.minTemperature = minTemperature;
+    }
+
+    public void setMaxWindSpeed(double maxWindSpeed) {
+        this.maxWindSpeed = maxWindSpeed;
+    }
+
+    public void setMinWindSpeed(double minWindSpeed) {
+        this.minWindSpeed = minWindSpeed;
+    }
+
+    public void setMinHumidity(double minHumidity) {
+        this.minHumidity = minHumidity;
+    }
+
+    public void setMaxHumidity(double maxHumidity) {
+        this.maxHumidity = maxHumidity;
+    }
+
+    public void setMinPressure(double minPressure) {
+        this.minPressure = minPressure;
+    }
+
+    public void setMaxPressure(double maxPressure) {
+        this.maxPressure = maxPressure;
+    }
 
     public boolean veryficicationComplete(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                          TextField humidityTextField, TextField cloudinessTextField) {
+                                          TextField humidityTextField, ComboBox<String> cloudinessComboBox) {
         boolean temperature= verificationTemperature(temperatureTextField);
         boolean windSpeed = verificationWindSpeed(windTextField);
         boolean pressure=verificationPressure(pressureTextField);
-        boolean claudiness=verificationClaudiness(cloudinessTextField);
+        boolean claudiness=verificationClaudiness(cloudinessComboBox);
         boolean humidity=verificationHumidity(humidityTextField);
         if(temperature==true&&windSpeed==true&&pressure==true&&claudiness==true&&humidity==true)
         {
             return true;
         }
 
-        else if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0 && cloudinessTextField.getText().length()==0)
+        else if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0 && cloudinessComboBox.getSelectionModel().getSelectedItem().length()==0)
         {
             return false; // Nie można dodać pomiaru bez danych
         }
@@ -34,10 +75,10 @@ public class CheckDataBeforeAddMesure {
         }
         try {
             Double temperature = Double.parseDouble(temperatureTextField.getText());
-            if(temperature>-50.0){
+            if(temperature>=minTemperature){
                 minValue=true;
             }
-            if(temperature>60.0){
+            if(temperature>=maxTemperature){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(temperatureTextField)==true) {
@@ -65,10 +106,10 @@ public class CheckDataBeforeAddMesure {
         }
         try {
             Double windSpeed = Double.parseDouble(windSpeedTextField.getText());
-            if(windSpeed>0.0){
+            if(windSpeed>=minWindSpeed){
                 minValue=true;
             }
-            if(windSpeed>63.0){
+            if(windSpeed>=maxWindSpeed){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(windSpeedTextField)==true) {
@@ -96,10 +137,10 @@ public class CheckDataBeforeAddMesure {
         }
         try {
             Double pressure = Double.parseDouble(pressureTextField.getText());
-            if(pressure>870.0){
+            if(pressure>=minPressure){
                 minValue=true;
             }
-            if(pressure>1086.0){
+            if(pressure>=maxPressure){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(pressureTextField)==true) {
@@ -117,30 +158,30 @@ public class CheckDataBeforeAddMesure {
         }
 
     }
-   private boolean verificationClaudiness(TextField claudinessTextField){
+   private boolean verificationClaudiness(ComboBox<String> claudinessComboBox){
         boolean haveNumber=false;
-        if (claudinessTextField.getText().equals("")) {
-            claudinessTextField.setStyle("");
+        if (claudinessComboBox.getSelectionModel().getSelectedItem().equals("")) {
+            claudinessComboBox.setStyle("");
             return true;
         }
             try {
-            String claudiness = claudinessTextField.getText();
+            String claudiness = claudinessComboBox.getSelectionModel().getSelectedItem();
             for(int i =0; i<claudiness.length();i++) {
                 if ((int) (claudiness.charAt(i)) >= 48 && (int) (claudiness.charAt(i)) <= 57) {
                     haveNumber = true;
                 }
             }
             if(haveNumber==false) {
-                claudinessTextField.setStyle("");
+                claudinessComboBox.setStyle("");
                 return true;
             }
             else{
-                claudinessTextField.setStyle("-fx-background-color:red;");
+                claudinessComboBox.setStyle("-fx-background-color:red;");
                 return false;}
         }
         catch(Exception e)
         {
-            claudinessTextField.setStyle("-fx-background-color:red;");
+            claudinessComboBox.setStyle("-fx-background-color:red;");
             return false;
         }
 
@@ -155,10 +196,10 @@ public class CheckDataBeforeAddMesure {
         }
         try {
             Double humidity = Double.parseDouble(humidityTextField.getText());
-            if(humidity>=0.0){
+            if(humidity>=minHumidity){
                 minValue=true;
             }
-            if(humidity>=100.0){
+            if(humidity>=maxHumidity){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(humidityTextField)==true) {

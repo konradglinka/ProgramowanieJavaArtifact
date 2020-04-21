@@ -3,20 +3,21 @@ package MeasuresFromUsers.TypeOfMeasure;
 public class TemperatureFromUser { //Klasa reprezentuje pomiar temperatury powietrza od użytkownika
     private String date=null;
     private String userName=null;
-    private String city=null;
+    private int id =0;
     private double temperature=0.0;
 
 
 
 
-    public TemperatureFromUser(String date, String userName, double temperature, String city) {
+    public TemperatureFromUser(String date, String userName, double temperature, int id) {
         this.date = date;
         this.userName = userName;
         this.temperature = temperature;
-        this.city = city;
+        this.id = id;
     }
-    public String getCity() {
-        return city;
+
+    public int getId() {
+        return id;
     }
 
     public String getDate() {
