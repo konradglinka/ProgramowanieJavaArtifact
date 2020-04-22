@@ -117,9 +117,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             humidity="NULL";
         }
         String claudiness = cloudinessFromUserComboBox.getSelectionModel().getSelectedItem();
-        if(claudiness.length()==0){
-            claudiness="NULL";
-        }
+
         String pressure = pressureTextField.getText();
         if(pressure.length()==0){
             pressure="NULL";
@@ -130,6 +128,14 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
                         "('" + date + "', '" + userName + "', " + temperature + ", " + windSpeed + ", " + humidity + ", '"
                         + claudiness + "', " + pressure + ", " + ID + ")";
 
+        if(claudiness.length()==0) {
+            claudiness = "NULL";
+
+            addMeasureFromUserQuerySQL =
+                    "INSERT INTO measuresfromusers (DATE,USERNAME,TEMP,WINDSPEED,HUMIDITY,CLOUDINESS,PRESSURE,IDCITY) VALUES " +
+                            "('" + date + "', '" + userName + "', " + temperature + ", " + windSpeed + ", " + humidity + ", "
+                            + claudiness + ", " + pressure + ", " + ID + ")";
+        }
         Statement stmt = null;
         if(checkDataBeforeAddMesure.veryficicationComplete(pressureTextField,temperatureTextField,windTextField,
                 humidityTextField, cloudinessFromUserComboBox)==true)  {
