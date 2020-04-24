@@ -80,9 +80,10 @@ public class Controller {
     TextField humidityTextField;
     @FXML
     TextField windSpeedTextField;
-
     @FXML
     TextField pressureTextField;
+    @FXML
+    Label addMesureAlertLabel;
     //ELEMENTY POBRANIA POMIARU PRZEZ UŻYTKOWNIKA
     @FXML
     ListView<String> cityToTakeMaeasureFromUserListView;
@@ -292,7 +293,7 @@ public class Controller {
         Double lon=Double.parseDouble(namelonlat[1]);
         Double lat=Double.parseDouble(namelonlat[2]);
         int id=listOfCitiesFactory.findIDForCity(name,lon,lat);
-        jdbcQuery.addMeasuresFromUserToDataBase(pressureTextField, temperatureTextField, windSpeedTextField, humidityTextField, claudinessFromIserComboBox,id );
+        jdbcQuery.addMeasuresFromUserToDataBase(pressureTextField, temperatureTextField, windSpeedTextField, humidityTextField, claudinessFromIserComboBox,id,addMesureAlertLabel);
     }
     //FUNKCJE DOTYCZĄCE POBRANIA POMIARU PRZEZ UŻYTKOWNIKA
 

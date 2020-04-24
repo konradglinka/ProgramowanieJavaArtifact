@@ -2682,7 +2682,7 @@
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <VBox prefHeight="371.0" prefWidth="166.0">
                                        <children>
@@ -2753,7 +2753,12 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
+                              <Label fx:id="addMesureAlertLabel" text="fbdssb" textFill="RED" wrapText="true">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox alignment="BOTTOM_CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
                                     <Button alignment="CENTER" mnemonicParsing="false" onAction="#addMeasureFromUserButton" prefHeight="40.0" prefWidth="10000.0" text="Prześlij pomiar" HBox.hgrow="ALWAYS" />
                                  </children>

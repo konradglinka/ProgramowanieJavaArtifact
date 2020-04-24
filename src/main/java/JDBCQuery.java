@@ -57,7 +57,6 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         if (resultSet.next()) {
             userNameToMeasures = email;
             loadSettingsAboutUser(email);
-            System.out.println(userSettings.getMaxTemperature());
             return true;
         }
         return false;
@@ -81,7 +80,6 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
                             addNewUserSettings(email);
                             return true;
                         } catch (SQLException e) {
-                            System.out.println("tutaj");
                             System.out.println("ERROR:Bad SQL query");
                         }
                   return false;
@@ -111,7 +109,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     //FUNKCJE DOTYCZĄCE POMIARÓW OD UŻYTKOWNIKA
     //Funkcja dodaje pomiar od użytkownika
     public void addMeasuresFromUserToDataBase(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                              TextField humidityTextField, ComboBox<String> cloudinessFromUserComboBox, int IDFromListView) {
+                                              TextField humidityTextField, ComboBox<String> cloudinessFromUserComboBox, int IDFromListView,Label addMesureAlertLabel) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    HH:mm");
         Date actualDate = getInstance().getTime();
         String userName = userNameToMeasures;
@@ -150,7 +148,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         }
         Statement stmt = null;
         if(checkDataBeforeAddMesure.veryficicationComplete(pressureTextField,temperatureTextField,windTextField,
-                humidityTextField, cloudinessFromUserComboBox)==true)  {
+                humidityTextField, cloudinessFromUserComboBox,addMesureAlertLabel)==true)  {
             try {
                 stmt = connection.createStatement();
             } catch (SQLException e) {
@@ -343,7 +341,6 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
         if (result.get() == buttonTypeOne){
             String emailVal=email.getText();
             String loadDefaultUserSettingsQuerySQL = "UPDATE usersettings SET MINTEMP=-50.0, MAXTEMP=60.0, MAXWIND=63.0, MINWIND=0.0, MINPRESSURE=970.0, MAXPRESSURE=1086.0 WHERE EMAIL='"+ emailVal +"'";
-            System.out.println(loadDefaultUserSettingsQuerySQL);
             Statement stmt = null;
             try {
                 stmt = connection.createStatement();
