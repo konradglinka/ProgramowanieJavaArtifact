@@ -42,7 +42,7 @@
                            </font>
                         </Label>
                         <Label text="E-mail" />
-                        <TextField fx:id="loginEmailTextField" maxWidth="300.0" onAction="#pressEnterToTypePassword" text="konradgjd@gmail.com" />
+                        <TextField fx:id="loginEmailTextField" maxWidth="300.0" onAction="#pressEnterToTypePassword" text="konradglkm@gmail.com" />
                         <Label text="Hasło" />
                         <PasswordField fx:id="passwordPasswordField" onAction="#pressEnterToLogin" text="zaq1@WSX" />
                         <Button mnemonicParsing="false" onAction="#loginButton" text="Zaloguj" />
@@ -238,7 +238,7 @@
                               <HBox prefWidth="200.0">
                                  <children>
                                     <TextField fx:id="nameOfCityToFindTextField" onAction="#pressEnterToTakeOWMMeasure" />
-                                    <Button mnemonicParsing="false" onAction="#testfind" prefHeight="0.0" prefWidth="52.0">
+                                    <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="52.0">
                                        <graphic>
                                           <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
@@ -2572,7 +2572,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <ListView fx:id="cityToTakeMaeasureFromUserListView" onMouseClicked="#onClickOWMCityListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="cityToTakeMaeasureFromUserListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -2789,16 +2789,6 @@
                                           <Font size="16.0" />
                                        </font>
                                     </Label>
-                                    <Label layoutX="10.0" layoutY="35.0" text="Maksymalna wilgotność powietrza:">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Minimalna wilgotność powietrza:">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
                                     <Label layoutX="10.0" layoutY="35.0" text="Maksymalne ciśnienie atmosferyczne:">
                                        <font>
                                           <Font size="16.0" />
@@ -2821,24 +2811,56 @@
                                     </Label>
                                  </children>
                               </VBox>
+                              <VBox maxWidth="40.0" prefHeight="371.0" prefWidth="166.0">
+                                 <children>
+                                    <Label text="C">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="C">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label text="hpa">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="60.0" text="hpa">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="85.0" text="m/s">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="10.0" layoutY="110.0" text="m/s">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </VBox>
                               <VBox fx:id="setingsMaxTempratureTextField" prefHeight="371.0" prefWidth="166.0">
                                  <children>
-                                    <TextField fx:id="settingsMaxTemperatureTextField" text="60" />
-                                    <TextField fx:id="settingsMinTemperatureTextField" layoutX="10.0" layoutY="10.0" text="-50" />
-                                    <TextField fx:id="settingsMaxHumidityTextField" layoutX="10.0" layoutY="10.0" text="100" />
-                                    <TextField fx:id="settingsMinHumidityTextField" layoutX="10.0" layoutY="35.0" text="0" />
-                                    <TextField fx:id="settingsMaxPressureTextField" layoutX="10.0" layoutY="10.0" text="1080" />
-                                    <TextField fx:id="settingsMinPressureTextField" layoutX="10.0" layoutY="35.0" text="970" />
-                                    <TextField fx:id="settingsMaxWindSpeedTextField" layoutX="10.0" layoutY="60.0" text="63" />
-                                    <TextField fx:id="settingsMinWindSpeedTextField" layoutX="10.0" layoutY="85.0" text="0" />
+                                    <TextField fx:id="settingsMaxTemperatureTextField" />
+                                    <TextField fx:id="settingsMinTemperatureTextField" layoutX="10.0" layoutY="10.0" />
+                                    <TextField fx:id="settingsMaxPressureTextField" layoutX="10.0" layoutY="10.0" />
+                                    <TextField fx:id="settingsMinPressureTextField" layoutX="10.0" layoutY="35.0" />
+                                    <TextField fx:id="settingsMaxWindSpeedTextField" layoutX="10.0" layoutY="60.0" />
+                                    <TextField fx:id="settingsMinWindSpeedTextField" layoutX="10.0" layoutY="85.0" />
                                  </children>
                               </VBox>
                            </children>
                         </HBox>
                         <HBox alignment="BOTTOM_CENTER" prefWidth="200.0">
                            <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#saveSettingsButton" prefHeight="40.0" prefWidth="10000.0" text="Zapisz ustawienia" HBox.hgrow="ALWAYS" />
-                              <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="10000.0" text="Przywróć ustawienia początkowe" />
+                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#changeUserSettingsButton" prefHeight="40.0" prefWidth="10000.0" text="Zapisz ustawienia" HBox.hgrow="ALWAYS" />
+                              <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadDefaultSettingsButton" prefHeight="40.0" prefWidth="10000.0" text="Przywróć ustawienia początkowe" />
                            </children>
                         </HBox>
                      </children>

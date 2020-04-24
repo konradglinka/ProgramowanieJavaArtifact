@@ -5,9 +5,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class OWMClaudinesTranslator {
-   // private String filepath="C:\\Tlumaczenie.txt";
+   // private String filepath="C:\\translateClaudiness.txt";
    ClassLoader classLoader = getClass().getClassLoader();
-   private String filepath =classLoader.getResource("Tlumaczenie.txt").getPath();
+   private String filepath =classLoader.getResource("translateClaudiness.txt").getPath();
     ArrayList<String> englishStringArraylist = new ArrayList<>();
     ArrayList<String> polishStringArraylist = new ArrayList<>();
     public OWMClaudinesTranslator() throws IOException {

@@ -5,46 +5,12 @@ import javafx.scene.control.TextField;
 
 
 public class CheckDataBeforeAddMesure {
-    private double maxTemperature=60.0;
-    private double minTemperature=-50.0;
-    private double maxWindSpeed=63.0;
-    private double minWindSpeed=0.0;
-    private double minHumidity=0.0;
-    private double maxHumidity=100.00;
-    private double minPressure=870.00;
-    private double maxPressure=1086.00;
+  private UserSettings userSettings=new UserSettings();
 
-    public void setMaxTemperature(double maxTemperature) {
-        this.maxTemperature = maxTemperature;
+    public UserSettings getUserSettings() {
+        return userSettings;
     }
 
-    public void setMinTemperature(double minTemperature) {
-        this.minTemperature = minTemperature;
-    }
-
-    public void setMaxWindSpeed(double maxWindSpeed) {
-        this.maxWindSpeed = maxWindSpeed;
-    }
-
-    public void setMinWindSpeed(double minWindSpeed) {
-        this.minWindSpeed = minWindSpeed;
-    }
-
-    public void setMinHumidity(double minHumidity) {
-        this.minHumidity = minHumidity;
-    }
-
-    public void setMaxHumidity(double maxHumidity) {
-        this.maxHumidity = maxHumidity;
-    }
-
-    public void setMinPressure(double minPressure) {
-        this.minPressure = minPressure;
-    }
-
-    public void setMaxPressure(double maxPressure) {
-        this.maxPressure = maxPressure;
-    }
 
     public boolean veryficicationComplete(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
                                           TextField humidityTextField, ComboBox<String> cloudinessComboBox) {
@@ -75,10 +41,10 @@ public class CheckDataBeforeAddMesure {
         }
         try {
             Double temperature = Double.parseDouble(temperatureTextField.getText());
-            if(temperature>=minTemperature){
+            if(temperature>=userSettings.getMinTemperature()){
                 minValue=true;
             }
-            if(temperature>=maxTemperature){
+            if(temperature>=userSettings.getMaxTemperature()){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(temperatureTextField)==true) {
@@ -106,10 +72,10 @@ public class CheckDataBeforeAddMesure {
         }
         try {
             Double windSpeed = Double.parseDouble(windSpeedTextField.getText());
-            if(windSpeed>=minWindSpeed){
+            if(windSpeed>=userSettings.getMinWindSpeed()){
                 minValue=true;
             }
-            if(windSpeed>=maxWindSpeed){
+            if(windSpeed>=userSettings.getMaxWindSpeed()){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(windSpeedTextField)==true) {
@@ -137,10 +103,10 @@ public class CheckDataBeforeAddMesure {
         }
         try {
             Double pressure = Double.parseDouble(pressureTextField.getText());
-            if(pressure>=minPressure){
+            if(pressure>=userSettings.getMinPressure()){
                 minValue=true;
             }
-            if(pressure>=maxPressure){
+            if(pressure>=userSettings.getMaxPressure()){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(pressureTextField)==true) {
@@ -196,10 +162,10 @@ public class CheckDataBeforeAddMesure {
         }
         try {
             Double humidity = Double.parseDouble(humidityTextField.getText());
-            if(humidity>=minHumidity){
+            if(humidity>=userSettings.getMinHumidity()){
                 minValue=true;
             }
-            if(humidity>=maxHumidity){
+            if(humidity>=userSettings.getMaxHumidity()){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(humidityTextField)==true) {

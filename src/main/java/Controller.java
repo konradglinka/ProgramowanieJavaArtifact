@@ -200,10 +200,6 @@ public class Controller {
     @FXML
     TextField settingsMinTemperatureTextField;
     @FXML
-    TextField settingsMaxHumidityTextField;
-    @FXML
-    TextField settingsMinHumidityTextField;
-    @FXML
     TextField settingsMaxPressureTextField;
     @FXML
     TextField settingsMinPressureTextField;
@@ -253,11 +249,13 @@ public class Controller {
     @FXML
     void loginButton() throws SQLException { //Funkcja zajmuje się uwierzytelnianiem i przełącza na główny ekran aplikacji
         if (jdbcQuery.loginCheck(loginEmailTextField, passwordPasswordField) == true) {
+            jdbcQuery.loadUserSettingsAboutAddMesure(settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField);
             registerAndLoginStackPane.setVisible(false);
             mainViewTabPane.setVisible(true);
         } else if (jdbcQuery.loginCheck(loginEmailTextField, passwordPasswordField) == false) {
             badEmailOrPasswordLabel.setVisible(true);
         }
+
     }
 
     @FXML
@@ -710,21 +708,14 @@ public class Controller {
         }
     }
     @FXML
-    void saveSettingsButton(){
-        try
-        {
-            jdbcQuery.checkDataBeforeAddMesure.setMaxTemperature(Double.parseDouble(settingsMaxTemperatureTextField.getText()));
-            jdbcQuery.checkDataBeforeAddMesure.setMaxWindSpeed(Double.parseDouble(settingsMaxWindSpeedTextField.getText()));
-            jdbcQuery.checkDataBeforeAddMesure.setMaxPressure(Double.parseDouble(settingsMaxPressureTextField.getText()));
-            jdbcQuery.checkDataBeforeAddMesure.setMaxHumidity(Double.parseDouble(settingsMaxHumidityTextField.getText()));
-            jdbcQuery.checkDataBeforeAddMesure.setMinTemperature(Double.parseDouble(settingsMinTemperatureTextField.getText()));
-            jdbcQuery.checkDataBeforeAddMesure.setMinWindSpeed(Double.parseDouble(settingsMinWindSpeedTextField.getText()));
-            jdbcQuery.checkDataBeforeAddMesure.setMinPressure(Double.parseDouble(settingsMinPressureTextField.getText()));
-            jdbcQuery.checkDataBeforeAddMesure.setMinHumidity(Double.parseDouble(settingsMinHumidityTextField.getText()));
+    void changeUserSettingsButton() throws SQLException {
+        jdbcQuery.changeUserSettings(settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField,loginEmailTextField);
+    }
+    @FXML
+    void loadDefaultSettingsButton() throws SQLException {
+        jdbcQuery.loadDefaultSettingsForUser(loginEmailTextField);
 
-        }
-        catch (Exception e){
-        }
+        jdbcQuery.loadUserSettingsAboutAddMesure(settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField);
     }
 }
 

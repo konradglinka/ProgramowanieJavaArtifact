@@ -1,6 +1,7 @@
 import MeasuresFromUsers.MesureFromUser;
 import MeasuresFromUsers.TypeOfMeasure.*;
 import MeasuresFromUsers.CheckDataBeforeAddMesure;
+import MeasuresFromUsers.UserSettings;
 import RegisterAndLoginActions.VerificateDataFromUser;
 import javafx.scene.control.*;
 import org.jetbrains.annotations.Nullable;
@@ -11,16 +12,23 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Optional;
 
 import static java.util.Calendar.getInstance;
 
 public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
-    CheckDataBeforeAddMesure checkDataBeforeAddMesure = new CheckDataBeforeAddMesure();
-    VerificateDataFromUser verificateDataFromUser = new VerificateDataFromUser();
-   MD5 MD5 =new MD5();
+
+    private CheckDataBeforeAddMesure checkDataBeforeAddMesure = new CheckDataBeforeAddMesure();
+    private UserSettings userSettings=checkDataBeforeAddMesure.getUserSettings();
+    private VerificateDataFromUser verificateDataFromUser = new VerificateDataFromUser();
+    private MD5 MD5 =new MD5();
     private String userNameToMeasures = "USER"; //Nazwa użytkownika do testów to USER w przypadku braku podania email
-    ArrayList<MesureFromUser> listOfMeasures = new ArrayList<>(); //Lista wszystkich pomiarów od użytkownika
+    private  ArrayList<MesureFromUser> listOfMeasures = new ArrayList<>(); //Lista wszystkich pomiarów od użytkownika
     private static Connection connection; //Polaczenie z baza danych
+
+    public UserSettings getUserSettings() {
+        return userSettings;
+    }
 
     public JDBCQuery(JDBC jdbc) throws SQLException { //Laczymy sie z baza
         connection = jdbc.getConnection();
@@ -48,6 +56,8 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         }
         if (resultSet.next()) {
             userNameToMeasures = email;
+            loadSettingsAboutUser(email);
+            System.out.println(userSettings.getMaxTemperature());
             return true;
         }
         return false;
@@ -68,8 +78,10 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
                         }
                         try {
                             stmt.executeUpdate(addUserQuerySQL);
+                            addNewUserSettings(email);
                             return true;
                         } catch (SQLException e) {
+                            System.out.println("tutaj");
                             System.out.println("ERROR:Bad SQL query");
                         }
                   return false;
@@ -152,37 +164,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
             }
         }
     }
-
-    //Metoda pobiera pomiary od użytkowników
-   /* public void getMeasureFromUserListFromDataBase() throws SQLException {
-        listOfMeasures.clear(); //Usuwamy poprzednie pomiary
-        //Metoda zwraca liste rekordow z bazy danych
-        String takeAllMeasuresQuerySQL = "SELECT * FROM measuresfromusers";
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(takeAllMeasuresQuerySQL);
-        while (rs.next()) {
-            listOfMeasures.add(new MesureFromUser(rs.getInt(1), rs.getString(2),
-                    rs.getString(3), rs.getDouble(4), rs.getDouble(5),
-                    rs.getDouble(6), rs.getString(7), rs.getDouble(8), rs.getString(9)));
-
-        }
-
-    }
-*/
     //TE FUNKCJE ZWRACAJĄ POMIARY DLA WSZYSTKICH MIAST ICH OBRÓBKĄ ZAJMUJE SIE TablesForCityFactory
-    //Funkcja zwraca pomiary temperatury
-   /* public ArrayList<TemperatureFromUser> getTemperaturesFromUserList() {
-        ArrayList<TemperatureFromUser> temperaturesFromUserArrayList = new ArrayList();
-        for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (listOfMeasures.get(i).getTemperature()!=999999999) {
-                temperaturesFromUserArrayList.add(new TemperatureFromUser(listOfMeasures.get(i).getDate(),
-                        listOfMeasures.get(i).getUserName(),
-                        listOfMeasures.get(i).getTemperature(),
-                        listOfMeasures.get(i).getCity()));
-            }
-        }
-        return temperaturesFromUserArrayList;
-    }*/
     public ArrayList<TemperatureFromUser> getTemperaturesFromUserList() throws SQLException {
         ArrayList<TemperatureFromUser> temperaturesFromUserArrayList = new ArrayList();
         String takeTemperatureMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE TEMP IS NOT NULL";
@@ -197,16 +179,6 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
 
         return temperaturesFromUserArrayList;
     }
-    //Funkcja zwraca pomiaru predkości wiatru
-    /*public ArrayList<WindSpeedFromUser> getWindSpeedFromUserList() {
-        ArrayList<WindSpeedFromUser> windSpeedFromUserArrayList = new ArrayList();
-        for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (listOfMeasures.get(i).getWindSpeed() != 999999999) {
-                windSpeedFromUserArrayList.add(new WindSpeedFromUser(listOfMeasures.get(i).getDate(), listOfMeasures.get(i).getUserName(), listOfMeasures.get(i).getWindSpeed(), listOfMeasures.get(i).getCity()));
-            }
-        }
-        return windSpeedFromUserArrayList;
-    }*/
     public ArrayList<WindSpeedFromUser> getWindSpeedFromUserList() throws SQLException {
         ArrayList<WindSpeedFromUser> windSpeedFromUserArrayList = new ArrayList();
         String takeWindSpeedMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE WINDSPEED IS NOT NULL";
@@ -221,16 +193,6 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
 
         return windSpeedFromUserArrayList;
     }
-//Funkcja zwraca pomiary wilgotności
-    /*public ArrayList<HumidityFromUser> getHumidityFromUserList() {
-        ArrayList<HumidityFromUser> humidityFromUserArrayList = new ArrayList();
-        for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (listOfMeasures.get(i).getHumidity() != 999999999) {
-                humidityFromUserArrayList.add(new HumidityFromUser(listOfMeasures.get(i).getDate(), listOfMeasures.get(i).getUserName(), listOfMeasures.get(i).getHumidity(), listOfMeasures.get(i).getCity()));
-            }
-        }
-        return humidityFromUserArrayList;
-    } */
 public ArrayList<HumidityFromUser> getHumidityFromUserList() throws SQLException {
     ArrayList<HumidityFromUser> humidityFromUserArrayList = new ArrayList();
     String takeHumidityMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE HUMIDITY IS NOT NULL";
@@ -244,18 +206,6 @@ public ArrayList<HumidityFromUser> getHumidityFromUserList() throws SQLException
     }
     return humidityFromUserArrayList;
 }
-//Funckja zwraca pomiary ciśnienia powietrza
-
-    /*public ArrayList<PressureFromUser> getPressureFromUserList() {
-        ArrayList<PressureFromUser> pressureFromUserArrayList = new ArrayList();
-        for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (listOfMeasures.get(i).getPressure() != 999999999) {
-                pressureFromUserArrayList.add(new PressureFromUser(listOfMeasures.get(i).getDate(), listOfMeasures.get(i).getUserName(), listOfMeasures.get(i).getPressure(), listOfMeasures.get(i).getCity()));
-            }
-        }
-        return pressureFromUserArrayList;
-    }
-    */
     public ArrayList<PressureFromUser> getPressureFromUserList() throws SQLException {
         ArrayList<PressureFromUser> pressureFromUserArrayList = new ArrayList();
         String takePressureMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE PRESSURE IS NOT NULL";
@@ -269,18 +219,6 @@ public ArrayList<HumidityFromUser> getHumidityFromUserList() throws SQLException
         }
         return pressureFromUserArrayList;
     }
-//Funkcja zwraca pomiary zachmurzenia
-    /*
-    public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() {
-        ArrayList<ClaudinessFromUser> claudinessFromUserArrayList = new ArrayList();
-        for (int i = 0; i < listOfMeasures.size(); i++) {
-            if (!listOfMeasures.get(i).getClaudiness().equals("")) {
-                claudinessFromUserArrayList.add(new ClaudinessFromUser(listOfMeasures.get(i).getDate(), listOfMeasures.get(i).getUserName(), listOfMeasures.get(i).getClaudiness(), listOfMeasures.get(i).getCity()));
-            }
-        }
-        return claudinessFromUserArrayList;
-    }
-*/
 public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLException {
     ArrayList<ClaudinessFromUser> claudinessFromUserArrayList = new ArrayList();
     String takeClaudinessMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE CLOUDINESS IS NOT NULL";
@@ -314,7 +252,114 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
                 }
         return false;
     }
+    //Funkcje dotyczace tabeli usersettings
+    private void addNewUserSettings(String email){
+    String addSettingsAboutNewUser="INSERT INTO usersettings (MINTEMP, MAXTEMP, MINWIND, MAXWIND, MINPRESSURE , MAXPRESSURE, EMAIL) VALUES (-50.0, 60.0, 0.0, 63.0, 870.0, 1086.0, '"+email+"')";
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        try {
+            stmt.executeUpdate(addSettingsAboutNewUser);
+        } catch (SQLException e) {
+            System.out.println("ERROR:Bad SQL query");
+        }
+    }
+    private void loadSettingsAboutUser(String email) throws SQLException {
+        String loadSettingsAboutActualUser="SELECT * FROM usersettings where EMAIL='"+email+"'";
+        Statement stmt = null;
+        ResultSet resultSet = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        try {
+            resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
+        } catch (SQLException e) {
+            System.out.println("ERROR:Bad SQL query");
+        }
+        while (resultSet.next()) {
+            userSettings.setMinTemperature(resultSet.getDouble(2));
+            userSettings.setMaxTemperature(resultSet.getDouble(3));
+            userSettings.setMinWindSpeed(resultSet.getDouble(4));
+            userSettings.setMaxWindSpeed(resultSet.getDouble(5));
+            userSettings.setMinPressure(resultSet.getDouble(6));
+            userSettings.setMaxPressure(resultSet.getDouble(7));
+        }
+    }
+    public void loadUserSettingsAboutAddMesure(TextField maxTemp,TextField minTemp, TextField minWind, TextField maxWind, TextField minPressure,TextField maxPressure){
+        maxTemp.setText(String.valueOf(userSettings.getMaxTemperature()));
+        minTemp.setText(String.valueOf(userSettings.getMinTemperature()));
+        maxWind.setText(String.valueOf(userSettings.getMaxWindSpeed()));
+        minWind.setText(String.valueOf(userSettings.getMinWindSpeed()));
+        maxPressure.setText(String.valueOf(userSettings.getMaxPressure()));
+        minPressure.setText(String.valueOf(userSettings.getMinPressure()));
+    }
+    public void changeUserSettings(TextField maxTemp,TextField minTemp, TextField minWind, TextField maxWind, TextField minPressure,TextField maxPressure,TextField email) throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Potwierdzenie");
+        alert.setHeaderText("Czy napewno chcesz zapisać ustawienia dla konta?");
+        ButtonType buttonTypeOne = new ButtonType("Tak");
+        ButtonType buttonTypeCancel = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne) {
+            double maxTempVal = Double.parseDouble(maxTemp.getText());
+            double minTempVal = Double.parseDouble(minTemp.getText());
+            double maxWindVal = Double.parseDouble(maxWind.getText());
+            double minWindVal = Double.parseDouble(minWind.getText());
+            double maxPressureVal = Double.parseDouble(maxPressure.getText());
+            double minPressureVal = Double.parseDouble(minPressure.getText());
+            String emailVal = email.getText();
+            String changeUserSettingsQuerySQL = "UPDATE usersettings SET MINTEMP=" + minTempVal + ",MAXTEMP=" + maxTempVal + ",MAXWIND=" + maxWindVal + ",MINWIND=" + minWindVal + ",MINPRESSURE=" + minPressureVal + ",MAXPRESSURE=" + maxPressureVal + " WHERE EMAIL='" + emailVal + "'";
+            Statement stmt = null;
+            try {
+                stmt = connection.createStatement();
+            } catch (SQLException e) {
+                System.out.println("ERROR:No connection with Database");
+            }
+            try {
+                stmt.executeUpdate(changeUserSettingsQuerySQL);
+            } catch (SQLException e) {
+                System.out.println("ERROR:Bad SQL query");
+            }
+            loadSettingsAboutUser(emailVal);
+        }
 
+    }
+    public void loadDefaultSettingsForUser(TextField email) throws SQLException {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Potwierdzenie");
+        alert.setHeaderText("Czy napewno chcesz przywrócić ustawienia domyślne dla konta?");
+        ButtonType buttonTypeOne = new ButtonType("Tak");
+        ButtonType buttonTypeCancel = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
 
+        alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == buttonTypeOne){
+            String emailVal=email.getText();
+            String loadDefaultUserSettingsQuerySQL = "UPDATE usersettings SET MINTEMP=-50.0, MAXTEMP=60.0, MAXWIND=63.0, MINWIND=0.0, MINPRESSURE=970.0, MAXPRESSURE=1086.0 WHERE EMAIL='"+ emailVal +"'";
+            System.out.println(loadDefaultUserSettingsQuerySQL);
+            Statement stmt = null;
+            try {
+                stmt = connection.createStatement();
+            } catch (SQLException e) {
+                System.out.println("ERROR:No connection with Database");
+            }
+            try {
+                stmt.executeUpdate(loadDefaultUserSettingsQuerySQL);
+            } catch (SQLException e) {
+                System.out.println("ERROR:Bad SQL query");
+            }
+            loadSettingsAboutUser(emailVal);
+        } else {
+
+        }
+
+    }
 }
 
