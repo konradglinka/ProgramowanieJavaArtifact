@@ -1,31 +1,41 @@
 package DustyPlants;
 
-public class DustyPlant { //Klasa reprezentuje dowolną rośline pylącą
+public class DustyPlant {
 
-    private String name; //nazwa rośliny
-    private int startDustMonth; //Początek pylenia rośliny
-    private int endDustMonth; //Koniec pylenia rośliny
+    private String name;
+    private int startDustMonth;
+    private int endDustMonth;
+    private int stardDustDay;
+    private int endDustyDay;
 
-    //NIE ISTNIEJĄ ROŚLINY KTÓRE PYLĄ W KILKU OKRESACH CZASU.KAŻDA ROSLINA MA OKRES OD PEWNEGO MIESIACA DO INNEGO MIESIĄCA
-
-
-    public DustyPlant(String name, int startDustMonth, int endDustMonth) {
-        this.name = name;
-        this.startDustMonth = startDustMonth;
-        this.endDustMonth = endDustMonth;
-    }
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public DustyPlant(String name, int startDustMonth, int endDustMonth,int stardDustDay, int endDustyDay) {
+        this.name = name;
+        this.startDustMonth = startDustMonth;
+        this.endDustMonth = endDustMonth;
+        this.stardDustDay= stardDustDay;
+        this.endDustyDay= endDustyDay;
+
     }
 
     public int getStartDustMonth() {
         return startDustMonth;
     }
 
+    public int getStardDustDay(){return stardDustDay;}
+
     public int getEndDustMonth() {
         return endDustMonth;
     }
 
+    public int getEndDustyDay() {return endDustyDay;}
 
 }

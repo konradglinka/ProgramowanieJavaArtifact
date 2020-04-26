@@ -11,6 +11,8 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -40,13 +42,17 @@
                            </font>
                         </Label>
                         <Label text="E-mail" />
-                        <TextField fx:id="emailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
+                        <TextField fx:id="loginEmailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
                         <Label text="Hasło" />
                         <PasswordField fx:id="passwordPasswordField" text="password" />
                         <Button mnemonicParsing="false" onAction="#loginButton" text="Zaloguj" />
                      </children></VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
+                        <Button mnemonicParsing="false" onAction="#switchOnForgotPasswordButton" text="Zapomnialem hasła">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin></Button>
                         <Label text="Nie posiadasz konta ?" />
                         <Button mnemonicParsing="false" onAction="#switchOnRegisterButton" text="Rejestracja" />
                      </children>
@@ -72,11 +78,42 @@
                            </font>
                         </Label>
                         <Label text="E-mail" />
-                        <TextField fx:id="registrationEmailTextField" maxWidth="300.0" text="januszkowalski@gmail.com" />
+                        <TextField fx:id="registrationEmailTextField" maxWidth="300.0" text="konradgjd@gmail.com" />
                         <Label text="Hasło" />
-                        <PasswordField fx:id="registrationPasswordPasswordField" text="wojak" />
+                        <PasswordField fx:id="registrationPasswordPasswordField" text="zaq12wsX" />
                         <Label layoutX="145.0" layoutY="64.0" text="Powtórz hasło" />
-                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" layoutX="10.0" layoutY="73.0" text="wojak" />
+                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" layoutX="10.0" layoutY="73.0" text="zaq12wsX" />
+                        <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#sendRegistrationCode" text="Zarejestruj" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Masz już konto ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Logowanie" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="register2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Rejestracja" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="registrationCodeAlertLabel" text="Hasła nie są jednakowe" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Aby potwierdzić rejestracje wpisz kod przesłany na podany wcześniej adres e-mail" textAlignment="CENTER" wrapText="true" />
+                        <TextField fx:id="registrationCodeTextField" alignment="CENTER" maxWidth="300.0" />
                         <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#registerButton" text="Zarejestruj" />
                      </children>
                   </VBox>
@@ -88,11 +125,106 @@
                   </VBox>
                </children>
             </VBox>
+            <VBox fx:id="changePassword1VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zresetuj hasło" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="badEmailResetPasswordLabel" text="Nieprawidłowy E-mail" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Podaj adres E-mail dla którego chcesz zresetować hasło, zostanie na niego wysłany kod do resetowania hasła" textAlignment="CENTER" wrapText="true" />
+                        <TextField fx:id="emailToResetPasswordTextField" alignment="CENTER" maxWidth="300.0" text="konradgjd@gmail.com" />
+                        <Button mnemonicParsing="false" onAction="#sendResetPasswordCode" text="Wyślij kod" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Znasz hasło ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="changePassword2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zresetuj hasło" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="badCodeResetPasswordLabel" text="Nie prawidłowy kod" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Wpisz otrzymany kod aby zresetować hasło" textAlignment="CENTER" wrapText="true" />
+                        <TextField fx:id="resetCodeTextField" alignment="CENTER" maxWidth="300.0" />
+                        <Button mnemonicParsing="false" onAction="#goToChangePasswordButton" text="Zresetuj hasło" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Znasz hasło ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="changePassword3VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zmiana hasła" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="badPasswordLabel" text="Nieprawidłowe hasło" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Hasło" textAlignment="CENTER" wrapText="true" />
+                        <PasswordField fx:id="resetPasswordPasswordField" />
+                        <Label layoutX="145.0" layoutY="43.0" text="Powtórz hasło" textAlignment="CENTER" wrapText="true" />
+                        <PasswordField fx:id="conifrmedResetPasswordPasswordField" layoutX="10.0" layoutY="52.0" />
+                        <Button mnemonicParsing="false" onAction="#changePasswordButton" text="Zmień hasło" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Znasz hasło ?" />
+                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
          </children>
       </StackPane>
       <TabPane fx:id="mainViewTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
         <tabs>
-          <Tab text="Temperatura powietrza">
+          <Tab text="Stan powietrza">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -103,16 +235,31 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <ListView fx:id="citiesListView" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <HBox prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="nameOfCityToFindTextField" />
+                                    <Button mnemonicParsing="false" onAction="#findCityToTakeOWMDataButton" prefHeight="0.0" prefWidth="52.0">
+                                       <graphic>
+                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="cityToTakeMaeasureFromOWMListView" onMouseClicked="#onClickOWMCityListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
-                        <TableView fx:id="measuresTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                        <TableView fx:id="measuresFromOWMTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                           <columns>
-                            <TableColumn fx:id="minTemp" prefWidth="75.0" text="tempmin" />
-                            <TableColumn fx:id="maxTemp" prefWidth="75.0" text="tempmax" />
-                              <TableColumn fx:id="windSpeed" prefWidth="75.0" text="predkosc" />
-                              <TableColumn fx:id="humidity" prefWidth="75.0" text="wilgotnosc" />
-                              <TableColumn fx:id="dateOfMeasure" maxWidth="1.7976931348623157E308" prefWidth="200.0" text="data" />
+                            <TableColumn fx:id="tempColumn" prefWidth="100.0" text="Temperatura" />
+                            <TableColumn fx:id="windColumn" prefWidth="109.0" text="Prędkość wiatru" />
+                              <TableColumn fx:id="humidityColumn" prefWidth="91.0" text="Wilgotność" />
+                              <TableColumn fx:id="pressureColumn" minWidth="0.0" prefWidth="0.0" text="Ciśnienie" />
+                              <TableColumn fx:id="claudinessColumn" prefWidth="91.0" text="Zachmurzenie" />
+                              <TableColumn fx:id="dateOWMColumn" maxWidth="1.7976931348623157E308" prefWidth="184.0" text="Data" />
                           </columns>
                         </TableView>
                      </children>
@@ -2403,11 +2550,28 @@
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="371.0" prefWidth="150.0">
+                        <VBox>
                            <children>
-                              <Label text="Wybież miasto" />
-                              <TextField text="Wyszukaj" />
-                              <ListView fx:id="cityToTakeMaeasureFromUserListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <Label text="Wybierz miasto">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="nameOfCityToFindMesureFromUserTextField" />
+                                    <Button mnemonicParsing="false" onAction="#findCityToTakeMeasureFromUsersButton" prefHeight="0.0" prefWidth="52.0">
+                                       <graphic>
+                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="cityToTakeMaeasureFromUserListView" onMouseClicked="#onClickOWMCityListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -2491,88 +2655,109 @@
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox prefHeight="371.0" prefWidth="150.0">
+                        <VBox>
                            <children>
-                              <Label text="Wybież miasto" />
-                              <TextField text="Wyszukaj" />
-                              <ListView fx:id="cityToAddMeasureListView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <Label text="Wybierz miasto">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="nameOfCityToAddMesureFromUserTextField" />
+                                    <Button mnemonicParsing="false" onAction="#findCityToAddMeasureFromUsersButton" prefHeight="0.0" prefWidth="52.0">
+                                       <graphic>
+                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="cityToAddMeasureListView" onMouseClicked="#onClickOWMCityListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
-                        <VBox prefHeight="371.0" prefWidth="166.0">
+                        <VBox prefHeight="200.0" prefWidth="100.0">
                            <children>
-                              <Label text="Temperatura powietrza">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Wilgotnosć powietrza">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label text="Ciśnienie">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="60.0" text="Prędkość wiatru">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="85.0" text="Zachmurzenie">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <VBox layoutX="160.0" layoutY="10.0" maxWidth="40.0" prefHeight="371.0" prefWidth="166.0">
-                           <children>
-                              <Label text="C">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label text="\%">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label text="hpa">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="60.0" text="m/s">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="10.0" layoutY="85.0">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <VBox layoutX="160.0" layoutY="10.0" prefHeight="371.0" prefWidth="166.0" HBox.hgrow="ALWAYS">
-                           <children>
-                              <TextField fx:id="temperatureTextField" text="12" />
-                              <TextField fx:id="humidityTextField" text="58" />
-                              <TextField fx:id="pressureTextField" layoutX="10.0" layoutY="35.0" text="1020" />
-                              <TextField fx:id="windSpeedTextField" layoutX="10.0" layoutY="35.0" text="10" />
-                              <TextField fx:id="claudinessTextField" layoutX="10.0" layoutY="60.0" text="Clear sky" />
-                              <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <VBox prefHeight="371.0" prefWidth="166.0">
+                                       <children>
+                                          <Label text="Temperatura powietrza">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Wilgotnosć powietrza">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="Ciśnienie">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="60.0" text="Prędkość wiatru">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="85.0" text="Zachmurzenie">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox maxWidth="40.0" prefHeight="371.0" prefWidth="166.0">
+                                       <children>
+                                          <Label text="C">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="\%">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label text="hpa">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="60.0" text="m/s">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="85.0">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <VBox prefHeight="371.0" prefWidth="166.0">
+                                       <children>
+                                          <TextField fx:id="temperatureTextField" text="12" />
+                                          <TextField fx:id="humidityTextField" text="58" />
+                                          <TextField fx:id="pressureTextField" layoutX="10.0" layoutY="35.0" text="1020" />
+                                          <TextField fx:id="windSpeedTextField" layoutX="10.0" layoutY="35.0" text="10" />
+                                          <TextField fx:id="claudinessTextField" layoutX="10.0" layoutY="60.0" text="Clear sky" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="BOTTOM_CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#addMeasureFromUserButton" prefHeight="25.0" prefWidth="315.0" text="Prześlij pomiar" />
                                  </children>
                               </HBox>
-                           </children>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </VBox>
+                           </children></VBox>
                      </children>
                   </HBox>
                </content>

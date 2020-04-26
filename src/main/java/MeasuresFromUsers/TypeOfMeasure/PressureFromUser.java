@@ -5,13 +5,13 @@ public class PressureFromUser { //Klasa reprezentuje pomiar ciśnienia powietrza
     private String userName=null;
 
     private double pressure=0.0;
-    private String city=null;
+    private int id=0;
 
-    public PressureFromUser(String date, String userName, double pressure, String city) {
+    public PressureFromUser(String date, String userName, double pressure, int id) {
         this.date = date;
         this.userName = userName;
         this.pressure = pressure;
-        this.city = city;
+        this.id = id;
     }
 
     public String getDate() {
@@ -26,7 +26,7 @@ public class PressureFromUser { //Klasa reprezentuje pomiar ciśnienia powietrza
         return pressure;
     }
 
-    public String getCity() {
-        return city;
+    public int getId() {
+        return id;
     }
 }
