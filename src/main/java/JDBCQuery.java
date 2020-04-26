@@ -148,7 +148,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         }
         Statement stmt = null;
         if(checkDataBeforeAddMesure.veryficicationComplete(pressureTextField,temperatureTextField,windTextField,
-                humidityTextField, cloudinessFromUserComboBox,addMesureAlertLabel)==true)  {
+                humidityTextField,addMesureAlertLabel)==true)  {
             try {
                 stmt = connection.createStatement();
             } catch (SQLException e) {

@@ -14,19 +14,18 @@ public class CheckDataBeforeAddMesure {
 
 
     public boolean veryficicationComplete(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                          TextField humidityTextField, ComboBox<String> cloudinessComboBox, Label addMesureAlertLabel ) {
+                                          TextField humidityTextField, Label addMesureAlertLabel ) {
         boolean temperature= verificationTemperature(temperatureTextField,addMesureAlertLabel);
         boolean windSpeed = verificationWindSpeed(windTextField,addMesureAlertLabel);
         boolean pressure=verificationPressure(pressureTextField,addMesureAlertLabel);
-        boolean claudiness=verificationClaudiness(cloudinessComboBox,addMesureAlertLabel);
         boolean humidity=verificationHumidity(humidityTextField,addMesureAlertLabel);
-        if(temperature==true&&windSpeed==true&&pressure==true&&claudiness==true&&humidity==true)
+        if(temperature==true&&windSpeed==true&&pressure==true&&humidity==true)
         {
             addMesureAlertLabel.setVisible(false);
             return true;
         }
 
-        else if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0 && cloudinessComboBox.getSelectionModel().getSelectedItem().length()==0)
+        else if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0 )
         {
             addMesureAlertLabel.setVisible(true);
             addMesureAlertLabel.setText("Nie można dodać pomiaru bez danych");
@@ -144,34 +143,7 @@ public class CheckDataBeforeAddMesure {
         }
 
     }
-   private boolean verificationClaudiness(ComboBox<String> claudinessComboBox, Label addMesureAlertLabel){
-        boolean haveNumber=false;
-        if (claudinessComboBox.getSelectionModel().getSelectedItem().equals("")) {
-            claudinessComboBox.setStyle("");
-            return true;
-        }
-            try {
-            String claudiness = claudinessComboBox.getSelectionModel().getSelectedItem();
-            for(int i =0; i<claudiness.length();i++) {
-                if ((int) (claudiness.charAt(i)) >= 48 && (int) (claudiness.charAt(i)) <= 57) {
-                    haveNumber = true;
-                }
-            }
-            if(haveNumber==false) {
-                claudinessComboBox.setStyle("");
-                return true;
-            }
-            else{
-                claudinessComboBox.setStyle("-fx-background-color:red;");
-                return false;}
-        }
-        catch(Exception e)
-        {
-            claudinessComboBox.setStyle("-fx-background-color:red;");
-            return false;
-        }
 
-    }
     private boolean verificationHumidity(TextField humidityTextField, Label addMesureAlertLabel){
 
         boolean maxValue=false;
