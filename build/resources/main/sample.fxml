@@ -2711,17 +2711,21 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label fx:id="addMesureAlertLabel" text="fbdssb" textFill="RED" visible="false" wrapText="true">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
                                           <HBox prefHeight="35.0" prefWidth="166.0" />
+                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                             <children>
+                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@sun.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </children>
+                                          </HBox>
                                        </children>
                                     </VBox>
                                     <VBox maxWidth="40.0" prefHeight="371.0" prefWidth="166.0">
                                        <children>
-                                          <Label text="C">
+                                          <Label text="°C">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -2731,7 +2735,7 @@
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label text="hpa">
+                                          <Label text="hPa">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
@@ -2755,25 +2759,11 @@
                                           <TextField fx:id="pressureTextField" layoutX="10.0" layoutY="35.0" text="1020" />
                                           <TextField fx:id="windSpeedTextField" layoutX="10.0" layoutY="35.0" text="10" />
                                           <ComboBox fx:id="claudinessFromIserComboBox" maxWidth="1.7976931348623157E308" prefWidth="194.0" />
-                                          <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                             <children>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@sun.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@umbrella.png" />
-                                                   </image>
-                                                </ImageView>
-                                                <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                                                   <image>
-                                                      <Image url="@rain2.png" />
-                                                   </image>
-                                                </ImageView>
-                                             </children>
-                                          </HBox>
+                                          <Label fx:id="addMeasureAlertLabel" text="Podana temperatura powietrza nie mieści się w wartościach podanych w ustawieniach" textFill="RED">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                          </Label>
                                        </children>
                                     </VBox>
                                     <VBox prefHeight="200.0" prefWidth="100.0">
@@ -2859,6 +2849,11 @@
                                        </font>
                                     </Label>
                                     <Label layoutX="10.0" layoutY="110.0" text="Minimalna prędkość wiatru:">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="settingsAlertLabel" text="Label" textFill="RED" visible="false">
                                        <font>
                                           <Font size="16.0" />
                                        </font>

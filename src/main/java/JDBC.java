@@ -6,7 +6,7 @@ import java.sql.SQLException;
 public class JDBC { //Klasa sluzy do laczenia sie z baza danych
     private static Connection connection; //Polaczenie z baza danych
     private static String dbDriverName ="com.mysql.jdbc.Driver"; // driver jdbc
-    private static String database = "jdbc:mysql://localhost:3306/weatherapp?useUnicode=yes&characterEncoding=UTF-8";
+    private static String database = "jdbc:mysql://localhost:3307/weatherapp?useUnicode=yes&characterEncoding=UTF-8";
     //bazadanych
 
 

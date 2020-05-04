@@ -7,34 +7,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d9cae06-15e2-45bb-9f50-bf3beda623fb" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckUserSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Controller.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/JDBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/JDBC.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/JDBCQuery.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/JDBCQuery.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/CheckDataBeforeAddMesure.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/CheckDataBeforeAddMesure.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TablesForCityFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TablesForCityFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/HumidityFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/HumidityFromUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/PressureFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/PressureFromUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OWM/DataFromOWM.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OWM/DataFromOWM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OWM/WeatherMeasureOWM.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OWM/WeatherMeasureOWM.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OWM/WeatherMeasuresFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OWM/WeatherMeasuresFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/WeatherInCities/ListOfCitiesFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/WeatherInCities/ListOfCitiesFactory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/cities.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/cities.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/sample2.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JDBC.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/JDBCQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JDBCQuery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sample.fxml" afterDir="false" />
     </list>
@@ -98,29 +86,6 @@
         <option value="Class" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>password</find>
-      <find>tabpane</find>
-      <find>addmesure</find>
-      <find>addme</find>
-      <find>HAVENUMB</find>
-      <find>alrea</find>
-      <find>badem</find>
-      <find>pressEnterToSe</find>
-      <find>dupa</find>
-      <find>add</find>
-      <find>light rain</find>
-      <find>few</find>
-      <find>tempe</find>
-      <find>OWM</find>
-      <find>onClickOW</find>
-      <find>system</find>
-      <find>System.out</find>
-      <find>System</find>
-      <find>setVisible(false)</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -301,26 +266,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587913702011" />
-    <state width="1876" height="268" key="GridCell.Tab.0.bottom" timestamp="1587914214593">
+    <state width="1876" height="268" key="GridCell.Tab.0.bottom" timestamp="1588593414035">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1587914214593" />
-    <state width="1876" height="268" key="GridCell.Tab.0.center" timestamp="1587914214592">
+    <state width="1876" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588593414035" />
+    <state width="1876" height="268" key="GridCell.Tab.0.center" timestamp="1588593414035">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="268" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1587914214592" />
-    <state width="1876" height="268" key="GridCell.Tab.0.left" timestamp="1587914214592">
+    <state width="1876" height="268" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588593414035" />
+    <state width="1876" height="268" key="GridCell.Tab.0.left" timestamp="1588593414034">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="268" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1587914214592" />
-    <state width="1876" height="268" key="GridCell.Tab.0.right" timestamp="1587914214593">
+    <state width="1876" height="268" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588593414034" />
+    <state width="1876" height="268" key="GridCell.Tab.0.right" timestamp="1588593414035">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="268" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1587914214593" />
-    <state x="655" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1587913633448">
+    <state width="1876" height="268" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588593414035" />
+    <state x="655" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1588587509254">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="655" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587913633448" />
+    <state x="655" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588587509254" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

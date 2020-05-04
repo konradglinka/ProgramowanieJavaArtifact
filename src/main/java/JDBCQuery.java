@@ -109,7 +109,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     //FUNKCJE DOTYCZĄCE POMIARÓW OD UŻYTKOWNIKA
     //Funkcja dodaje pomiar od użytkownika
     public void addMeasuresFromUserToDataBase(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                              TextField humidityTextField, ComboBox<String> cloudinessFromUserComboBox, int IDFromListView,Label addMesureAlertLabel) {
+                                              TextField humidityTextField, ComboBox<String> cloudinessFromUserComboBox, int IDFromListView, Label addMeasureAlertLabel) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    HH:mm");
         Date actualDate = getInstance().getTime();
         String userName = userNameToMeasures;
@@ -148,7 +148,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         }
         Statement stmt = null;
         if(checkDataBeforeAddMesure.veryficicationComplete(pressureTextField,temperatureTextField,windTextField,
-                humidityTextField,addMesureAlertLabel)==true)  {
+                humidityTextField, addMeasureAlertLabel )==true)  {
             try {
                 stmt = connection.createStatement();
             } catch (SQLException e) {
