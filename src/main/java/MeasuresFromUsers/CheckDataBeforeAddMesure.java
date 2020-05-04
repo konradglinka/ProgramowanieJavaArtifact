@@ -1,40 +1,50 @@
 package MeasuresFromUsers;
 
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 
 public class CheckDataBeforeAddMesure {
+    StringBuilder stringBuilderWithAlertToLabel =new StringBuilder();
+
   private UserSettings userSettings=new UserSettings();
 
     public UserSettings getUserSettings() {
         return userSettings;
     }
-
-
     public boolean veryficicationComplete(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                          TextField humidityTextField, ComboBox<String> cloudinessComboBox, Label addMesureAlertLabel ) {
-        boolean temperature= verificationTemperature(temperatureTextField,addMesureAlertLabel);
-        boolean windSpeed = verificationWindSpeed(windTextField,addMesureAlertLabel);
-        boolean pressure=verificationPressure(pressureTextField,addMesureAlertLabel);
-        boolean claudiness=verificationClaudiness(cloudinessComboBox,addMesureAlertLabel);
-        boolean humidity=verificationHumidity(humidityTextField,addMesureAlertLabel);
-        if(temperature==true&&windSpeed==true&&pressure==true&&claudiness==true&&humidity==true)
+                                          TextField humidityTextField,Label addMesureAlertLabel) {
+        boolean temperature= verificationTemperature(temperatureTextField);
+        boolean windSpeed = verificationWindSpeed(windTextField);
+        boolean pressure=verificationPressure(pressureTextField);
+        boolean humidity=verificationHumidity(humidityTextField);
+     if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0)
         {
+            System.out.println("pusty pomiar");
+            stringBuilderWithAlertToLabel.append("Nie można dodać pomiaru bez danych");
+            addMesureAlertLabel.setVisible(true);
+            addMesureAlertLabel.setText(stringBuilderWithAlertToLabel.toString());
+            stringBuilderWithAlertToLabel.delete(0, stringBuilderWithAlertToLabel.length());
+            return false; // Nie można dodać pomiaru bez danych
+        }
+        if(temperature==true&&windSpeed==true&&pressure==true&&humidity==true)
+        {
+            System.out.println( temperatureTextField.getText().length());
+
             addMesureAlertLabel.setVisible(false);
+            stringBuilderWithAlertToLabel.delete(0, stringBuilderWithAlertToLabel.length());
             return true;
         }
 
-        else if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0 && cloudinessComboBox.getSelectionModel().getSelectedItem().length()==0)
-        {
+        else{
             addMesureAlertLabel.setVisible(true);
-            addMesureAlertLabel.setText("Nie można dodać pomiaru bez danych");
-            return false; // Nie można dodać pomiaru bez danych
+            addMesureAlertLabel.setText(stringBuilderWithAlertToLabel.toString());
+            stringBuilderWithAlertToLabel.delete(0, stringBuilderWithAlertToLabel.length());
+            return false;
         }
-        return false;
+
     }
-    private boolean verificationTemperature(TextField temperatureTextField, Label addMesureAlertLabel){
+    private boolean verificationTemperature(TextField temperatureTextField){
 
         boolean maxValue=false;
         boolean minValue=false;
@@ -53,26 +63,24 @@ public class CheckDataBeforeAddMesure {
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(temperatureTextField)==true) {
                 temperatureTextField.setStyle("");
-
-
                 return true;
             }
             else{
                 temperatureTextField.setStyle("-fx-background-color:red;");
-                addMesureAlertLabel.setVisible(true);
-                addMesureAlertLabel.setText("Podana temperatura nie mieści się w wartościach podanych w ustawieniach");
+
+                stringBuilderWithAlertToLabel.append("Podana temperatura nie mieści się w wartościach podanych w ustawieniach\n");
             return false;}
         }
         catch(Exception e)
         {
             temperatureTextField.setStyle("-fx-background-color:red;");
-            addMesureAlertLabel.setVisible(true);
-            addMesureAlertLabel.setText("Podana wartość temperatury jest nieprawidłowa");
+
+            stringBuilderWithAlertToLabel.append("Podana wartość temperatury jest nieprawidłowa\n");
             return false;
         }
 
     }
-    private boolean verificationWindSpeed(TextField windSpeedTextField, Label addMesureAlertLabel){
+    private boolean verificationWindSpeed(TextField windSpeedTextField){
 
         boolean maxValue=false;
         boolean minValue=false;
@@ -95,20 +103,20 @@ public class CheckDataBeforeAddMesure {
             }
             else{
                 windSpeedTextField.setStyle("-fx-background-color:red;");
-                addMesureAlertLabel.setVisible(true);
-                addMesureAlertLabel.setText("Podana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach");
+
+                stringBuilderWithAlertToLabel.append("Podana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\n");
                 return false;}
         }
         catch(Exception e)
         {
             windSpeedTextField.setStyle("-fx-background-color:red;");
-            addMesureAlertLabel.setVisible(true);
-            addMesureAlertLabel.setText("Podana prędkość wiatru jest nieprawidłowa");
+
+            stringBuilderWithAlertToLabel.append("Podana prędkość wiatru jest nieprawidłowa\n");
             return false;
         }
 
     }
-   private boolean verificationPressure(TextField pressureTextField, Label addMesureAlertLabel){
+   private boolean verificationPressure(TextField pressureTextField){
 
         boolean maxValue=false;
         boolean minValue=false;
@@ -131,48 +139,20 @@ public class CheckDataBeforeAddMesure {
             }
             else{
                 pressureTextField.setStyle("-fx-background-color:red;");
-                addMesureAlertLabel.setVisible(true);
-                addMesureAlertLabel.setText("Podane ćiśnienie powietrza nie mieści się w wartościach podanych w ustawieniach");
+
+                stringBuilderWithAlertToLabel.append("Podane ćiśnienie powietrza nie mieści się w wartościach podanych w ustawieniach\n");
                 return false;}
         }
         catch(Exception e)
         {
             pressureTextField.setStyle("-fx-background-color:red;");
-            addMesureAlertLabel.setVisible(true);
-            addMesureAlertLabel.setText("Podana wartość ćisnienia jest nieprawidłowa");
+
+            stringBuilderWithAlertToLabel.append("Podana wartość ćisnienia jest nieprawidłowa\n");
             return false;
         }
 
     }
-   private boolean verificationClaudiness(ComboBox<String> claudinessComboBox, Label addMesureAlertLabel){
-        boolean haveNumber=false;
-        if (claudinessComboBox.getSelectionModel().getSelectedItem().equals("")) {
-            claudinessComboBox.setStyle("");
-            return true;
-        }
-            try {
-            String claudiness = claudinessComboBox.getSelectionModel().getSelectedItem();
-            for(int i =0; i<claudiness.length();i++) {
-                if ((int) (claudiness.charAt(i)) >= 48 && (int) (claudiness.charAt(i)) <= 57) {
-                    haveNumber = true;
-                }
-            }
-            if(haveNumber==false) {
-                claudinessComboBox.setStyle("");
-                return true;
-            }
-            else{
-                claudinessComboBox.setStyle("-fx-background-color:red;");
-                return false;}
-        }
-        catch(Exception e)
-        {
-            claudinessComboBox.setStyle("-fx-background-color:red;");
-            return false;
-        }
-
-    }
-    private boolean verificationHumidity(TextField humidityTextField, Label addMesureAlertLabel){
+    private boolean verificationHumidity(TextField humidityTextField){
 
         boolean maxValue=false;
         boolean minValue=false;
@@ -193,15 +173,14 @@ public class CheckDataBeforeAddMesure {
                 return true;
             }
             else{
-                humidityTextField.setStyle("-fx-background-color:red;"); addMesureAlertLabel.setVisible(true);
-                addMesureAlertLabel.setText("Podana wilgotność musi mieścić się w przedziale procentowym od 0 do 100");
+                humidityTextField.setStyle("-fx-background-color:red;");
+                stringBuilderWithAlertToLabel.append("Podana wilgotność musi mieścić się w przedziale procentowym od 0 do 100\n");
                 return false;}
         }
         catch(Exception e)
         {
             humidityTextField.setStyle("-fx-background-color:red;");
-            addMesureAlertLabel.setVisible(true);
-            addMesureAlertLabel.setText("Podana wartosć wilgotności jest nieprawidłowa");
+            stringBuilderWithAlertToLabel.append("Podana wartosć wilgotności jest nieprawidłowa\n");
             return false;
         }
 

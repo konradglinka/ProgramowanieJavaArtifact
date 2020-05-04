@@ -254,11 +254,11 @@
                         </VBox>
                         <TableView fx:id="measuresFromOWMTableView" HBox.hgrow="ALWAYS">
                           <columns>
-                            <TableColumn fx:id="tempColumn" prefWidth="100.0" text="Temperatura" />
-                            <TableColumn fx:id="windColumn" prefWidth="109.0" text="Prędkość wiatru" />
-                              <TableColumn fx:id="humidityColumn" prefWidth="91.0" text="Wilgotność" />
+                            <TableColumn fx:id="tempColumn" prefWidth="100.0" text="Temperatura (C)" />
+                            <TableColumn fx:id="windColumn" prefWidth="109.0" text="Prędkość wiatru (m/s)" />
+                              <TableColumn fx:id="humidityColumn" prefWidth="91.0" text="Wilgotność (%)" />
                               <TableColumn fx:id="claudinessColumn" prefWidth="170.0" text="Zachmurzenie" />
-                              <TableColumn fx:id="pressureColumn" prefWidth="91.0" text="Ciśnienie" />
+                              <TableColumn fx:id="pressureColumn" prefWidth="91.0" text="Ciśnienie (hpa)" />
                               <TableColumn fx:id="dateOWMColumn" maxWidth="1.7976931348623157E308" prefWidth="184.0" text="Data" />
                           </columns>
                         </TableView>
@@ -266,6 +266,38 @@
                   </HBox>
                </content>
           </Tab>
+            <Tab text="Zanieczyszczenia powietrza">
+               <content>
+                  <HBox prefHeight="100.0" prefWidth="200.0">
+                     <children>
+                        <VBox minWidth="200.0">
+                           <children>
+                              <Label text="Wybierz miasto">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <HBox prefWidth="200.0">
+                                 <children>
+                                    <TextField fx:id="nameOfCityToFindGIOSStationTextField" />
+                                    <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="52.0">
+                                       <graphic>
+                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                              <ListView fx:id="cityToTakeMaeasureFromGIOSListView" onMouseClicked="#onClickOnOWMStationsListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </content>
+            </Tab>
             <Tab text="Kalendarz pylenia roślin">
                <content>
                   <VBox>
@@ -2753,7 +2785,7 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <Label fx:id="addMesureAlertLabel" text="fbdssb" textFill="RED" wrapText="true">
+                              <Label fx:id="addMesureAlertLabel" text="fbdssb" textFill="RED" visible="false" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
