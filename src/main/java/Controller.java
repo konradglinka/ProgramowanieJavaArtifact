@@ -1,6 +1,7 @@
 import DustyPlants.ActualDustyPlants;
 import EmailActions.EmailToRegister;
 import EmailActions.EmailToResetPassword;
+import GIOS.ListOfGIOSCitiesFactory;
 import MeasuresFromUsers.MeasuresPLNamesFactory;
 import MeasuresFromUsers.TablesForCityFactory;
 import MeasuresFromUsers.TypeOfMeasure.*;
@@ -34,10 +35,11 @@ public class Controller {
     VerificateDataFromUser verificateDataFromUser = new VerificateDataFromUser();
     ActualDustyPlants actualDustyPlants = new ActualDustyPlants(); //Pobieramy listę aktualnie pylących roślin
     WeatherMeasuresFactory weatherMeasuresFactory;
-
+    TextFieldRestrict textFieldRestrict=new TextFieldRestrict();
     TablesForCityFactory tablesForCityFactory = new TablesForCityFactory(); //Do tworzenia tabel z pomiarami dla wybranych miast
     MeasuresPLNamesFactory measuresPLNamesFactory = new MeasuresPLNamesFactory();//Pobieramy listę dostępnych pomiarów
     ListOfCitiesFactory listOfCitiesFactory = new ListOfCitiesFactory(); //Pobieramy liste dostępnych miast
+    ListOfGIOSCitiesFactory listOfGIOSCitiesFactory=new ListOfGIOSCitiesFactory();
     OWMClaudinesTranslator owmClaudinesTranslator = new OWMClaudinesTranslator();
     JDBC jdbc = new JDBC(); //Do połączenia z baza
     JDBCQuery jdbcQuery; //Do wykonywania zapytań do bazy
@@ -83,8 +85,7 @@ public class Controller {
     @FXML
     TextField pressureTextField;
     @FXML
-    Label addMeasureAlertLabel;
-
+    Label addMesureAlertLabel;
     //ELEMENTY POBRANIA POMIARU PRZEZ UŻYTKOWNIKA
     @FXML
     ListView<String> cityToTakeMaeasureFromUserListView;
@@ -209,9 +210,13 @@ public class Controller {
     TextField settingsMaxWindSpeedTextField;
     @FXML
     TextField settingsMinWindSpeedTextField;
-    @FXML
-    Label settingsAlertLabel;
 
+
+    //gios
+    @FXML
+    TextField nameOfCityToFindGIOSStationTextField;
+    @FXML
+    ListView<String>cityToTakeMaeasureFromGIOSListView;
     public Controller() throws IOException {
     }
 
@@ -226,10 +231,18 @@ public class Controller {
         cityToAddMeasureListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList()); //Lista miast do dodania pomiaru
         cityToTakeMaeasureFromUserListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList()); //Lista miast do pobrania pomiaru
         cityToTakeMaeasureFromOWMListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList());
+        cityToTakeMaeasureFromGIOSListView.getItems().addAll(listOfGIOSCitiesFactory.getGIOSStationsNamesArrayList());
         measuresFromUserComboBox.getSelectionModel().select(0); //Wybieramy 1 z wartości combobox by nie byl pusty
         cityToAddMeasureListView.getSelectionModel().selectFirst();
         cityToTakeMaeasureFromUserListView.getSelectionModel().selectFirst();
         cityToTakeMaeasureFromOWMListView.getSelectionModel().selectFirst();
+        textFieldRestrict.onlyDigitsInTextField(settingsMinTemperatureTextField);
+        textFieldRestrict.onlyDigitsInTextField(settingsMaxTemperatureTextField);
+        textFieldRestrict.onlyPlusDigitsInTextField(settingsMinPressureTextField);
+        textFieldRestrict.onlyPlusDigitsInTextField(settingsMaxPressureTextField);
+        textFieldRestrict.onlyPlusDigitsInTextField(settingsMinWindSpeedTextField);
+        textFieldRestrict.onlyPlusDigitsInTextField(settingsMaxWindSpeedTextField);
+        textFieldRestrict.onlyValidEmail(registrationEmailTextField);
     }
 
     private void startConectionWithDataBase() { //Połączenie aplikacji z bazą danych
@@ -296,7 +309,7 @@ public class Controller {
         Double lon=Double.parseDouble(namelonlat[1]);
         Double lat=Double.parseDouble(namelonlat[2]);
         int id=listOfCitiesFactory.findIDForCity(name,lon,lat);
-        jdbcQuery.addMeasuresFromUserToDataBase(pressureTextField, temperatureTextField, windSpeedTextField, humidityTextField, claudinessFromIserComboBox,id,addMeasureAlertLabel);
+        jdbcQuery.addMeasuresFromUserToDataBase(pressureTextField, temperatureTextField, windSpeedTextField, humidityTextField, claudinessFromIserComboBox,id,addMesureAlertLabel);
     }
     //FUNKCJE DOTYCZĄCE POBRANIA POMIARU PRZEZ UŻYTKOWNIKA
 

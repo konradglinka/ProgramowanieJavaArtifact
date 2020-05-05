@@ -1,110 +1,50 @@
 package MeasuresFromUsers;
 
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 
 public class CheckDataBeforeAddMesure {
-  private UserSettings userSettings=new UserSettings();
+    StringBuilder stringBuilderWithAlertToLabel =new StringBuilder();
 
+  private UserSettings userSettings=new UserSettings();
 
     public UserSettings getUserSettings() {
         return userSettings;
     }
-
-
-
     public boolean veryficicationComplete(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                          TextField humidityTextField, Label addMeasureAlertLabel) {
-        boolean temperature= verificationTemperature(temperatureTextField,addMeasureAlertLabel);
-        boolean windSpeed = verificationWindSpeed(windTextField,addMeasureAlertLabel);
-        boolean pressure=verificationPressure(pressureTextField,addMeasureAlertLabel);
-        boolean humidity=verificationHumidity(humidityTextField,addMeasureAlertLabel);
-        if(temperature==true&&windSpeed==true&&pressure==true&&humidity==true)
+                                          TextField humidityTextField,Label addMesureAlertLabel) {
+        boolean temperature= verificationTemperature(temperatureTextField);
+        boolean windSpeed = verificationWindSpeed(windTextField);
+        boolean pressure=verificationPressure(pressureTextField);
+        boolean humidity=verificationHumidity(humidityTextField);
+     if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0)
         {
-            addMeasureAlertLabel.setVisible(false);
-            return true;
-        }
-        //OBSLUGA PRZYPADKOW Z DWOMA ALERTAMI
-        if(temperature==false&&windSpeed==false&&pressure==true&&humidity==true)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana temperatura nie mieści się w wartościach podanych w ustawieniach\nPodana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        if(temperature==false&&windSpeed==true&&pressure==false&&humidity==true)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana temperatura nie mieści się w wartościach podanych w ustawieniach\nPodane ciśnienie nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        if(temperature==false&&windSpeed==true&&pressure==true&&humidity==false)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana temperatura nie mieści się w wartościach podanych w ustawieniach\nPodana wilgotność powietrza nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        if(temperature==true&&windSpeed==false&&pressure==false&&humidity==true)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\nPodane ciśnienie nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        if(temperature==true&&windSpeed==false&&pressure==true&&humidity==false)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\nPodana wilgotność powietrza nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        if(temperature==true&&windSpeed==true&&pressure==false&&humidity==false)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podane ciśnienie powietrza nie mieści się w wartościach podanych w ustawieniach\nPodana wilgotność powietrza nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        //OBSLUGA PRZYPADKOW Z TRZEMA ALERTAMI
-        if(temperature==true&&windSpeed==false&&pressure==false&&humidity==false)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\nPodane ciśnienie nie mieści się w wartościach podanych w ustawieniach\nPodana wilgotność powietrza nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        if(temperature==false&&windSpeed==true&&pressure==false&&humidity==false)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana temperatura powietrza nie mieści się w wartościach podanych w ustawieniach\nPodane ciśnienie nie mieści się w wartościach podanych w ustawieniach\nPodana wilgotność powietrza nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        if(temperature==false&&windSpeed==false&&pressure==true&&humidity==false)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana temperatura powietrza nie mieści się w wartościach podanych w ustawieniach\nPodana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\nPodana wilgotność powietrza nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        if(temperature==false&&windSpeed==false&&pressure==false&&humidity==true)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana temperatura powietrza nie mieści się w wartościach podanych w ustawieniach\nPodana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\nPodane ciśnienie powietrza nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        //OBSLUGA PRZYPADKU Z CZTEREMA ALERTAMI
-        if(temperature==false&&windSpeed==false&&pressure==false&&humidity==false)
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana temperatura powietrza nie mieści się w wartościach podanych w ustawieniach\nPodana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\nPodane ciśnienie powietrza nie mieści się w wartościach podanych w ustawieniach\nPodana wilgotność powietrza nie mieści się w wartościach podanych w ustawieniach");
-            return false;
-        }
-        //OBSLUGA PRZYPADKU BEZ DANYCH
-        else if(temperatureTextField.getText().length()==0 && windTextField.getText().length()==0 && pressureTextField.getText().length()==0 && humidityTextField.getText().length()==0 )
-        {
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Nie można dodać pomiaru bez danych");
+            System.out.println("Pusty pomiar");
+            stringBuilderWithAlertToLabel.append("Nie można dodać pomiaru bez danych");
+            addMesureAlertLabel.setVisible(true);
+            addMesureAlertLabel.setText(stringBuilderWithAlertToLabel.toString());
+            stringBuilderWithAlertToLabel.delete(0, stringBuilderWithAlertToLabel.length());
             return false; // Nie można dodać pomiaru bez danych
         }
-        return false;
+        if(temperature==true&&windSpeed==true&&pressure==true&&humidity==true)
+        {
+            System.out.println( temperatureTextField.getText().length());
+
+            addMesureAlertLabel.setVisible(false);
+            stringBuilderWithAlertToLabel.delete(0, stringBuilderWithAlertToLabel.length());
+            return true;
+        }
+
+        else{
+            addMesureAlertLabel.setVisible(true);
+            addMesureAlertLabel.setText(stringBuilderWithAlertToLabel.toString());
+            stringBuilderWithAlertToLabel.delete(0, stringBuilderWithAlertToLabel.length());
+            return false;
+        }
+
     }
-    private boolean verificationTemperature(TextField temperatureTextField, Label addMeasureAlertLabel){
+    private boolean verificationTemperature(TextField temperatureTextField){
 
         boolean maxValue=false;
         boolean minValue=false;
@@ -123,26 +63,24 @@ public class CheckDataBeforeAddMesure {
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(temperatureTextField)==true) {
                 temperatureTextField.setStyle("");
-
-
                 return true;
             }
             else{
                 temperatureTextField.setStyle("-fx-background-color:red;");
-                addMeasureAlertLabel.setVisible(true);
-                addMeasureAlertLabel.setText("Podana temperatura nie mieści się w wartościach podanych w ustawieniach");
+
+                stringBuilderWithAlertToLabel.append("Podana temperatura nie mieści się w wartościach podanych w ustawieniach\n");
             return false;}
         }
         catch(Exception e)
         {
             temperatureTextField.setStyle("-fx-background-color:red;");
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana wartość temperatury jest nieprawidłowa");
+
+            stringBuilderWithAlertToLabel.append("Podana wartość temperatury jest nieprawidłowa\n");
             return false;
         }
 
     }
-    private boolean verificationWindSpeed(TextField windSpeedTextField, Label addMeasureAlertLabel){
+    private boolean verificationWindSpeed(TextField windSpeedTextField){
 
         boolean maxValue=false;
         boolean minValue=false;
@@ -165,20 +103,20 @@ public class CheckDataBeforeAddMesure {
             }
             else{
                 windSpeedTextField.setStyle("-fx-background-color:red;");
-                addMeasureAlertLabel.setVisible(true);
-                addMeasureAlertLabel.setText("Podana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach");
+
+                stringBuilderWithAlertToLabel.append("Podana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\n");
                 return false;}
         }
         catch(Exception e)
         {
             windSpeedTextField.setStyle("-fx-background-color:red;");
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana prędkość wiatru jest nieprawidłowa");
+
+            stringBuilderWithAlertToLabel.append("Podana prędkość wiatru jest nieprawidłowa\n");
             return false;
         }
 
     }
-   private boolean verificationPressure(TextField pressureTextField, Label addMeasureAlertLabel){
+   private boolean verificationPressure(TextField pressureTextField){
 
         boolean maxValue=false;
         boolean minValue=false;
@@ -201,21 +139,20 @@ public class CheckDataBeforeAddMesure {
             }
             else{
                 pressureTextField.setStyle("-fx-background-color:red;");
-                addMeasureAlertLabel.setVisible(true);
-                addMeasureAlertLabel.setText("Podane ćiśnienie powietrza nie mieści się w wartościach podanych w ustawieniach");
+
+                stringBuilderWithAlertToLabel.append("Podane ćiśnienie powietrza nie mieści się w wartościach podanych w ustawieniach\n");
                 return false;}
         }
         catch(Exception e)
         {
             pressureTextField.setStyle("-fx-background-color:red;");
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana wartość ćisnienia jest nieprawidłowa");
+
+            stringBuilderWithAlertToLabel.append("Podana wartość ćisnienia jest nieprawidłowa\n");
             return false;
         }
 
     }
-
-    private boolean verificationHumidity(TextField humidityTextField, Label addMeasureAlertLabel){
+    private boolean verificationHumidity(TextField humidityTextField){
 
         boolean maxValue=false;
         boolean minValue=false;
@@ -237,15 +174,13 @@ public class CheckDataBeforeAddMesure {
             }
             else{
                 humidityTextField.setStyle("-fx-background-color:red;");
-                addMeasureAlertLabel.setVisible(true);
-                addMeasureAlertLabel.setText("Podana wilgotność musi mieścić się w przedziale procentowym od 0 do 100");
+                stringBuilderWithAlertToLabel.append("Podana wilgotność musi mieścić się w przedziale procentowym od 0 do 100\n");
                 return false;}
         }
         catch(Exception e)
         {
             humidityTextField.setStyle("-fx-background-color:red;");
-            addMeasureAlertLabel.setVisible(true);
-            addMeasureAlertLabel.setText("Podana wartosć wilgotności jest nieprawidłowa");
+            stringBuilderWithAlertToLabel.append("Podana wartosć wilgotności jest nieprawidłowa\n");
             return false;
         }
 

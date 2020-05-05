@@ -7,23 +7,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8d9cae06-15e2-45bb-9f50-bf3beda623fb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckUserSettings.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileContent/fileContent.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileContent/fileContent.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.8/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/JDBC.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/JDBC.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/JDBCQuery.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/JDBCQuery.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/CheckDataBeforeAddMesure.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/CheckDataBeforeAddMesure.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TablesForCityFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TablesForCityFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/ClaudinessFromUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/HumidityFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/HumidityFromUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/PressureFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/PressureFromUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/TemperatureFromUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/MeasuresFromUsers/TypeOfMeasure/WindSpeedFromUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OWM/DataFromOWM.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OWM/DataFromOWM.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OWM/WeatherMeasureOWM.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OWM/WeatherMeasureOWM.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/OWM/WeatherMeasuresFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/OWM/WeatherMeasuresFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/WeatherInCities/ListOfCitiesFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/WeatherInCities/ListOfCitiesFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/cities.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/cities.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/resources/main/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/resources/main/sample2.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/JDBC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JDBC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JDBCQuery.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JDBCQuery.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MeasuresFromUsers/CheckDataBeforeAddMesure.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/TextFieldRestrict.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/TextFieldRestrict.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/sample.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,35 +105,39 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectId" id="1b55b69QFgBgHeM8moac2UU6gnF" />
+  <component name="ProjectId" id="1bRoYTsmupo7acdMQcThqzGHNC0" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1587745711210" />
-    <property name="last_opened_file_path" value="E:/ProgramowanieJavaArtifact" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1588602288481" />
+    <property name="last_opened_file_path" value="D:/ProgramowanieJavaArtifact" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources" />
-      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources\Kalendarz" />
-      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java" />
-      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources\view" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="EmailActions" />
-      <recent name="OWM" />
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources" />
       <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java\EmailActions" />
       <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java\OWM" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="" />
+      <recent name="EmailActions" />
+      <recent name="OWM" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources" />
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources\Kalendarz" />
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\java" />
+      <recent name="E:\gitnowy\ProgramowanieJavaArtifact\src\main\resources\view" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -258,34 +277,34 @@
     </todo-panel>
   </component>
   <component name="WindowStateProjectService">
-    <state x="808" y="408" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1587909190729">
+    <state x="808" y="408" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1588604329207">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="808" y="408" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1587909190729" />
-    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1587913702011">
+    <state x="808" y="408" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588604329207" />
+    <state x="740" y="274" key="FileChooserDialogImpl" timestamp="1588605194939">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1587913702011" />
-    <state width="1876" height="268" key="GridCell.Tab.0.bottom" timestamp="1588593414035">
+    <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1588605194939" />
+    <state width="1876" height="266" key="GridCell.Tab.0.bottom" timestamp="1588692239846">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="268" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588593414035" />
-    <state width="1876" height="268" key="GridCell.Tab.0.center" timestamp="1588593414035">
+    <state width="1876" height="266" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1588692239846" />
+    <state width="1876" height="266" key="GridCell.Tab.0.center" timestamp="1588692239845">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="268" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588593414035" />
-    <state width="1876" height="268" key="GridCell.Tab.0.left" timestamp="1588593414034">
+    <state width="1876" height="266" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1588692239845" />
+    <state width="1876" height="266" key="GridCell.Tab.0.left" timestamp="1588692239845">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="268" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588593414034" />
-    <state width="1876" height="268" key="GridCell.Tab.0.right" timestamp="1588593414035">
+    <state width="1876" height="266" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1588692239845" />
+    <state width="1876" height="266" key="GridCell.Tab.0.right" timestamp="1588692239846">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1876" height="268" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588593414035" />
-    <state x="655" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1588587509254">
+    <state width="1876" height="266" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1588692239846" />
+    <state x="655" y="342" key="com.intellij.ide.util.TipDialog" timestamp="1588621520322">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="655" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588587509254" />
+    <state x="655" y="342" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1588621520322" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

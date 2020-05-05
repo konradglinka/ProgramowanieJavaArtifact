@@ -34,6 +34,9 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         connection = jdbc.getConnection();
        // getMeasureFromUserListFromDataBase();
     }
+    public void getConnectionToDataBase(){
+
+    }
 
     //FUNKCJE DOTYCZĄCE LOGOWANIA I REJESTRACJI
     //Funkcja odpowaida za logowanie
@@ -109,7 +112,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
     //FUNKCJE DOTYCZĄCE POMIARÓW OD UŻYTKOWNIKA
     //Funkcja dodaje pomiar od użytkownika
     public void addMeasuresFromUserToDataBase(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                              TextField humidityTextField, ComboBox<String> cloudinessFromUserComboBox, int IDFromListView, Label addMeasureAlertLabel) {
+                                              TextField humidityTextField, ComboBox<String> cloudinessFromUserComboBox, int IDFromListView,Label addMesureAlertLabel) {
         DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    HH:mm");
         Date actualDate = getInstance().getTime();
         String userName = userNameToMeasures;
@@ -148,7 +151,7 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         }
         Statement stmt = null;
         if(checkDataBeforeAddMesure.veryficicationComplete(pressureTextField,temperatureTextField,windTextField,
-                humidityTextField, addMeasureAlertLabel )==true)  {
+                humidityTextField,addMesureAlertLabel)==true)  {
             try {
                 stmt = connection.createStatement();
             } catch (SQLException e) {
@@ -299,7 +302,7 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
     public void changeUserSettings(TextField maxTemp,TextField minTemp, TextField minWind, TextField maxWind, TextField minPressure,TextField maxPressure,TextField email) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Potwierdzenie");
-        alert.setHeaderText("Czy napewno chcesz zapisać ustawienia dla konta?");
+        alert.setHeaderText("Czy na pewno chcesz zapisać ustawienia dla konta?");
         ButtonType buttonTypeOne = new ButtonType("Tak");
         ButtonType buttonTypeCancel = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
         alert.getButtonTypes().setAll(buttonTypeOne, buttonTypeCancel);
@@ -331,7 +334,7 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
     public void loadDefaultSettingsForUser(TextField email) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Potwierdzenie");
-        alert.setHeaderText("Czy napewno chcesz przywrócić ustawienia domyślne dla konta?");
+        alert.setHeaderText("Czy na pewno chcesz przywrócić ustawienia domyślne dla konta?");
         ButtonType buttonTypeOne = new ButtonType("Tak");
         ButtonType buttonTypeCancel = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
 

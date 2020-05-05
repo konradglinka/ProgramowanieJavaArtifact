@@ -27,14 +27,6 @@ public class UserSettings {
         this.minWindSpeed = minWindSpeed;
     }
 
-    public void setMinHumidity(double minHumidity) {
-        this.minHumidity = minHumidity;
-    }
-
-    public void setMaxHumidity(double maxHumidity) {
-        this.maxHumidity = maxHumidity;
-    }
-
     public void setMinPressure(double minPressure) {
         this.minPressure = minPressure;
     }
