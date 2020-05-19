@@ -1,12 +1,13 @@
-import MeasuresFromUsers.MesureFromUser;
-import MeasuresFromUsers.TypeOfMeasure.*;
-import MeasuresFromUsers.CheckDataBeforeAddMesure;
-import MeasuresFromUsers.UserSettings;
-import RegisterAndLoginActions.VerificateDataFromUser;
+/*
+import AnotherClasses.MD5;
+import Objects.DustyPlant;
+import Objects.GIOSSensor;
+import AnotherClasses.AddUserMeasureHelper;
+import Repositories.FromDB.UserSettingsRepository;
+import Objects.*;
+import AnotherClasses.RegisterHelper;
 import javafx.scene.control.*;
-import org.jetbrains.annotations.Nullable;
 
-import javax.crypto.NullCipher;
 import java.sql.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -18,25 +19,20 @@ import static java.util.Calendar.getInstance;
 
 public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
 
-    private CheckDataBeforeAddMesure checkDataBeforeAddMesure = new CheckDataBeforeAddMesure();
-    private UserSettings userSettings=checkDataBeforeAddMesure.getUserSettings();
-    private VerificateDataFromUser verificateDataFromUser = new VerificateDataFromUser();
-    private MD5 MD5 =new MD5();
+
+
+
+    private AnotherClasses.MD5 MD5 =new MD5();
     private String userNameToMeasures = "USER"; //Nazwa użytkownika do testów to USER w przypadku braku podania email
-    private  ArrayList<MesureFromUser> listOfMeasures = new ArrayList<>(); //Lista wszystkich pomiarów od użytkownika
     private static Connection connection; //Polaczenie z baza danych
 
-    public UserSettings getUserSettings() {
-        return userSettings;
-    }
+
 
     public JDBCQuery(JDBC jdbc) throws SQLException { //Laczymy sie z baza
         connection = jdbc.getConnection();
        // getMeasureFromUserListFromDataBase();
     }
-    public void getConnectionToDataBase(){
 
-    }
 
     //FUNKCJE DOTYCZĄCE LOGOWANIA I REJESTRACJI
     //Funkcja odpowaida za logowanie
@@ -74,13 +70,13 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
                                 "INSERT INTO users (EMAIL,PASSWORD) VALUES ('" + email + "', '" + password + "')";
                         Statement stmt = null;
                         try {
+                            addNewUserSettings(email);
                             stmt = connection.createStatement();
                         } catch (SQLException e) {
                             System.out.println("ERROR:No connection with Database");
                         }
                         try {
                             stmt.executeUpdate(addUserQuerySQL);
-                            addNewUserSettings(email);
                             return true;
                         } catch (SQLException e) {
                             System.out.println("ERROR:Bad SQL query");
@@ -109,77 +105,9 @@ public class JDBCQuery { //Klasa zawiera metody współpracujące z bazą danych
         return false;
     }
 
-    //FUNKCJE DOTYCZĄCE POMIARÓW OD UŻYTKOWNIKA
-    //Funkcja dodaje pomiar od użytkownika
-    public void addMeasuresFromUserToDataBase(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
-                                              TextField humidityTextField, ComboBox<String> cloudinessFromUserComboBox, int IDFromListView,Label addMesureAlertLabel) {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy    HH:mm");
-        Date actualDate = getInstance().getTime();
-        String userName = userNameToMeasures;
-        String date = dateFormat.format(actualDate);
-        String temperature = temperatureTextField.getText();
-        if(temperature.length()==0){
-            temperature="NULL";
-        }
-        String windSpeed = windTextField.getText();
-        if(windSpeed.length()==0){
-            windSpeed="NULL";
-        }
-        String humidity = humidityTextField.getText();
-        if(humidity.length()==0){
-            humidity="NULL";
-        }
-        String claudiness = cloudinessFromUserComboBox.getSelectionModel().getSelectedItem();
 
-        String pressure = pressureTextField.getText();
-        if(pressure.length()==0){
-            pressure="NULL";
-        }
-        int ID = IDFromListView;
-        String addMeasureFromUserQuerySQL =
-                "INSERT INTO measuresfromusers (DATE,USERNAME,TEMP,WINDSPEED,HUMIDITY,CLOUDINESS,PRESSURE,IDCITY) VALUES " +
-                        "('" + date + "', '" + userName + "', " + temperature + ", " + windSpeed + ", " + humidity + ", '"
-                        + claudiness + "', " + pressure + ", " + ID + ")";
+    //TE FUNKCJE ZWRACAJĄ POMIARY DLA WSZYSTKICH MIAST ICH OBRÓBKĄ ZAJMUJE SIE UserMeasuresRepository
 
-        if(claudiness.length()==0) {
-            claudiness = "NULL";
-
-            addMeasureFromUserQuerySQL =
-                    "INSERT INTO measuresfromusers (DATE,USERNAME,TEMP,WINDSPEED,HUMIDITY,CLOUDINESS,PRESSURE,IDCITY) VALUES " +
-                            "('" + date + "', '" + userName + "', " + temperature + ", " + windSpeed + ", " + humidity + ", "
-                            + claudiness + ", " + pressure + ", " + ID + ")";
-        }
-        Statement stmt = null;
-        if(checkDataBeforeAddMesure.veryficicationComplete(pressureTextField,temperatureTextField,windTextField,
-                humidityTextField,addMesureAlertLabel)==true)  {
-            try {
-                stmt = connection.createStatement();
-            } catch (SQLException e) {
-                System.out.println("ERROR:No connection with Database");
-            }
-            try {
-                stmt.executeUpdate(addMeasureFromUserQuerySQL);
-
-            } catch (SQLException e) {
-                System.out.println("ERROR:Bad SQL query");
-            }
-        }
-    }
-    //TE FUNKCJE ZWRACAJĄ POMIARY DLA WSZYSTKICH MIAST ICH OBRÓBKĄ ZAJMUJE SIE TablesForCityFactory
-    public ArrayList<TemperatureFromUser> getTemperaturesFromUserList() throws SQLException {
-        ArrayList<TemperatureFromUser> temperaturesFromUserArrayList = new ArrayList();
-        String takeTemperatureMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE TEMP IS NOT NULL";
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery(takeTemperatureMeasuresQuerySQL);
-         while (rs.next()){
-                temperaturesFromUserArrayList.add(new TemperatureFromUser(rs.getString(2),
-                        rs.getString(3),
-                        rs.getDouble(4),
-                        rs.getInt(9)));
-            }
-
-        return temperaturesFromUserArrayList;
-    }
     public ArrayList<WindSpeedFromUser> getWindSpeedFromUserList() throws SQLException {
         ArrayList<WindSpeedFromUser> windSpeedFromUserArrayList = new ArrayList();
         String takeWindSpeedMeasuresQuerySQL = "SELECT * FROM measuresfromusers WHERE WINDSPEED IS NOT NULL";
@@ -253,9 +181,10 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
                 }
         return false;
     }
+
     //Funkcje dotyczace tabeli usersettings
     private void addNewUserSettings(String email){
-    String addSettingsAboutNewUser="INSERT INTO usersettings (MINTEMP, MAXTEMP, MINWIND, MAXWIND, MINPRESSURE , MAXPRESSURE, EMAIL) VALUES (-50.0, 60.0, 0.0, 63.0, 870.0, 1086.0, '"+email+"')";
+    String addSettingsAboutNewUser="INSERT INTO usersettings (MINTEMP, MAXTEMP, MINWIND, MAXWIND, MINPRESSURE , MAXPRESSURE, USERID) VALUES (-50.0, 60.0, 0.0, 63.0, 870.0, 1086.0, '"+email+"')";
         Statement stmt = null;
         try {
             stmt = connection.createStatement();
@@ -268,37 +197,7 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
             System.out.println("ERROR:Bad SQL query");
         }
     }
-    private void loadSettingsAboutUser(String email) throws SQLException {
-        String loadSettingsAboutActualUser="SELECT * FROM usersettings where EMAIL='"+email+"'";
-        Statement stmt = null;
-        ResultSet resultSet = null;
-        try {
-            stmt = connection.createStatement();
-        } catch (SQLException e) {
-            System.out.println("ERROR:No connection with Database");
-        }
-        try {
-            resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
-        } catch (SQLException e) {
-            System.out.println("ERROR:Bad SQL query");
-        }
-        while (resultSet.next()) {
-            userSettings.setMinTemperature(resultSet.getDouble(2));
-            userSettings.setMaxTemperature(resultSet.getDouble(3));
-            userSettings.setMinWindSpeed(resultSet.getDouble(4));
-            userSettings.setMaxWindSpeed(resultSet.getDouble(5));
-            userSettings.setMinPressure(resultSet.getDouble(6));
-            userSettings.setMaxPressure(resultSet.getDouble(7));
-        }
-    }
-    public void loadUserSettingsAboutAddMesure(TextField maxTemp,TextField minTemp, TextField minWind, TextField maxWind, TextField minPressure,TextField maxPressure){
-        maxTemp.setText(String.valueOf(userSettings.getMaxTemperature()));
-        minTemp.setText(String.valueOf(userSettings.getMinTemperature()));
-        maxWind.setText(String.valueOf(userSettings.getMaxWindSpeed()));
-        minWind.setText(String.valueOf(userSettings.getMinWindSpeed()));
-        maxPressure.setText(String.valueOf(userSettings.getMaxPressure()));
-        minPressure.setText(String.valueOf(userSettings.getMinPressure()));
-    }
+
     public void changeUserSettings(TextField maxTemp,TextField minTemp, TextField minWind, TextField maxWind, TextField minPressure,TextField maxPressure,TextField email) throws SQLException {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Potwierdzenie");
@@ -361,5 +260,186 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
         }
 
     }
+
+
+    public ArrayList<String> getCloudinessTranslatorPLNamesFromDataBase() throws SQLException {
+        ArrayList<String>PLNames=new ArrayList<>();
+        String loadSettingsAboutActualUser="SELECT PL FROM cloudinesstranslator";
+        Statement stmt = null;
+        ResultSet resultSet = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        try {
+            resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
+        } catch (SQLException e) {
+            System.out.println("ERROR:Bad SQL query");
+        }
+        while (resultSet.next()) {
+          PLNames.add(resultSet.getString(1));
+        }
+        return PLNames;
+    }
+    public ArrayList<String> getCloudinessTranslatorENGNamesFromDataBase() throws SQLException {
+        ArrayList<String>ENGNames=new ArrayList<>();
+        String loadSettingsAboutActualUser="SELECT ENG FROM cloudinesstranslator";
+        Statement stmt = null;
+        ResultSet resultSet = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        try {
+            resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
+        } catch (SQLException e) {
+            System.out.println("ERROR:Bad SQL query");
+        }
+        while (resultSet.next()) {
+            ENGNames.add(resultSet.getString(1));
+        }
+        return ENGNames;
+    }
+/*
+    //GIOS DATABASES
+    public void addValuesToGiosStationsTable() throws IOException {
+        ListOfGIOSCitiesFactory listOfGIOSCitiesFactory=new ListOfGIOSCitiesFactory();
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        for(int i=0;i<listOfGIOSCitiesFactory.getStationsArrayList().size();i++) {
+            try {
+                String addGiosStationQuerySQL="INSERT INTO giosstations (IDSTATION,STATIONNAME,LON,LAT) VALUES ("+listOfGIOSCitiesFactory.getStationsArrayList().get(i).getId()+",'"+listOfGIOSCitiesFactory.getStationsArrayList().get(i).getName()+"',"+listOfGIOSCitiesFactory.getStationsArrayList().get(i).getLon()+","+listOfGIOSCitiesFactory.getStationsArrayList().get(i).getLat()+")";
+
+                stmt.executeUpdate(addGiosStationQuerySQL);
+            } catch (SQLException e) {
+                System.out.println("ERROR:Bad SQL query");
+            }
+        }
+    }
+    public void addValuesToGiosSensorsTable() throws IOException {
+        ListOfGIOSSensorsFactory listOfGIOSSensorsFactory=new ListOfGIOSSensorsFactory();
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        for(int i=0;i<listOfGIOSSensorsFactory.getSensorsArrayList().size();i++) {
+            try {
+                String addGiosSensorsQuerySQL="INSERT INTO giossensors (IDSTATION,IDSENSOR,NAME,SHORTNAME) VALUES ("+listOfGIOSSensorsFactory.getSensorsArrayList().get(i).getIDStation()+","+listOfGIOSSensorsFactory.getSensorsArrayList().get(i).getIDSensor()+",'"+listOfGIOSSensorsFactory.getSensorsArrayList().get(i).getNameOfSensor()+"','"+listOfGIOSSensorsFactory.getSensorsArrayList().get(i).getShortNameOfSensor()+"')";
+                stmt.executeUpdate(addGiosSensorsQuerySQL);
+            } catch (SQLException e) {
+                System.out.println("ERROR:Bad SQL query");
+            }
+        }
+    }
+
+
+    public ArrayList<Station> getGiosStatonsFromDataBase() throws SQLException {
+        ArrayList<Station>giosStations=new ArrayList<>();
+        String loadSettingsAboutActualUser="SELECT * FROM giosstations";
+        Statement stmt = null;
+        ResultSet resultSet = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        try {
+            resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
+        } catch (SQLException e) {
+            System.out.println("ERROR:Bad SQL query");
+        }
+        while (resultSet.next()) {
+            giosStations.add(new Station(resultSet.getInt(1),resultSet.getString(2),resultSet.getDouble(3),resultSet.getDouble(4)));
+        }
+        return giosStations;
+    }
+    public ArrayList<GIOSSensor> getGiosSensorsFromDataBase() throws SQLException {
+        ArrayList<GIOSSensor>giosSensors=new ArrayList<>();
+        String loadSettingsAboutActualUser="SELECT * FROM giossensors";
+        Statement stmt = null;
+        ResultSet resultSet = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        try {
+            resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
+        } catch (SQLException e) {
+            System.out.println("ERROR:Bad SQL query");
+        }
+        while (resultSet.next()) {
+            giosSensors.add(new GIOSSensor(resultSet.getInt(2),resultSet.getInt(1),resultSet.getString(3),resultSet.getString(4)));
+        }
+        return giosSensors;
+    }
+    public ArrayList<DustyPlant> getDustyPlantsFromDataBase() throws SQLException {
+        ArrayList<DustyPlant>dustyPlants=new ArrayList<>();
+        String loadSettingsAboutActualUser="SELECT * FROM dustyplants";
+        Statement stmt = null;
+        ResultSet resultSet = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        try {
+            resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
+        } catch (SQLException e) {
+            System.out.println("ERROR:Bad SQL query");
+        }
+        while (resultSet.next()) {
+            dustyPlants.add(new DustyPlant(resultSet.getString(2),resultSet.getInt(3),resultSet.getInt(4),resultSet.getInt(5),resultSet.getInt(6)));
+        }
+        return dustyPlants;
+    }
+    /*public void addValuesToOWMStationsTable() throws IOException {
+        OWMStationsRepository OWMStationsRepository=new OWMStationsRepository();
+        ArrayList<Station>list=OWMStationsRepository.getStations();
+        Statement stmt = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        for(int i=0;i<list.size();i++) {
+            try {
+                String addGiosSensorsQuerySQL="INSERT INTO owmstations (IDSTATION,NAME,LON,LAT) VALUES ("+list.get(i).getId()+",'"+list.get(i).getName()+"',"+list.get(i).getLon()+","+list.get(i).getLat()+")";
+                stmt.executeUpdate(addGiosSensorsQuerySQL);
+            } catch (SQLException e) {
+                System.out.println("ERROR:Bad SQL query");
+            }
+        }
+    }
+
+    public ArrayList<Station> getOWMStationsFromDataBase() throws SQLException {
+        ArrayList<Station> stations =new ArrayList<>();
+        String loadSettingsAboutActualUser="SELECT * FROM owmstations";
+        Statement stmt = null;
+        ResultSet resultSet = null;
+        try {
+            stmt = connection.createStatement();
+        } catch (SQLException e) {
+            System.out.println("ERROR:No connection with Database");
+        }
+        try {
+            resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
+        } catch (SQLException e) {
+            System.out.println("ERROR:Bad SQL query");
+        }
+        while (resultSet.next()) {
+            stations.add(new Station(resultSet.getInt(1),resultSet.getString(2),resultSet.getDouble(3),resultSet.getDouble(4)));
+        }
+        return stations;
+    }
 }
+*/
 

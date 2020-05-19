@@ -12,7 +12,7 @@ public class EmailToRegister implements Runnable {
     @Override
     public void run() {
         try {
-            sendRegistrationEmial();
+            sendRegistrationEmail();
         } catch (MessagingException e) {
             e.printStackTrace();
         }
@@ -36,7 +36,7 @@ public class EmailToRegister implements Runnable {
 
 
 
-    public void sendRegistrationEmial() throws MessagingException {
+    public void sendRegistrationEmail() throws MessagingException {
 
         // Temat wiadomości
        String SubjectOfEmail = "Potwierdzenie rejestracji";

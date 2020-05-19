@@ -11,8 +11,6 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -21,7 +19,7 @@
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <StackPane fx:id="registerAndLoginStackPane" prefHeight="150.0" prefWidth="200.0">
+      <StackPane fx:id="registerAndLoginStackPane" maxWidth="400.0" prefHeight="150.0" prefWidth="200.0">
          <children>
             <VBox fx:id="loginVBox" alignment="CENTER" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0">
                <children>
@@ -176,7 +174,7 @@
                         </Label>
                         <Label text="Wpisz otrzymany kod aby zresetować hasło" textAlignment="CENTER" wrapText="true" />
                         <TextField fx:id="resetCodeTextField" alignment="CENTER" maxWidth="300.0" onAction="#pressEnterToResetPassword" />
-                        <Button mnemonicParsing="false" onAction="#goToChangePasswordButton" text="Zresetuj hasło" />
+                        <Button mnemonicParsing="false" onAction="#goToChangePasswordAfterEnterCodeButton" text="Zresetuj hasło" />
                      </children>
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -237,19 +235,10 @@
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="nameOfCityToFindTextField" onAction="#pressEnterToTakeOWMMeasure" />
-                                    <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="52.0">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
+                                    <TextField fx:id="OWMStationBrowserTextField" />
                                  </children>
                               </HBox>
-                              <ListView fx:id="cityToTakeMaeasureFromOWMListView" onMouseClicked="#onClickOnOWMStationsListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="OWMStationsListView" onMouseClicked="#onClickOnOWMStationsListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <TableView fx:id="measuresFromOWMTableView" HBox.hgrow="ALWAYS">
@@ -279,21 +268,38 @@
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="nameOfCityToFindGIOSStationTextField" />
-                                    <Button mnemonicParsing="false" prefHeight="0.0" prefWidth="52.0">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
+                                    <TextField fx:id="GIOSStationsBrowserTextField" promptText="wpisz nazwe miasta" />
                                  </children>
                               </HBox>
-                              <ListView fx:id="cityToTakeMaeasureFromGIOSListView" onMouseClicked="#onClickOnOWMStationsListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="GIOSStationsListView" onMouseClicked="#onClickGIOSStation" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
+                        <VBox prefHeight="200.0" prefWidth="300.0">
+                           <children>
+                              <Label text="Wybierz sensor">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <ListView fx:id="sensorsListView" onMouseClicked="#onClickGIOSSensor" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                              <VBox fx:id="GIOSAirIndexName" prefHeight="242.0" prefWidth="300.0">
+                                 <children>
+                                    <TableView fx:id="GIOSAirIndexTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                      <columns>
+                                        <TableColumn fx:id="GIOSAirIndexNameColumn" prefWidth="75.0" text="Sensor" />
+                                        <TableColumn fx:id="GIOSAirIndexValueColumn" prefWidth="224.0" text="Polski indeks jakości powietrza" />
+                                      </columns>
+                                    </TableView>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <TableView fx:id="GIOSTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                          <columns>
+                            <TableColumn fx:id="GIOSValueColumn" editable="false" prefWidth="234.0" text="Wartość (µg/m3, dla CO (mg/m3))" />
+                            <TableColumn fx:id="GIOSDateColumn" editable="false" prefWidth="565.0" text="Data" />
+                          </columns>
+                        </TableView>
                      </children>
                   </HBox>
                </content>
@@ -2592,19 +2598,10 @@
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="nameOfCityToFindMesureFromUserTextField" />
-                                    <Button mnemonicParsing="false" onAction="#findCityToTakeMeasureFromUsersButton" prefHeight="0.0" prefWidth="52.0">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
+                                    <TextField fx:id="TakeMeasureFromUserBrowserTextField" />
                                  </children>
                               </HBox>
-                              <ListView fx:id="cityToTakeMaeasureFromUserListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="stationsToTakeMaeasureListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -2697,19 +2694,10 @@
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="nameOfCityToAddMesureFromUserTextField" />
-                                    <Button mnemonicParsing="false" onAction="#findCityToAddMeasureFromUsersButton" prefHeight="0.0" prefWidth="52.0">
-                                       <graphic>
-                                          <ImageView fitHeight="16.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
-                                             <image>
-                                                <Image url="@kisspng-magnifying-glass-computer-icons-clip-art-instagram-circle-5b1183ddc13263.5640386315278745257914.jpg" />
-                                             </image>
-                                          </ImageView>
-                                       </graphic>
-                                    </Button>
+                                    <TextField fx:id="AddMesureFromUserBrowserTextField" />
                                  </children>
                               </HBox>
-                              <ListView fx:id="cityToAddMeasureListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="stationsToAddMeasureListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">

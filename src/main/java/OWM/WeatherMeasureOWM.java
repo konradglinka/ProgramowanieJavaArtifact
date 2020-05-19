@@ -14,13 +14,13 @@ public class WeatherMeasureOWM {
     String dateOfMeasure;
 
     public WeatherMeasureOWM(double temp, double wind, double humidity, double pressure, String claudiness, String dateOfMeasure) throws ParseException {
-        DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
         this.temp = temp;
         this.wind = wind;
         this.humidity = humidity;
         this.pressure = pressure;
         this.claudiness = claudiness;
-        this.dateOfMeasure = dateOfMeasure.toString();
+        this.dateOfMeasure = dateOfMeasure;
     }
 
     public double getTemp() {

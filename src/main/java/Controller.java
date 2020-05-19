@@ -1,15 +1,19 @@
-import DustyPlants.ActualDustyPlants;
+import AnotherClasses.AddUserMeasureHelper;
+import ViewControll.IDStationFinder;
+import Repositories.*;
+import Repositories.FromDB.*;
+import ViewControll.ActualDustyPlantsView;
 import EmailActions.EmailToRegister;
 import EmailActions.EmailToResetPassword;
-import GIOS.ListOfGIOSCitiesFactory;
-import MeasuresFromUsers.MeasuresPLNamesFactory;
-import MeasuresFromUsers.TablesForCityFactory;
-import MeasuresFromUsers.TypeOfMeasure.*;
-import OWM.OWMClaudinesTranslator;
+import GIOS.GIOSAirIndex.AirIndexLevel;
+import GIOS.GIOSAirIndex.GIOSAirIndexRepository;
+import Objects.SensorData;
+import Objects.*;
+import Repositories.UserMeasuresPLNamesRepository;
 import OWM.WeatherMeasureOWM;
 import OWM.WeatherMeasuresFactory;
-import RegisterAndLoginActions.VerificateDataFromUser;
-import WeatherInCities.ListOfCitiesFactory;
+import AnotherClasses.RegisterHelper;
+import ViewControll.UserSettingsView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,30 +23,35 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import net.aksingh.owmjapis.api.APIException;
+import org.json.JSONException;
 
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 
 public class Controller {
-
+    UserSettingsRepository userSettingsRepository;
+    DustyPlantsRepository dustyPlantsRepository;
+    OWMStationsRepository OWMStationsRepository;
+    UserStationsRepository userStationsRepository;
+    GIOSStationsRepository giosStationsRepository;
+    GIOSSensorsRepository giosSensorsRepository;
+    OWMClaudinesTranslatorRepository owmClaudinesTranslatorRepository;
+    UserMeasuresPLNamesRepository userMeasuresPLNamesRepository;
+    IDStationFinder idStationFinder=new IDStationFinder();
+    StationBrowser stationBrowser=new StationBrowser();
     String resetPasswordCode;
     String registerCode;
-    VerificateDataFromUser verificateDataFromUser = new VerificateDataFromUser();
-    ActualDustyPlants actualDustyPlants = new ActualDustyPlants(); //Pobieramy listę aktualnie pylących roślin
+    RegisterHelper registerHelper = new RegisterHelper();
     WeatherMeasuresFactory weatherMeasuresFactory;
     TextFieldRestrict textFieldRestrict=new TextFieldRestrict();
-    TablesForCityFactory tablesForCityFactory = new TablesForCityFactory(); //Do tworzenia tabel z pomiarami dla wybranych miast
-    MeasuresPLNamesFactory measuresPLNamesFactory = new MeasuresPLNamesFactory();//Pobieramy listę dostępnych pomiarów
-    ListOfCitiesFactory listOfCitiesFactory = new ListOfCitiesFactory(); //Pobieramy liste dostępnych miast
-    ListOfGIOSCitiesFactory listOfGIOSCitiesFactory=new ListOfGIOSCitiesFactory();
-    OWMClaudinesTranslator owmClaudinesTranslator = new OWMClaudinesTranslator();
+    UserMeasuresRepository userMeasuresRepository = new UserMeasuresRepository(); //Do tworzenia tabel z pomiarami dla wybranych miast
+
+
     JDBC jdbc = new JDBC(); //Do połączenia z baza
-    JDBCQuery jdbcQuery; //Do wykonywania zapytań do bazy
+    NewJDBCQuery newJDBCQuery; //Do wykonywania zapytań do bazy
 
     //ELEMENTY LOGOWANIA I REJESTRACJI
     @FXML
@@ -75,7 +84,7 @@ public class Controller {
     ListView actualDustyPlantsListView;
     //ELEMENTY DODANIA POMIARU PRZEZ UŻYTKOWNIKA
     @FXML
-    ListView<String> cityToAddMeasureListView;
+    ListView<String> stationsToAddMeasureListView;
     @FXML
     TextField temperatureTextField;
     @FXML
@@ -88,7 +97,7 @@ public class Controller {
     Label addMesureAlertLabel;
     //ELEMENTY POBRANIA POMIARU PRZEZ UŻYTKOWNIKA
     @FXML
-    ListView<String> cityToTakeMaeasureFromUserListView;
+    ListView<String> stationsToTakeMaeasureListView;
     @FXML
     ComboBox<String> measuresFromUserComboBox;  //wybór rodzaju pomiaru
     //TEMPERATURA POWIETRZA
@@ -140,9 +149,9 @@ public class Controller {
 
     //OWM
     @FXML
-    ListView<String> cityToTakeMaeasureFromOWMListView;
+    ListView<String> OWMStationsListView;
     @FXML
-    TextField nameOfCityToFindTextField;
+    TextField OWMStationBrowserTextField;
     @FXML
     TableView<WeatherMeasureOWM> measuresFromOWMTableView;
     @FXML
@@ -157,6 +166,7 @@ public class Controller {
     TableColumn<WeatherMeasureOWM, String> claudinessColumn;
     @FXML
     TableColumn<WeatherMeasureOWM, String> dateOWMColumn;
+
 
 
     //RESETOWANIE HASŁA
@@ -189,10 +199,10 @@ public class Controller {
 
 
     @FXML
-    TextField nameOfCityToFindMesureFromUserTextField;
+    TextField TakeMeasureFromUserBrowserTextField;
 
     @FXML
-    TextField nameOfCityToAddMesureFromUserTextField;
+    TextField AddMesureFromUserBrowserTextField;
 
     @FXML
     ComboBox<String> claudinessFromIserComboBox;
@@ -210,32 +220,70 @@ public class Controller {
     TextField settingsMaxWindSpeedTextField;
     @FXML
     TextField settingsMinWindSpeedTextField;
-
+    @FXML
+    ListView<String> sensorsListView;
 
     //gios
-    @FXML
-    TextField nameOfCityToFindGIOSStationTextField;
-    @FXML
-    ListView<String>cityToTakeMaeasureFromGIOSListView;
-    public Controller() throws IOException {
-    }
+
 
     @FXML
-    void initialize() {
+    TableView<SensorData> GIOSTableView;
+    @FXML
+    TableColumn<SensorData, String> GIOSValueColumn;
+    @FXML
+    TableColumn<SensorData, String> GIOSDateColumn;
+    public Controller() throws IOException {
+    }
+    @FXML
+    TableColumn<AirIndexLevel,String>GIOSAirIndexValueColumn;
+    @FXML
+    TableColumn<AirIndexLevel,String>GIOSAirIndexNameColumn;
+    @FXML
+    TableView<AirIndexLevel>GIOSAirIndexTableView;
+    @FXML
+    TextField GIOSStationsBrowserTextField;
+    @FXML
+    ListView<String>GIOSStationsListView;
+    @FXML
+    void initialize() throws IOException, SQLException, APIException, ParseException {
         startConectionWithDataBase(); //Łączymy się z bazą w celu uwierzytelnienia i dalszej pracy aplikacji
-        measuresFromUserComboBox.getItems().addAll(measuresPLNamesFactory.getNamesOfMeasuresArraylist()); //Lista dostępnych pomiarów do wyboru
-        claudinessFromIserComboBox.getItems().add("");
-        claudinessFromIserComboBox.getSelectionModel().select(0);
-        claudinessFromIserComboBox.getItems().addAll(owmClaudinesTranslator.getPolishStringArraylist());
-        actualDustyPlantsListView.getItems().addAll(actualDustyPlants.listOfActualDustyPlants()); //Lista aktualnie pylących roślin
-        cityToAddMeasureListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList()); //Lista miast do dodania pomiaru
-        cityToTakeMaeasureFromUserListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList()); //Lista miast do pobrania pomiaru
-        cityToTakeMaeasureFromOWMListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList());
-        cityToTakeMaeasureFromGIOSListView.getItems().addAll(listOfGIOSCitiesFactory.getGIOSStationsNamesArrayList());
-        measuresFromUserComboBox.getSelectionModel().select(0); //Wybieramy 1 z wartości combobox by nie byl pusty
-        cityToAddMeasureListView.getSelectionModel().selectFirst();
-        cityToTakeMaeasureFromUserListView.getSelectionModel().selectFirst();
-        cityToTakeMaeasureFromOWMListView.getSelectionModel().selectFirst();
+        takeDataFromDBToRepositories();
+        addDataFromRepositioriesToView();
+        activeRestrictionsOnTextFields();
+        activeStationsBrowsers();
+
+    }
+
+    private void startConectionWithDataBase() throws SQLException { //Połączenie aplikacji z bazą danych
+        jdbc.getDbConnection();
+        newJDBCQuery= new NewJDBCQuery(jdbc);
+    }
+    private void takeDataFromDBToRepositories() throws SQLException {
+         userSettingsRepository=new UserSettingsRepository();
+         dustyPlantsRepository=new DustyPlantsRepository( newJDBCQuery.getdustyplantsTable());
+         OWMStationsRepository = new OWMStationsRepository(newJDBCQuery.getstationsTable("owmstations"));
+         userStationsRepository =new UserStationsRepository(newJDBCQuery.getstationsTable("userstations"));
+         giosStationsRepository=new GIOSStationsRepository(newJDBCQuery.getstationsTable("giosstations"));
+         giosSensorsRepository=new GIOSSensorsRepository(newJDBCQuery.getGiosSensorsFromDataBase());
+         owmClaudinesTranslatorRepository=new OWMClaudinesTranslatorRepository(newJDBCQuery.getCloudinessTranslatorTableENGNames(),newJDBCQuery.getCloudinessTranslatorTablePLNames());
+         userMeasuresPLNamesRepository=new UserMeasuresPLNamesRepository();
+    }
+    private void addDataFromRepositioriesToView(){
+        ActualDustyPlantsView actualDustyPlantsView = new ActualDustyPlantsView(actualDustyPlantsListView,dustyPlantsRepository);
+        OWMStationsListView.getItems().addAll(OWMStationsRepository.getStationNames());
+        stationsToAddMeasureListView.getItems().addAll(userStationsRepository.getStationNames());
+        stationsToTakeMaeasureListView.getItems().addAll(userStationsRepository.getStationNames());
+        GIOSStationsListView.getItems().addAll(giosStationsRepository.getStationNames());
+        measuresFromUserComboBox.getItems().addAll(userMeasuresPLNamesRepository.getNamesOfMeasuresArraylist());
+        claudinessFromIserComboBox.getItems().add(""); //Mozliwe dodanie pomiaru bez danych o zachmurzeniu
+        claudinessFromIserComboBox.getSelectionModel().select(0); //Pomiar bez danych, a pusty ComboBox to
+        // co innego wiec domyślnie wybrany jest bez danych
+        claudinessFromIserComboBox.getItems().addAll(owmClaudinesTranslatorRepository.getPolishStringArraylist());
+        measuresFromUserComboBox.getSelectionModel().select(0); //Wartość domyślna do pobrania z danych od
+        // userów by combobox nie był pusty
+
+    }
+    private void activeRestrictionsOnTextFields(){
         textFieldRestrict.onlyDigitsInTextField(settingsMinTemperatureTextField);
         textFieldRestrict.onlyDigitsInTextField(settingsMaxTemperatureTextField);
         textFieldRestrict.onlyPlusDigitsInTextField(settingsMinPressureTextField);
@@ -243,17 +291,25 @@ public class Controller {
         textFieldRestrict.onlyPlusDigitsInTextField(settingsMinWindSpeedTextField);
         textFieldRestrict.onlyPlusDigitsInTextField(settingsMaxWindSpeedTextField);
     }
-
-    private void startConectionWithDataBase() { //Połączenie aplikacji z bazą danych
-        jdbc.getDbConnection();
-        try {
-            jdbcQuery = new JDBCQuery(jdbc);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    private void activeStationsBrowsers(){
+        StationBrowser stationBrowser=new StationBrowser();
+        stationBrowser.searchByNameOnWriteInTextField(OWMStationBrowserTextField,OWMStationsRepository.getStationNames(),OWMStationsListView);
+        stationBrowser.searchByNameOnWriteInTextField(AddMesureFromUserBrowserTextField,userStationsRepository.getStationNames(),stationsToAddMeasureListView);
+        stationBrowser.searchByNameOnWriteInTextField(TakeMeasureFromUserBrowserTextField,userStationsRepository.getStationNames(), stationsToTakeMaeasureListView);
+        stationBrowser.searchByNameOnWriteInTextField(GIOSStationsBrowserTextField,giosStationsRepository.getStationNames(),GIOSStationsListView);
     }
-
     //FUNKCJE DOTYCZĄCE LOGOWANIA I REJESTRACJI
+    @FXML
+    void loginButton() throws SQLException { //Funkcja zajmuje się uwierzytelnianiem i przełącza na główny ekran aplikacji
+        if (newJDBCQuery.loginUser(userSettingsRepository,loginEmailTextField, passwordPasswordField) == true) {
+            UserSettingsView userSettingsView=new UserSettingsView(userSettingsRepository,settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField);
+            registerAndLoginStackPane.setVisible(false);
+            mainViewTabPane.setVisible(true);
+        } else if (newJDBCQuery.loginUser(userSettingsRepository,loginEmailTextField, passwordPasswordField) == false) {
+            badEmailOrPasswordLabel.setVisible(true);
+        }
+
+    }
     @FXML
     void switchOnRegisterButton() { //Funkcja przełącza na okienko do rejestracji
         loginVBox.setVisible(false);
@@ -261,30 +317,54 @@ public class Controller {
         registrationAlertLabel.setVisible(false);
     }
 
-
     @FXML
-    void loginButton() throws SQLException { //Funkcja zajmuje się uwierzytelnianiem i przełącza na główny ekran aplikacji
-        if (jdbcQuery.loginCheck(loginEmailTextField, passwordPasswordField) == true) {
-            jdbcQuery.loadUserSettingsAboutAddMesure(settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField);
-            registerAndLoginStackPane.setVisible(false);
-            mainViewTabPane.setVisible(true);
-        } else if (jdbcQuery.loginCheck(loginEmailTextField, passwordPasswordField) == false) {
-            badEmailOrPasswordLabel.setVisible(true);
+    void sendResetPasswordCode() {
+        EmailToResetPassword emailToResetPassword = new EmailToResetPassword(emailToResetPasswordTextField);
+        if (registerHelper.isEmail(emailToResetPasswordTextField) == true) {
+            Thread threadResetPasswordEmail = new Thread(emailToResetPassword);
+            threadResetPasswordEmail.start();
+            changePassword1VBox.setVisible(false);
+            changePassword2VBox.setVisible(true);
+            resetPasswordCode = emailToResetPassword.getResetPasswordCode();
+            badCodeResetPasswordLabel.setVisible(false);
+        } else {
+            badEmailResetPasswordLabel.setVisible(true);
         }
-
     }
 
     @FXML
-    void fakeLoginButton() { //Funkcja przełącza naekran główny bez uwierzytelniania (TYLKO DO TESTOWANIA APLIKACJI, ZASTĘPUJE loginButton)
-        registerAndLoginStackPane.setVisible(false);
-        mainViewTabPane.setVisible(true);
+    void goToChangePasswordAfterEnterCodeButton() {
+        if (resetCodeTextField.getText().equals(resetPasswordCode)) {
+            changePassword2VBox.setVisible(false);
+            changePassword3VBox.setVisible(true);
+        } else {
+            badCodeResetPasswordLabel.setVisible(true);
+        }
+    }
+    @FXML
+    void switchOnForgotPasswordButton() {
+        loginVBox.setVisible(false);
+        changePassword1VBox.setVisible(true);
+        badEmailResetPasswordLabel.setVisible(false);
+    }
+    @FXML
+    void changePasswordButton() throws SQLException {
+        if (registerHelper.isPasswordStrength(resetPasswordPasswordField, badPasswordLabel) == true) {
+            if (resetPasswordPasswordField.getText().equals(conifrmedResetPasswordPasswordField.getText())) {
+                if (newJDBCQuery.changeUserPassword(emailToResetPasswordTextField, resetPasswordPasswordField, conifrmedResetPasswordPasswordField, badPasswordLabel) == true) {
+                    changePassword3VBox.setVisible(false);
+                    loginVBox.setVisible(true);
+                }
+            } else
+                badPasswordLabel.setVisible(true);
+            badPasswordLabel.setText("Hasła nie są jednakowe");
+        }
     }
 
     @FXML
     void registerButton() throws SQLException { //Funkcja dodaje nowego użytkownika do bazy i przechodzi do logowania
-
         if (registerCode.equals(registrationCodeTextField.getText())) {
-            if (jdbcQuery.addNewUser(registrationEmailTextField, registrationPasswordPasswordField) == true) {
+            if(newJDBCQuery.addNewUser(registrationEmailTextField, registrationPasswordPasswordField) == true) {
                 loginVBox.setVisible(true);
                 register2VBox.setVisible(false);
             }
@@ -295,23 +375,50 @@ public class Controller {
     }
 
     @FXML
-    void logoutButton() { //Funkcja wylogowywuje z aplikacji i przełącza do logowania
-        registerAndLoginStackPane.setVisible(true);
-        mainViewTabPane.setVisible(false);
+    void sendRegistrationCode() throws SQLException {
+        if (registerHelper.isEmail(registrationEmailTextField) == true
+                && registerHelper.isPasswordStrength(registrationPasswordPasswordField, registrationAlertLabel) == true
+                && newJDBCQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText()) == false
+                && registrationPasswordPasswordField.getText().equals(registrationConfirmedPasswordPasswordField.getText()) == true) {
+            registerVBox.setVisible(false);
+            register2VBox.setVisible(true);
+            EmailToRegister emailToRegister = new EmailToRegister(registrationEmailTextField);
+            Thread threadRegisterEmail = new Thread(emailToRegister);
+            threadRegisterEmail.start();
+            registerCode = emailToRegister.getRegistrationCode();
+            registrationCodeAlertLabel.setVisible(false);
+        } else if (registerHelper.isEmail(registrationEmailTextField) == false) {
+            registrationAlertLabel.setText("Nie prawidłowy adres E-mail");
+            registrationAlertLabel.setVisible(true);
+        } else if (newJDBCQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText()) == true) {
+            registrationAlertLabel.setText("Konto jest już zarejstrowane");
+            registrationAlertLabel.setVisible(true);
+        } else if (registerHelper.isPasswordStrength(registrationPasswordPasswordField, registrationAlertLabel) == false) {
+        } else if (!registrationPasswordPasswordField.equals(registrationConfirmedPasswordPasswordField)) {
+            registrationAlertLabel.setText("Hasła nie są jednakowe");
+            registrationAlertLabel.setVisible(true);
+        }
     }
-
+    @FXML
+    void switchOnLoginButton() {
+        changePassword1VBox.setVisible(false);
+        changePassword2VBox.setVisible(false);
+        changePassword3VBox.setVisible(false);
+        registerVBox.setVisible(false);
+        register2VBox.setVisible(false);
+        badEmailOrPasswordLabel.setVisible(false);
+        loginVBox.setVisible(true);
+    }
     //FUNKCJE DOTYCZĄCE DODANIA POMIARU PRZEZ UŻYTKOWNIKA
     @FXML
-    void addMeasureFromUserButton() {
-        String[]namelonlat=cityToAddMeasureListView.getSelectionModel().getSelectedItem().split("\n");
-        String name=namelonlat[0];
-        Double lon=Double.parseDouble(namelonlat[1]);
-        Double lat=Double.parseDouble(namelonlat[2]);
-        int id=listOfCitiesFactory.findIDForCity(name,lon,lat);
-        jdbcQuery.addMeasuresFromUserToDataBase(pressureTextField, temperatureTextField, windSpeedTextField, humidityTextField, claudinessFromIserComboBox,id,addMesureAlertLabel);
+    void addMeasureFromUserButton() throws SQLException {
+        AddUserMeasureHelper addUserMeasureHelper=new AddUserMeasureHelper(userSettingsRepository);
+        newJDBCQuery.addMeasuresFromUserToDataBase(addUserMeasureHelper,loginEmailTextField,pressureTextField,
+                temperatureTextField, windSpeedTextField, humidityTextField, claudinessFromIserComboBox,
+                idStationFinder.getIDSelectedStation(stationsToAddMeasureListView,userStationsRepository.getStations()),
+                addMesureAlertLabel);
     }
     //FUNKCJE DOTYCZĄCE POBRANIA POMIARU PRZEZ UŻYTKOWNIKA
-
     private void turnOffAllMeasuresFromUser() { //Funkcja pomocnicza wyłącza wszystkie widoczne tabele z pomiarami
         claudinessTableView.setVisible(false);
         temperatureTableView.setVisible(false);
@@ -326,119 +433,53 @@ public class Controller {
         windSpeedTableView.getItems().removeAll();
         humidityTableView.getItems().removeAll();
         claudinessTableView.getItems().removeAll();
-
     }
 
     @FXML
     void showMeasuresFromUserButton() throws SQLException { //Funkcja odpowiadająca za wypełnienie tabeli pomiarami po kliknieciu przycisku
         turnOffAllMeasuresFromUser(); //Wyłączamy poprzedni widok
         clearAllTablesWithMeasuresFromUser(); //Czyścimy poprzednie tabele
-        String[]namelonlat=cityToTakeMaeasureFromUserListView.getSelectionModel().getSelectedItem().split("\n");
-        String name=namelonlat[0];
-        double lon =Double.parseDouble(namelonlat[1]);
-        double lat =Double.parseDouble(namelonlat[2]);
-        int id=listOfCitiesFactory.findIDForCity(name,lon,lat);
-
         if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Temperatura powietrza")) {
             temperatureTableView.setVisible(true);
-            ObservableList<TemperatureFromUser> listOfTemperatureResults = FXCollections.observableArrayList(tablesForCityFactory.showTemperaturesFromUserInCity(id, jdbcQuery.getTemperaturesFromUserList()));
+            ObservableList<TemperatureFromUser> listOfTemperatureResults = FXCollections.observableArrayList(userMeasuresRepository.showTemperaturesFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getTemperaturesFromUserList()));
             dateTempUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNameTemp.setCellValueFactory(new PropertyValueFactory<>("userName"));
             temperature.setCellValueFactory(new PropertyValueFactory<>("temperature"));
             temperatureTableView.setItems(listOfTemperatureResults);
         } else if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Wilgotność powietrza")) {
             humidityTableView.setVisible(true);
-            ObservableList<HumidityFromUser> listOfHumidityResults = FXCollections.observableArrayList(tablesForCityFactory.showHumidityFromUserInCity(id, jdbcQuery.getHumidityFromUserList()));
+            ObservableList<HumidityFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showHumidityFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getHumidityFromUserList()));
             dateHumidityUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNameHumidity.setCellValueFactory(new PropertyValueFactory<>("userName"));
             humidity.setCellValueFactory(new PropertyValueFactory<>("humidity"));
             humidityTableView.setItems(listOfHumidityResults);
         } else if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Prędkość wiatru")) {
             windSpeedTableView.setVisible(true);
-            ObservableList<WindSpeedFromUser> listOfHumidityResults = FXCollections.observableArrayList(tablesForCityFactory.showWindSpeedFromUserInCity(id, jdbcQuery.getWindSpeedFromUserList()));
+            ObservableList<WindSpeedFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showWindSpeedFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getWindSpeedFromUserList()));
             dateWindSpeedUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNameWindSpeed.setCellValueFactory(new PropertyValueFactory<>("userName"));
             windSpeed.setCellValueFactory(new PropertyValueFactory<>("windSpeed"));
             windSpeedTableView.setItems(listOfHumidityResults);
         } else if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Ciśnienie")) {
             pressureTableView.setVisible(true);
-            ObservableList<PressureFromUser> listOfPressureResults = FXCollections.observableArrayList(tablesForCityFactory.showPressureFromUserInCity(id, jdbcQuery.getPressureFromUserList()));
+            ObservableList<PressureFromUser> listOfPressureResults = FXCollections.observableArrayList(userMeasuresRepository.showPressureFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getPressureFromUserList()));
             datePressureUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNamePressure.setCellValueFactory(new PropertyValueFactory<>("userName"));
             pressure.setCellValueFactory(new PropertyValueFactory<>("pressure"));
             pressureTableView.setItems(listOfPressureResults);
         } else if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Zachmurzenie")) {
             claudinessTableView.setVisible(true);
-            ObservableList<ClaudinessFromUser> listOfClaudinessResults = FXCollections.observableArrayList(tablesForCityFactory.showClaudinessFromUserInCity(id, jdbcQuery.getClaudinessFromUserList()));
+            ObservableList<ClaudinessFromUser> listOfClaudinessResults = FXCollections.observableArrayList(userMeasuresRepository.showClaudinessFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getCloudinessFromUserList()));
             dateClaudinessUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNameClaudiness.setCellValueFactory(new PropertyValueFactory<>("userName"));
             claudiness.setCellValueFactory(new PropertyValueFactory<>("claudiness"));
             claudinessTableView.setItems(listOfClaudinessResults);
         }
     }
-
-    @FXML
-    void findOWMStationButton() throws APIException, ParseException, IOException {
-        boolean finded=false;
-        ArrayList<String>findedCities=new ArrayList<>();
-        String input = nameOfCityToFindTextField.getText().toLowerCase();
-        String finalInput = "";
-        for (int i = 0; i < input.length(); i++) {
-            if (i == 0) {
-                finalInput += input.charAt(i);
-                finalInput = finalInput.toUpperCase();
-            }
-            if (i > 0) {
-                if (input.charAt(i) == 32) {
-                    String bigletter = " " + input.substring(i + 1, i + 2).toUpperCase();
-                    finalInput += bigletter;
-                    i++;
-                } else {
-                    finalInput += input.charAt(i);
-                }
-
-            }
-        }
-        if(finalInput.length()>0) {
-            for (int i = 0; i < listOfCitiesFactory.getStationsNamesArrayList().size(); i++) {
-                if (listOfCitiesFactory.getStationsNamesArrayList().get(i).startsWith(finalInput)) {
-
-                    finded = true;
-                    findedCities.add(listOfCitiesFactory.getStationsNamesArrayList().get(i));
-                }
-            }
-            if (finded == true) {
-                nameOfCityToFindTextField.setStyle("-fx-control-inner-background: green;");
-                cityToTakeMaeasureFromOWMListView.getItems().clear();
-                cityToTakeMaeasureFromOWMListView.getItems().addAll(findedCities);
-                cityToTakeMaeasureFromOWMListView.getSelectionModel().selectFirst();
-
-            } else if (finded == false) {
-                nameOfCityToFindTextField.setStyle("-fx-control-inner-background: red;");
-                cityToTakeMaeasureFromOWMListView.getItems().removeAll();
-                cityToTakeMaeasureFromOWMListView.getItems().clear();
-                cityToTakeMaeasureFromOWMListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList());
-            }
-        }
-        else
-        {
-            nameOfCityToFindTextField.setStyle("");
-            cityToTakeMaeasureFromOWMListView.getItems().removeAll();
-            cityToTakeMaeasureFromOWMListView.getItems().clear();
-            cityToTakeMaeasureFromOWMListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList());
-        }
-    }
-    String[] temp={"a","b","c"};
+    //DO POBRANIA POMIAROW Z OWM
     @FXML
     void onClickOnOWMStationsListView() throws APIException, ParseException, IOException {
-
-      String[]namelonlat=cityToTakeMaeasureFromOWMListView.getSelectionModel().getSelectedItem().split("\n");
-
-        if(!temp.equals(namelonlat[0])) {
-            String name = namelonlat[0];
-            Double lon = Double.parseDouble(namelonlat[1]);
-            Double lat = Double.parseDouble(namelonlat[2]);
-            weatherMeasuresFactory = new WeatherMeasuresFactory(listOfCitiesFactory.findIDForCity(name, lon, lat), 39);
+            weatherMeasuresFactory = new WeatherMeasuresFactory(idStationFinder.getIDSelectedStation(OWMStationsListView,OWMStationsRepository.getStations()), 39, owmClaudinesTranslatorRepository);
             ObservableList<WeatherMeasureOWM> listOfWeatherMeasures = FXCollections.observableArrayList(weatherMeasuresFactory.getWeatherMeasuresListOWM());
             tempColumn.setCellValueFactory(new PropertyValueFactory<>("temp"));
             windColumn.setCellValueFactory(new PropertyValueFactory<>("wind"));
@@ -447,228 +488,57 @@ public class Controller {
             claudinessColumn.setCellValueFactory(new PropertyValueFactory<>("claudiness"));
             dateOWMColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfMeasure"));
             measuresFromOWMTableView.setItems(listOfWeatherMeasures);
-            temp=namelonlat;
-
         }
-    }
-    @FXML
-    void findCityToTakeMeasureFromUsersButton() {
-        boolean finded=false;
-        ArrayList<String>findedCities=new ArrayList<>();
-        String input = nameOfCityToFindMesureFromUserTextField.getText().toLowerCase();
-        String finalInput = "";
-        for (int i = 0; i < input.length(); i++) {
-            if (i == 0) {
-                finalInput += input.charAt(i);
-                finalInput = finalInput.toUpperCase();
-            }
-            if (i > 0) {
-                if (input.charAt(i) == 32) {
-                    String bigletter = " " + input.substring(i + 1, i + 2).toUpperCase();
-                    finalInput += bigletter;
-                    i++;
-                } else {
-                    finalInput += input.charAt(i);
-                }
 
-            }
-        }
-        if(finalInput.length()>0) {
-            for (int i = 0; i < listOfCitiesFactory.getStationsNamesArrayList().size(); i++) {
-                if (listOfCitiesFactory.getStationsNamesArrayList().get(i).startsWith(finalInput)) {
-
-                    finded = true;
-                    findedCities.add(listOfCitiesFactory.getStationsNamesArrayList().get(i));
-                }
-            }
-            if (finded == true) {
-                nameOfCityToFindMesureFromUserTextField.setStyle("-fx-control-inner-background: green;");
-
-                cityToTakeMaeasureFromUserListView.getItems().clear();
-                cityToTakeMaeasureFromUserListView.getItems().addAll(findedCities);
-                cityToTakeMaeasureFromUserListView.getSelectionModel().selectFirst();
-            } else if (finded == false) {
-                nameOfCityToFindMesureFromUserTextField.setStyle("-fx-control-inner-background: red;");
-                cityToTakeMaeasureFromUserListView.getItems().removeAll();
-                cityToTakeMaeasureFromUserListView.getItems().clear();
-                cityToTakeMaeasureFromUserListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList());
-            }
-        }
-        else
-        {
-            nameOfCityToFindMesureFromUserTextField.setStyle("");
-            cityToTakeMaeasureFromUserListView.getItems().removeAll();
-            cityToTakeMaeasureFromUserListView.getItems().clear();
-            cityToTakeMaeasureFromUserListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList());
-        }
-    }
-
-    @FXML
-    void findCityToAddMeasureFromUsersButton() {
-        boolean finded=false;
-
-        ArrayList<String>findedCities=new ArrayList<>();
-        String input = nameOfCityToAddMesureFromUserTextField.getText().toLowerCase();
-        String finalInput = "";
-        for (int i = 0; i < input.length(); i++) {
-            if (i == 0) {
-                finalInput += input.charAt(i);
-                finalInput = finalInput.toUpperCase();
-            }
-            if (i > 0) {
-                if (input.charAt(i) == 32) {
-                    String bigletter = " " + input.substring(i + 1, i + 2).toUpperCase();
-                    finalInput += bigletter;
-                    i++;
-                } else {
-                    finalInput += input.charAt(i);
-                }
-
-            }
-        }
-        if(finalInput.length()>0) {
-            for (int i = 0; i < listOfCitiesFactory.getStationsNamesArrayList().size(); i++) {
-                if (listOfCitiesFactory.getStationsNamesArrayList().get(i).startsWith(finalInput)) {
-
-                    finded = true;
-                    findedCities.add(listOfCitiesFactory.getStationsNamesArrayList().get(i));
-                }
-            }
-            if (finded == true) {
-                nameOfCityToAddMesureFromUserTextField.setStyle("-fx-control-inner-background: green;");
-                cityToAddMeasureListView.getItems().clear();
-                cityToAddMeasureListView.getItems().addAll(findedCities);
-                cityToAddMeasureListView.getSelectionModel().selectFirst();
-            } else if (finded == false) {
-                nameOfCityToAddMesureFromUserTextField.setStyle("-fx-control-inner-background: red;");
-                cityToAddMeasureListView.getItems().removeAll();
-                cityToAddMeasureListView.getItems().clear();
-                cityToAddMeasureListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList());
-            }
-        }
-        else
-        {
-            nameOfCityToAddMesureFromUserTextField.setStyle("");
-            cityToAddMeasureListView.getItems().removeAll();
-            cityToAddMeasureListView.getItems().clear();
-            cityToAddMeasureListView.getItems().addAll(listOfCitiesFactory.getStationsNamesArrayList());
-        }
-    }
 
 
     @FXML
-    void sendRegistrationCode() throws SQLException {
-
-        if (verificateDataFromUser.isEmail(registrationEmailTextField) == true
-                && verificateDataFromUser.isPasswordStrength(registrationPasswordPasswordField, registrationAlertLabel) == true
-                && jdbcQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText()) == false
-                && registrationPasswordPasswordField.getText().equals(registrationConfirmedPasswordPasswordField.getText()) == true) {
-            registerVBox.setVisible(false);
-            register2VBox.setVisible(true);
-            EmailToRegister emailToRegister = new EmailToRegister(registrationEmailTextField);
-            Thread threadRegisterEmail = new Thread(emailToRegister);
-            threadRegisterEmail.start();
-            registerCode = emailToRegister.getRegistrationCode();
-            registrationCodeAlertLabel.setVisible(false);
-        } else if (verificateDataFromUser.isEmail(registrationEmailTextField) == false) {
-            registrationAlertLabel.setText("Nie prawidłowy adres E-mail");
-            registrationAlertLabel.setVisible(true);
-        } else if (jdbcQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText()) == true) {
-            registrationAlertLabel.setText("Konto jest już zarejstrowane");
-            registrationAlertLabel.setVisible(true);
-        } else if (verificateDataFromUser.isPasswordStrength(registrationPasswordPasswordField, registrationAlertLabel) == false) {
-        } else if (!registrationPasswordPasswordField.equals(registrationConfirmedPasswordPasswordField)) {
-            registrationAlertLabel.setText("Hasła nie są jednakowe");
-            registrationAlertLabel.setVisible(true);
-        }
-
-
+    void changeUserSettingsButton() throws SQLException {
+       newJDBCQuery.changeUserSettings(userSettingsRepository,settingsMaxTemperatureTextField,settingsMinTemperatureTextField,
+               settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField,
+               loginEmailTextField);
     }
-
     @FXML
-    void sendResetPasswordCode() {
-        EmailToResetPassword emailToResetPassword = new EmailToResetPassword(emailToResetPasswordTextField);
-        if (verificateDataFromUser.isEmail(emailToResetPasswordTextField) == true) {
-            Thread threadResetPasswordEmail = new Thread(emailToResetPassword);
-            threadResetPasswordEmail.start();
-            changePassword1VBox.setVisible(false);
-            changePassword2VBox.setVisible(true);
-            resetPasswordCode = emailToResetPassword.getResetPasswordCode();
-            badCodeResetPasswordLabel.setVisible(false);
-        } else {
-            badEmailResetPasswordLabel.setVisible(true);
-        }
+    void loadDefaultSettingsButton() throws SQLException {
+        newJDBCQuery.loadDefaultSettingsForUser(userSettingsRepository,loginEmailTextField);
+        UserSettingsView userSettingsView=new UserSettingsView(userSettingsRepository,settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField);
     }
-
     @FXML
-    void goToChangePasswordButton() {
-        if (resetCodeTextField.getText().equals(resetPasswordCode)) {
-            changePassword2VBox.setVisible(false);
-            changePassword3VBox.setVisible(true);
-        } else {
-            badCodeResetPasswordLabel.setVisible(true);
-        }
+    void onClickGIOSStation() throws IOException, JSONException {
+        GIOSTableView.getItems().clear();
+        GIOSAirIndexTableView.getItems().clear();
+        sensorsListView.getItems().clear();
+        sensorsListView.getItems().addAll(giosSensorsRepository.getSensorsForSelectedStation(idStationFinder.getIDSelectedStation(GIOSStationsListView,giosStationsRepository.getStations())));
+        GIOSAirIndexRepository giosAirIndexRepository =new GIOSAirIndexRepository();
+        GIOSAirIndexNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        GIOSAirIndexValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+        GIOSAirIndexTableView.getItems().addAll(giosAirIndexRepository.getAirIndexData(idStationFinder.getIDSelectedStation(GIOSStationsListView,giosStationsRepository.getStations())));
     }
-
     @FXML
-    void changePasswordButton() throws SQLException {
-        if (verificateDataFromUser.isPasswordStrength(resetPasswordPasswordField, badPasswordLabel) == true) {
-            if (resetPasswordPasswordField.getText().equals(conifrmedResetPasswordPasswordField.getText())) {
-                if (jdbcQuery.changeUserPassword(emailToResetPasswordTextField, resetPasswordPasswordField, conifrmedResetPasswordPasswordField, badPasswordLabel) == true) {
-                    changePassword3VBox.setVisible(false);
-                    loginVBox.setVisible(true);
-                }
-            } else
-                badPasswordLabel.setVisible(true);
-            badPasswordLabel.setText("Hasła nie są jednakowe");
-        }
+    void onClickGIOSSensor() throws IOException, JSONException, ParseException {
+        GIOSTableView.getItems().clear();
+        GIOSSensorDataRepository GIOSSensorDataRepository =new GIOSSensorDataRepository();
+        GIOSDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+        GIOSValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+        GIOSTableView.getItems().addAll(GIOSSensorDataRepository.getDataFromSensor(giosSensorsRepository.getSelectedSensorID(sensorsListView)));
     }
-
-    @FXML
-    void switchOnForgotPasswordButton() {
-        loginVBox.setVisible(false);
-        changePassword1VBox.setVisible(true);
-        badEmailResetPasswordLabel.setVisible(false);
-    }
-
-
-    @FXML
-    void switchOnLoginButton() {
-        changePassword1VBox.setVisible(false);
-        changePassword2VBox.setVisible(false);
-        changePassword3VBox.setVisible(false);
-        registerVBox.setVisible(false);
-        register2VBox.setVisible(false);
-        badEmailOrPasswordLabel.setVisible(false);
-        loginVBox.setVisible(true);
-    }
-
     @FXML
     void pressEnterToTypePassword(ActionEvent ae) {
         passwordPasswordField.requestFocus();
     }
 
     @FXML
-    void pressEnterToLogin(ActionEvent ae) {
-        try {
+    void pressEnterToLogin(ActionEvent ae) throws SQLException {
             loginButton();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
-
     @FXML
     void pressEnterToSendPasswordCode(ActionEvent ae) {
         sendResetPasswordCode();
     }
 
     @FXML
-    void pressEnterToSendRegistrationCode(ActionEvent ae) {
-        try {
-            sendRegistrationCode();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    void pressEnterToSendRegistrationCode(ActionEvent ae) throws SQLException {
+        sendRegistrationCode();
     }
 
     @FXML
@@ -682,17 +552,13 @@ public class Controller {
     }
 
     @FXML
-    void pressEnterToRegister(ActionEvent ae) {
-        try {
-            registerButton();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    void pressEnterToRegister(ActionEvent ae) throws SQLException {
+        registerButton();
     }
 
     @FXML
     void pressEnterToResetPassword(ActionEvent ae) {
-        goToChangePasswordButton();
+        goToChangePasswordAfterEnterCodeButton();
     }
 
     @FXML
@@ -701,37 +567,8 @@ public class Controller {
     }
 
     @FXML
-    void pressEnterToChangePassword(ActionEvent ae) {
-        try {
+    void pressEnterToChangePassword(ActionEvent ae) throws SQLException {
             changePasswordButton();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void pressEnterToTakeOWMMeasure(ActionEvent ae) {
-        try {
-            findOWMStationButton();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (APIException e) {
-            e.printStackTrace();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    @FXML
-    void changeUserSettingsButton() throws SQLException {
-        jdbcQuery.changeUserSettings(settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField,loginEmailTextField);
-    }
-    @FXML
-    void loadDefaultSettingsButton() throws SQLException {
-        jdbcQuery.loadDefaultSettingsForUser(loginEmailTextField);
-
-        jdbcQuery.loadUserSettingsAboutAddMesure(settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField);
     }
 }
 

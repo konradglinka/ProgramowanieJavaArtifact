@@ -43,7 +43,6 @@ public class DataFromOWM {
         return dateFormat.format(date);
     }
     public String claudinessInCity(int timeOfMeasure) { //funkcja zwraca stan nieba w mieście (chmury,deszcz itp)
-
         return dailyWeatherForecast.getDataList().get(timeOfMeasure).getWeatherList().get(0).component3();
     }
 

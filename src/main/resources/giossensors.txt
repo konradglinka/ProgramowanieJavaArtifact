@@ -1,0 +1,2828 @@
+114
+642
+dwutlenek azotu
+NO2
+114
+644
+ozon
+O3
+117
+672
+dwutlenek siarki
+SO2
+117
+658
+benzen
+C6H6
+117
+660
+tlenek węgla
+CO
+117
+665
+dwutlenek azotu
+NO2
+117
+667
+ozon
+O3
+117
+670
+pył zawieszony PM2.5
+PM2.5
+117
+14395
+pył zawieszony PM10
+PM10
+129
+737
+tlenek węgla
+CO
+129
+740
+dwutlenek azotu
+NO2
+129
+744
+pył zawieszony PM2.5
+PM2.5
+52
+282
+benzen
+C6H6
+52
+285
+tlenek węgla
+CO
+52
+291
+dwutlenek azotu
+NO2
+52
+293
+ozon
+O3
+52
+297
+dwutlenek siarki
+SO2
+52
+14397
+pył zawieszony PM10
+PM10
+109
+605
+benzen
+C6H6
+109
+608
+tlenek węgla
+CO
+109
+614
+dwutlenek azotu
+NO2
+109
+616
+ozon
+O3
+109
+618
+pył zawieszony PM10
+PM10
+109
+621
+dwutlenek siarki
+SO2
+14
+92
+pył zawieszony PM10
+PM10
+16
+101
+pył zawieszony PM10
+PM10
+38
+221
+dwutlenek azotu
+NO2
+38
+223
+ozon
+O3
+38
+224
+pył zawieszony PM10
+PM10
+38
+25988
+pył zawieszony PM2.5
+PM2.5
+70
+397
+dwutlenek azotu
+NO2
+70
+400
+pył zawieszony PM10
+PM10
+70
+20214
+ozon
+O3
+74
+441
+dwutlenek azotu
+NO2
+74
+444
+ozon
+O3
+74
+450
+dwutlenek siarki
+SO2
+84
+493
+ozon
+O3
+132
+759
+pył zawieszony PM10
+PM10
+134
+14735
+benzen
+C6H6
+9153
+14727
+dwutlenek azotu
+NO2
+9153
+14729
+ozon
+O3
+9153
+14730
+pył zawieszony PM10
+PM10
+9153
+14731
+pył zawieszony PM2.5
+PM2.5
+9153
+14733
+dwutlenek siarki
+SO2
+9153
+14734
+benzen
+C6H6
+9153
+14707
+tlenek węgla
+CO
+10133
+16436
+pył zawieszony PM10
+PM10
+10133
+20207
+pył zawieszony PM2.5
+PM2.5
+10135
+16443
+pył zawieszony PM10
+PM10
+10135
+16466
+pył zawieszony PM2.5
+PM2.5
+11254
+20210
+pył zawieszony PM10
+PM10
+11414
+20543
+dwutlenek azotu
+NO2
+11414
+20545
+tlenek węgla
+CO
+11414
+20546
+ozon
+O3
+11414
+20547
+pył zawieszony PM10
+PM10
+158
+987
+tlenek węgla
+CO
+158
+991
+dwutlenek azotu
+NO2
+158
+993
+ozon
+O3
+158
+995
+pył zawieszony PM10
+PM10
+158
+996
+pył zawieszony PM2.5
+PM2.5
+158
+998
+dwutlenek siarki
+SO2
+16197
+26020
+dwutlenek azotu
+NO2
+16197
+26012
+benzen
+C6H6
+16197
+26026
+pył zawieszony PM10
+PM10
+16197
+26028
+pył zawieszony PM2.5
+PM2.5
+295
+2066
+ozon
+O3
+295
+2069
+pył zawieszony PM10
+PM10
+295
+2071
+pył zawieszony PM2.5
+PM2.5
+296
+2088
+dwutlenek siarki
+SO2
+296
+2087
+pył zawieszony PM10
+PM10
+296
+2079
+benzen
+C6H6
+296
+2080
+tlenek węgla
+CO
+296
+2083
+dwutlenek azotu
+NO2
+314
+2199
+pył zawieszony PM10
+PM10
+314
+2204
+dwutlenek siarki
+SO2
+314
+2195
+dwutlenek azotu
+NO2
+314
+2197
+ozon
+O3
+355
+2370
+tlenek węgla
+CO
+355
+2373
+dwutlenek azotu
+NO2
+355
+2375
+ozon
+O3
+355
+2377
+pył zawieszony PM10
+PM10
+355
+2378
+pył zawieszony PM2.5
+PM2.5
+355
+2382
+dwutlenek siarki
+SO2
+10058
+16249
+benzen
+C6H6
+10058
+16250
+pył zawieszony PM10
+PM10
+10058
+16228
+tlenek węgla
+CO
+10058
+16231
+dwutlenek azotu
+NO2
+291
+2039
+dwutlenek siarki
+SO2
+291
+2031
+dwutlenek azotu
+NO2
+291
+2033
+ozon
+O3
+291
+2035
+pył zawieszony PM10
+PM10
+319
+2219
+dwutlenek azotu
+NO2
+319
+2221
+ozon
+O3
+319
+2222
+dwutlenek siarki
+SO2
+322
+2239
+tlenek węgla
+CO
+322
+2242
+dwutlenek azotu
+NO2
+322
+2244
+ozon
+O3
+322
+2245
+pył zawieszony PM10
+PM10
+322
+2248
+dwutlenek siarki
+SO2
+331
+16630
+pył zawieszony PM10
+PM10
+331
+16633
+dwutlenek siarki
+SO2
+331
+16638
+dwutlenek azotu
+NO2
+331
+16642
+tlenek węgla
+CO
+331
+17716
+ozon
+O3
+331
+21363
+pył zawieszony PM2.5
+PM2.5
+562
+3802
+pył zawieszony PM10
+PM10
+562
+14379
+pył zawieszony PM2.5
+PM2.5
+9913
+17276
+pył zawieszony PM10
+PM10
+9913
+16037
+dwutlenek azotu
+NO2
+9913
+16041
+ozon
+O3
+9913
+16043
+dwutlenek siarki
+SO2
+9913
+25921
+pył zawieszony PM2.5
+PM2.5
+10434
+17239
+pył zawieszony PM10
+PM10
+10434
+17240
+pył zawieszony PM2.5
+PM2.5
+10974
+18197
+pył zawieszony PM2.5
+PM2.5
+10974
+18196
+pył zawieszony PM10
+PM10
+11358
+20364
+benzen
+C6H6
+11358
+20365
+dwutlenek siarki
+SO2
+590
+20497
+benzen
+C6H6
+590
+16149
+dwutlenek siarki
+SO2
+590
+16158
+ozon
+O3
+590
+16160
+dwutlenek azotu
+NO2
+10374
+16147
+pył zawieszony PM10
+PM10
+10374
+25986
+pył zawieszony PM2.5
+PM2.5
+584
+3902
+pył zawieszony PM10
+PM10
+584
+14781
+ozon
+O3
+584
+21351
+dwutlenek azotu
+NO2
+600
+3964
+benzen
+C6H6
+600
+3970
+pył zawieszony PM10
+PM10
+8976
+21683
+pył zawieszony PM10
+PM10
+11399
+20490
+pył zawieszony PM10
+PM10
+16181
+25945
+dwutlenek azotu
+NO2
+16181
+25941
+pył zawieszony PM2.5
+PM2.5
+16181
+25943
+benzen
+C6H6
+16181
+25940
+pył zawieszony PM10
+PM10
+671
+14466
+pył zawieszony PM10
+PM10
+671
+4376
+benzen
+C6H6
+671
+4379
+tlenek węgla
+CO
+671
+4383
+dwutlenek azotu
+NO2
+671
+4385
+ozon
+O3
+671
+4391
+dwutlenek siarki
+SO2
+10125
+20277
+pył zawieszony PM2.5
+PM2.5
+10125
+16319
+dwutlenek azotu
+NO2
+10125
+16342
+benzen
+C6H6
+10125
+16343
+tlenek węgla
+CO
+10125
+16344
+pył zawieszony PM10
+PM10
+631
+20236
+pył zawieszony PM10
+PM10
+631
+20218
+pył zawieszony PM2.5
+PM2.5
+638
+4192
+dwutlenek azotu
+NO2
+638
+4194
+ozon
+O3
+638
+4196
+pył zawieszony PM10
+PM10
+638
+4198
+pył zawieszony PM2.5
+PM2.5
+638
+4200
+dwutlenek siarki
+SO2
+646
+21905
+pył zawieszony PM10
+PM10
+659
+14448
+ozon
+O3
+659
+4274
+tlenek węgla
+CO
+659
+4278
+dwutlenek azotu
+NO2
+659
+14416
+pył zawieszony PM10
+PM10
+659
+25910
+pył zawieszony PM2.5
+PM2.5
+665
+4333
+dwutlenek azotu
+NO2
+665
+4336
+pył zawieszony PM10
+PM10
+665
+4338
+pył zawieszony PM2.5
+PM2.5
+665
+4339
+dwutlenek siarki
+SO2
+665
+14771
+benzen
+C6H6
+665
+14772
+ozon
+O3
+870
+5716
+tlenek węgla
+CO
+870
+5718
+dwutlenek azotu
+NO2
+870
+5720
+ozon
+O3
+870
+5721
+pył zawieszony PM10
+PM10
+870
+5722
+dwutlenek siarki
+SO2
+882
+5826
+ozon
+O3
+882
+16396
+dwutlenek siarki
+SO2
+882
+16424
+dwutlenek azotu
+NO2
+10005
+16214
+dwutlenek siarki
+SO2
+10005
+16216
+dwutlenek azotu
+NO2
+10005
+16171
+ozon
+O3
+10005
+16173
+pył zawieszony PM10
+PM10
+10030
+16174
+tlenek węgla
+CO
+10030
+16177
+dwutlenek siarki
+SO2
+10030
+16178
+pył zawieszony PM10
+PM10
+10030
+16180
+ozon
+O3
+10030
+16181
+dwutlenek azotu
+NO2
+11375
+20451
+benzen
+C6H6
+11375
+20435
+dwutlenek azotu
+NO2
+11375
+20478
+pył zawieszony PM10
+PM10
+11375
+20479
+pył zawieszony PM2.5
+PM2.5
+943
+6062
+tlenek węgla
+CO
+943
+6065
+dwutlenek azotu
+NO2
+944
+6087
+dwutlenek siarki
+SO2
+944
+6085
+pył zawieszony PM10
+PM10
+944
+6074
+benzen
+C6H6
+944
+6076
+tlenek węgla
+CO
+944
+6081
+dwutlenek azotu
+NO2
+944
+6083
+ozon
+O3
+944
+20176
+pył zawieszony PM2.5
+PM2.5
+11477
+20701
+pył zawieszony PM10
+PM10
+11477
+20702
+pył zawieszony PM2.5
+PM2.5
+11477
+20692
+dwutlenek azotu
+NO2
+952
+6168
+dwutlenek siarki
+SO2
+952
+6161
+dwutlenek azotu
+NO2
+952
+6165
+pył zawieszony PM2.5
+PM2.5
+952
+14972
+pył zawieszony PM10
+PM10
+952
+16581
+benzen
+C6H6
+952
+14890
+ozon
+O3
+952
+14891
+tlenek węgla
+CO
+902
+5895
+tlenek węgla
+CO
+902
+5899
+dwutlenek azotu
+NO2
+902
+5902
+ozon
+O3
+902
+5904
+pył zawieszony PM10
+PM10
+920
+5973
+tlenek węgla
+CO
+920
+5979
+dwutlenek azotu
+NO2
+920
+14893
+pył zawieszony PM10
+PM10
+946
+6104
+dwutlenek azotu
+NO2
+946
+6106
+ozon
+O3
+946
+6108
+dwutlenek siarki
+SO2
+950
+6140
+dwutlenek azotu
+NO2
+950
+6142
+ozon
+O3
+950
+16526
+benzen
+C6H6
+950
+14892
+pył zawieszony PM10
+PM10
+9218
+21686
+pył zawieszony PM10
+PM10
+10834
+17945
+dwutlenek siarki
+SO2
+10834
+17956
+benzen
+C6H6
+10834
+17957
+dwutlenek azotu
+NO2
+10834
+17958
+pył zawieszony PM10
+PM10
+10834
+17960
+tlenek węgla
+CO
+986
+6348
+dwutlenek azotu
+NO2
+986
+6350
+ozon
+O3
+986
+6352
+pył zawieszony PM10
+PM10
+986
+6354
+pył zawieszony PM2.5
+PM2.5
+987
+6360
+benzen
+C6H6
+987
+6362
+tlenek węgla
+CO
+987
+6379
+dwutlenek azotu
+NO2
+987
+6382
+pył zawieszony PM10
+PM10
+987
+6383
+pył zawieszony PM2.5
+PM2.5
+987
+6385
+dwutlenek siarki
+SO2
+966
+6236
+dwutlenek azotu
+NO2
+966
+6238
+pył zawieszony PM10
+PM10
+11336
+20380
+ozon
+O3
+11336
+26305
+dwutlenek siarki
+SO2
+11336
+20565
+dwutlenek azotu
+NO2
+961
+6212
+dwutlenek azotu
+NO2
+961
+6214
+ozon
+O3
+961
+6218
+dwutlenek siarki
+SO2
+983
+6320
+dwutlenek azotu
+NO2
+983
+6322
+pył zawieszony PM10
+PM10
+983
+6324
+dwutlenek siarki
+SO2
+983
+21352
+tlenek węgla
+CO
+983
+20612
+benzen
+C6H6
+16157
+25915
+dwutlenek azotu
+NO2
+16157
+25919
+pył zawieszony PM2.5
+PM2.5
+16157
+25917
+pył zawieszony PM10
+PM10
+11514
+20745
+dwutlenek azotu
+NO2
+11514
+20736
+pył zawieszony PM10
+PM10
+805
+5274
+benzen
+C6H6
+805
+5277
+tlenek węgla
+CO
+805
+5281
+dwutlenek azotu
+NO2
+805
+5283
+ozon
+O3
+805
+5286
+pył zawieszony PM10
+PM10
+805
+5290
+dwutlenek siarki
+SO2
+809
+5312
+pył zawieszony PM10
+PM10
+809
+5317
+dwutlenek siarki
+SO2
+813
+5343
+tlenek węgla
+CO
+813
+5346
+dwutlenek azotu
+NO2
+813
+5349
+pył zawieszony PM10
+PM10
+813
+25931
+pył zawieszony PM2.5
+PM2.5
+814
+5371
+dwutlenek azotu
+NO2
+814
+5373
+ozon
+O3
+814
+5376
+pył zawieszony PM10
+PM10
+814
+5378
+pył zawieszony PM2.5
+PM2.5
+814
+5382
+dwutlenek siarki
+SO2
+837
+5478
+dwutlenek azotu
+NO2
+837
+5480
+pył zawieszony PM10
+PM10
+837
+5481
+dwutlenek siarki
+SO2
+841
+5501
+dwutlenek azotu
+NO2
+841
+5505
+pył zawieszony PM10
+PM10
+841
+5508
+dwutlenek siarki
+SO2
+848
+5573
+pył zawieszony PM10
+PM10
+848
+5579
+dwutlenek siarki
+SO2
+848
+5564
+tlenek węgla
+CO
+848
+5568
+dwutlenek azotu
+NO2
+848
+5570
+ozon
+O3
+834
+5454
+benzen
+C6H6
+834
+5457
+tlenek węgla
+CO
+834
+5461
+dwutlenek azotu
+NO2
+834
+5463
+ozon
+O3
+834
+5466
+pył zawieszony PM10
+PM10
+834
+5470
+dwutlenek siarki
+SO2
+10554
+17439
+dwutlenek siarki
+SO2
+10554
+17443
+tlenek węgla
+CO
+789
+5164
+ozon
+O3
+789
+5167
+pył zawieszony PM10
+PM10
+789
+5171
+dwutlenek siarki
+SO2
+789
+16705
+benzen
+C6H6
+10158
+16549
+dwutlenek azotu
+NO2
+10158
+16550
+tlenek węgla
+CO
+10158
+16551
+pył zawieszony PM2.5
+PM2.5
+798
+5228
+tlenek węgla
+CO
+798
+5230
+dwutlenek azotu
+NO2
+798
+5232
+pył zawieszony PM10
+PM10
+800
+5246
+tlenek węgla
+CO
+800
+5250
+dwutlenek azotu
+NO2
+800
+5253
+ozon
+O3
+800
+5256
+pył zawieszony PM10
+PM10
+800
+5260
+dwutlenek siarki
+SO2
+842
+5512
+dwutlenek azotu
+NO2
+842
+5514
+ozon
+O3
+842
+5515
+pył zawieszony PM10
+PM10
+842
+5516
+dwutlenek siarki
+SO2
+845
+5550
+dwutlenek siarki
+SO2
+845
+5540
+tlenek węgla
+CO
+845
+5543
+dwutlenek azotu
+NO2
+845
+5545
+ozon
+O3
+845
+5547
+pył zawieszony PM10
+PM10
+853
+5600
+benzen
+C6H6
+853
+5612
+dwutlenek azotu
+NO2
+853
+5615
+ozon
+O3
+853
+5618
+pył zawieszony PM10
+PM10
+853
+5619
+pył zawieszony PM2.5
+PM2.5
+853
+5623
+dwutlenek siarki
+SO2
+856
+14915
+dwutlenek siarki
+SO2
+856
+14916
+pył zawieszony PM10
+PM10
+856
+14917
+dwutlenek azotu
+NO2
+9000
+14498
+benzen
+C6H6
+11278
+21303
+dwutlenek siarki
+SO2
+11278
+20220
+pył zawieszony PM10
+PM10
+11278
+21328
+benzen
+C6H6
+11455
+20661
+pył zawieszony PM10
+PM10
+11457
+21083
+pył zawieszony PM2.5
+PM2.5
+11457
+20679
+dwutlenek azotu
+NO2
+11457
+20681
+pył zawieszony PM10
+PM10
+11457
+20684
+ozon
+O3
+11457
+20685
+benzen
+C6H6
+11794
+21128
+dwutlenek siarki
+SO2
+11794
+21129
+pył zawieszony PM10
+PM10
+11794
+21130
+pył zawieszony PM2.5
+PM2.5
+11794
+21131
+dwutlenek azotu
+NO2
+11195
+19740
+benzen
+C6H6
+11195
+19742
+tlenek węgla
+CO
+11195
+19745
+dwutlenek azotu
+NO2
+11195
+19747
+ozon
+O3
+11195
+19749
+pył zawieszony PM10
+PM10
+11195
+19753
+pył zawieszony PM2.5
+PM2.5
+11195
+19756
+dwutlenek siarki
+SO2
+769
+5083
+dwutlenek azotu
+NO2
+769
+5085
+pył zawieszony PM10
+PM10
+769
+5087
+dwutlenek siarki
+SO2
+769
+14878
+ozon
+O3
+778
+5109
+tlenek węgla
+CO
+778
+5112
+dwutlenek azotu
+NO2
+778
+5114
+ozon
+O3
+778
+5115
+pył zawieszony PM10
+PM10
+778
+5116
+pył zawieszony PM2.5
+PM2.5
+778
+5118
+dwutlenek siarki
+SO2
+785
+20310
+pył zawieszony PM10
+PM10
+785
+20311
+pył zawieszony PM2.5
+PM2.5
+785
+17249
+benzen
+C6H6
+10444
+18147
+pył zawieszony PM10
+PM10
+10444
+18150
+tlenek węgla
+CO
+10444
+18151
+ozon
+O3
+10444
+20306
+pył zawieszony PM2.5
+PM2.5
+10444
+17334
+dwutlenek siarki
+SO2
+10794
+17796
+dwutlenek azotu
+NO2
+10794
+17799
+dwutlenek siarki
+SO2
+10794
+17800
+pył zawieszony PM10
+PM10
+11754
+21043
+ozon
+O3
+11754
+21045
+dwutlenek azotu
+NO2
+11754
+21047
+dwutlenek siarki
+SO2
+11754
+26004
+pył zawieszony PM10
+PM10
+11955
+25989
+pył zawieszony PM10
+PM10
+11955
+25991
+pył zawieszony PM2.5
+PM2.5
+877
+5752
+benzen
+C6H6
+877
+5754
+tlenek węgla
+CO
+877
+5761
+dwutlenek azotu
+NO2
+877
+5763
+ozon
+O3
+877
+5766
+pył zawieszony PM10
+PM10
+877
+5768
+pył zawieszony PM2.5
+PM2.5
+877
+5770
+dwutlenek siarki
+SO2
+861
+5671
+benzen
+C6H6
+861
+5673
+tlenek węgla
+CO
+861
+5678
+dwutlenek azotu
+NO2
+861
+5680
+ozon
+O3
+861
+5683
+pył zawieszony PM10
+PM10
+861
+5686
+dwutlenek siarki
+SO2
+861
+20691
+pył zawieszony PM2.5
+PM2.5
+11616
+20844
+dwutlenek azotu
+NO2
+11616
+20846
+pył zawieszony PM2.5
+PM2.5
+11616
+20847
+pył zawieszony PM10
+PM10
+400
+2745
+tlenek węgla
+CO
+400
+2747
+dwutlenek azotu
+NO2
+400
+2750
+pył zawieszony PM10
+PM10
+400
+2752
+pył zawieszony PM2.5
+PM2.5
+400
+16500
+benzen
+C6H6
+401
+2766
+dwutlenek azotu
+NO2
+401
+2768
+ozon
+O3
+401
+2770
+pył zawieszony PM10
+PM10
+401
+2774
+dwutlenek siarki
+SO2
+401
+17896
+benzen
+C6H6
+402
+2779
+benzen
+C6H6
+402
+2783
+tlenek węgla
+CO
+402
+2788
+dwutlenek azotu
+NO2
+402
+2792
+pył zawieszony PM10
+PM10
+402
+2794
+pył zawieszony PM2.5
+PM2.5
+402
+2797
+dwutlenek siarki
+SO2
+10121
+16377
+pył zawieszony PM10
+PM10
+10121
+16516
+dwutlenek azotu
+NO2
+10123
+16786
+pył zawieszony PM10
+PM10
+10139
+16784
+pył zawieszony PM10
+PM10
+10447
+17309
+pył zawieszony PM10
+PM10
+11303
+20320
+pył zawieszony PM10
+PM10
+444
+3073
+dwutlenek siarki
+SO2
+444
+3066
+dwutlenek azotu
+NO2
+444
+3068
+ozon
+O3
+444
+3070
+pył zawieszony PM10
+PM10
+10120
+16494
+pył zawieszony PM2.5
+PM2.5
+10120
+16457
+pył zawieszony PM10
+PM10
+10120
+16460
+dwutlenek azotu
+NO2
+10120
+16465
+tlenek węgla
+CO
+10120
+20560
+benzen
+C6H6
+426
+2938
+dwutlenek azotu
+NO2
+426
+2941
+pył zawieszony PM10
+PM10
+426
+2944
+dwutlenek siarki
+SO2
+426
+16327
+benzen
+C6H6
+9173
+20324
+pył zawieszony PM10
+PM10
+9173
+20325
+pył zawieszony PM2.5
+PM2.5
+9175
+14751
+dwutlenek siarki
+SO2
+9175
+14753
+dwutlenek azotu
+NO2
+9175
+14756
+ozon
+O3
+10414
+17184
+pył zawieszony PM10
+PM10
+10414
+17185
+pył zawieszony PM2.5
+PM2.5
+10438
+17265
+dwutlenek siarki
+SO2
+10438
+17266
+dwutlenek azotu
+NO2
+10438
+17269
+ozon
+O3
+10438
+17270
+benzen
+C6H6
+10438
+17271
+pył zawieszony PM10
+PM10
+10438
+17272
+pył zawieszony PM2.5
+PM2.5
+12045
+21565
+pył zawieszony PM10
+PM10
+12045
+21566
+pył zawieszony PM2.5
+PM2.5
+605
+3996
+tlenek węgla
+CO
+605
+4001
+dwutlenek azotu
+NO2
+605
+4005
+pył zawieszony PM2.5
+PM2.5
+605
+4006
+dwutlenek siarki
+SO2
+605
+18157
+benzen
+C6H6
+609
+4024
+pył zawieszony PM10
+PM10
+609
+18156
+ozon
+O3
+612
+4040
+dwutlenek azotu
+NO2
+612
+4042
+ozon
+O3
+612
+4045
+dwutlenek siarki
+SO2
+612
+19657
+pył zawieszony PM10
+PM10
+612
+19696
+pył zawieszony PM2.5
+PM2.5
+618
+4075
+dwutlenek azotu
+NO2
+618
+4079
+pył zawieszony PM10
+PM10
+618
+4082
+dwutlenek siarki
+SO2
+9994
+16217
+benzen
+C6H6
+9994
+16220
+pył zawieszony PM2.5
+PM2.5
+9994
+16128
+dwutlenek azotu
+NO2
+9994
+16130
+pył zawieszony PM10
+PM10
+11154
+19697
+pył zawieszony PM2.5
+PM2.5
+11916
+21323
+pył zawieszony PM10
+PM10
+11916
+21324
+pył zawieszony PM2.5
+PM2.5
+729
+4676
+tlenek węgla
+CO
+729
+4679
+dwutlenek azotu
+NO2
+729
+4681
+pył zawieszony PM10
+PM10
+729
+4683
+dwutlenek siarki
+SO2
+731
+4701
+tlenek węgla
+CO
+731
+4703
+dwutlenek azotu
+NO2
+731
+4706
+pył zawieszony PM10
+PM10
+731
+4707
+dwutlenek siarki
+SO2
+732
+4709
+tlenek węgla
+CO
+732
+4712
+dwutlenek azotu
+NO2
+732
+4714
+ozon
+O3
+732
+4715
+pył zawieszony PM10
+PM10
+732
+4717
+dwutlenek siarki
+SO2
+734
+4741
+dwutlenek siarki
+SO2
+734
+4733
+tlenek węgla
+CO
+734
+4736
+dwutlenek azotu
+NO2
+734
+4738
+pył zawieszony PM10
+PM10
+736
+4755
+tlenek węgla
+CO
+736
+4758
+dwutlenek azotu
+NO2
+736
+4760
+ozon
+O3
+736
+4761
+pył zawieszony PM10
+PM10
+736
+4762
+pył zawieszony PM2.5
+PM2.5
+736
+4764
+dwutlenek siarki
+SO2
+738
+4769
+dwutlenek azotu
+NO2
+738
+4772
+ozon
+O3
+738
+4774
+pył zawieszony PM10
+PM10
+738
+4777
+dwutlenek siarki
+SO2
+725
+4629
+benzen
+C6H6
+725
+4640
+ozon
+O3
+725
+16071
+pył zawieszony PM10
+PM10
+740
+4812
+dwutlenek azotu
+NO2
+740
+4814
+ozon
+O3
+740
+4817
+pył zawieszony PM10
+PM10
+740
+4819
+pył zawieszony PM2.5
+PM2.5
+740
+16057
+benzen
+C6H6
+741
+4834
+tlenek węgla
+CO
+741
+4840
+dwutlenek azotu
+NO2
+741
+4842
+ozon
+O3
+741
+4845
+pył zawieszony PM10
+PM10
+741
+4848
+dwutlenek siarki
+SO2
+742
+4860
+tlenek węgla
+CO
+742
+4868
+ozon
+O3
+742
+16070
+pył zawieszony PM10
+PM10
+743
+4891
+dwutlenek azotu
+NO2
+743
+4893
+ozon
+O3
+743
+4898
+dwutlenek siarki
+SO2
+750
+4959
+ozon
+O3
+437
+3020
+dwutlenek azotu
+NO2
+437
+3023
+pył zawieszony PM10
+PM10
+437
+3026
+dwutlenek siarki
+SO2
+443
+3055
+dwutlenek azotu
+NO2
+443
+3057
+ozon
+O3
+443
+3058
+dwutlenek siarki
+SO2
+443
+21453
+pył zawieszony PM10
+PM10
+449
+3116
+tlenek węgla
+CO
+449
+3120
+dwutlenek azotu
+NO2
+449
+3123
+pył zawieszony PM10
+PM10
+449
+3127
+dwutlenek siarki
+SO2
+449
+15246
+ozon
+O3
+459
+3188
+tlenek węgla
+CO
+459
+3191
+dwutlenek azotu
+NO2
+459
+3193
+ozon
+O3
+459
+3195
+pył zawieszony PM10
+PM10
+459
+3198
+dwutlenek siarki
+SO2
+9179
+14804
+dwutlenek azotu
+NO2
+9179
+14826
+ozon
+O3
+10119
+16486
+dwutlenek azotu
+NO2
+10119
+16488
+ozon
+O3
+10124
+16498
+pył zawieszony PM10
+PM10
+10254
+16904
+dwutlenek siarki
+SO2
+10254
+16905
+pył zawieszony PM10
+PM10
+10446
+21489
+pył zawieszony PM10
+PM10
+10814
+21203
+benzen
+C6H6
+10814
+21249
+pył zawieszony PM10
+PM10
+11280
+21143
+pył zawieszony PM10
+PM10
+11301
+21183
+pył zawieszony PM10
+PM10
+11314
+20317
+benzen
+C6H6
+11434
+21571
+pył zawieszony PM10
+PM10
+530
+3575
+benzen
+C6H6
+530
+3576
+tlenek węgla
+CO
+530
+3580
+dwutlenek azotu
+NO2
+530
+3584
+pył zawieszony PM10
+PM10
+530
+3585
+pył zawieszony PM2.5
+PM2.5
+531
+3591
+ozon
+O3
+538
+3654
+pył zawieszony PM10
+PM10
+538
+18038
+pył zawieszony PM2.5
+PM2.5
+550
+3725
+dwutlenek azotu
+NO2
+550
+3727
+ozon
+O3
+550
+3730
+pył zawieszony PM10
+PM10
+550
+3731
+pył zawieszony PM2.5
+PM2.5
+552
+3760
+dwutlenek azotu
+NO2
+552
+3762
+ozon
+O3
+552
+3764
+pył zawieszony PM10
+PM10
+552
+14688
+pył zawieszony PM2.5
+PM2.5
+10955
+18200
+pył zawieszony PM10
+PM10
+10955
+18201
+pył zawieszony PM2.5
+PM2.5
+10955
+20408
+dwutlenek azotu
+NO2
+10955
+20410
+ozon
+O3
+10955
+20411
+dwutlenek siarki
+SO2
+10956
+18198
+pył zawieszony PM2.5
+PM2.5
+10956
+18199
+pył zawieszony PM10
+PM10
+497
+3407
+benzen
+C6H6
+497
+3412
+dwutlenek azotu
+NO2
+497
+3418
+dwutlenek siarki
+SO2
+501
+3419
+benzen
+C6H6
+501
+3420
+tlenek węgla
+CO
+501
+3425
+dwutlenek azotu
+NO2
+501
+3429
+pył zawieszony PM10
+PM10
+501
+3434
+dwutlenek siarki
+SO2
+501
+16765
+ozon
+O3
+501
+14376
+pył zawieszony PM2.5
+PM2.5
+515
+3486
+benzen
+C6H6
+515
+3487
+tlenek węgla
+CO
+515
+3492
+dwutlenek azotu
+NO2
+515
+3494
+ozon
+O3
+515
+3497
+pył zawieszony PM10
+PM10
+515
+3502
+dwutlenek siarki
+SO2
+515
+14377
+pył zawieszony PM2.5
+PM2.5
+460
+3199
+tlenek węgla
+CO
+460
+3201
+dwutlenek azotu
+NO2
+460
+3203
+ozon
+O3
+460
+3205
+dwutlenek siarki
+SO2
+466
+3229
+dwutlenek azotu
+NO2
+466
+3231
+ozon
+O3
+471
+3257
+dwutlenek azotu
+NO2
+471
+3259
+ozon
+O3
+471
+20461
+pył zawieszony PM10
+PM10
+471
+14378
+pył zawieszony PM2.5
+PM2.5
+485
+17225
+pył zawieszony PM10
+PM10
+485
+16044
+pył zawieszony PM2.5
+PM2.5
+485
+16046
+tlenek węgla
+CO
+485
+16048
+dwutlenek azotu
+NO2
+485
+16050
+ozon
+O3
+485
+16051
+dwutlenek siarki
+SO2
+488
+3339
+dwutlenek azotu
+NO2
+488
+20462
+pył zawieszony PM10
+PM10
+488
+14779
+pył zawieszony PM2.5
+PM2.5
+488
+14352
+ozon
+O3
+488
+21283
+benzen
+C6H6
+517
+3526
+pył zawieszony PM10
+PM10
+517
+3528
+pył zawieszony PM2.5
+PM2.5
+9778
+15828
+dwutlenek azotu
+NO2
+9778
+20253
+benzen
+C6H6
+9778
+20299
+pył zawieszony PM2.5
+PM2.5
+9778
+15832
+pył zawieszony PM10
+PM10
+266
+1888
+tlenek węgla
+CO
+266
+1895
+dwutlenek azotu
+NO2
+266
+1897
+ozon
+O3
+266
+1900
+pył zawieszony PM10
+PM10
+266
+1902
+dwutlenek siarki
+SO2
+266
+1885
+benzen
+C6H6
+266
+16472
+pył zawieszony PM2.5
+PM2.5
+236
+1676
+ozon
+O3
+236
+20419
+pył zawieszony PM10
+PM10
+236
+15727
+dwutlenek azotu
+NO2
+236
+18009
+benzen
+C6H6
+236
+14348
+dwutlenek siarki
+SO2
+248
+1741
+ozon
+O3
+282
+1983
+ozon
+O3
+285
+2001
+dwutlenek azotu
+NO2
+285
+2008
+dwutlenek siarki
+SO2
+285
+14367
+benzen
+C6H6
+285
+16744
+pył zawieszony PM10
+PM10
+285
+26316
+pył zawieszony PM2.5
+PM2.5
+9593
+15688
+dwutlenek azotu
+NO2
+10874
+18039
+dwutlenek azotu
+NO2
+10874
+18041
+dwutlenek siarki
+SO2
+10874
+18042
+ozon
+O3
+11360
+20426
+pył zawieszony PM10
+PM10
+12098
+21754
+dwutlenek azotu
+NO2
+12098
+21756
+pył zawieszony PM10
+PM10
+12098
+21757
+pył zawieszony PM2.5
+PM2.5
+12098
+21752
+benzen
+C6H6
+361
+2410
+benzen
+C6H6
+361
+2411
+tlenek węgla
+CO
+361
+2416
+dwutlenek azotu
+NO2
+361
+2418
+ozon
+O3
+361
+2421
+pył zawieszony PM10
+PM10
+361
+2425
+dwutlenek siarki
+SO2
+361
+26165
+pył zawieszony PM2.5
+PM2.5
+387
+2647
+benzen
+C6H6
+387
+2649
+tlenek węgla
+CO
+387
+2657
+dwutlenek azotu
+NO2
+387
+2659
+ozon
+O3
+387
+2664
+pył zawieszony PM2.5
+PM2.5
+387
+2668
+dwutlenek siarki
+SO2
+387
+14428
+pył zawieszony PM10
+PM10
+374
+2504
+dwutlenek azotu
+NO2
+374
+2506
+ozon
+O3
+374
+2510
+dwutlenek siarki
+SO2
+376
+2519
+tlenek węgla
+CO
+376
+2523
+dwutlenek azotu
+NO2
+376
+2525
+ozon
+O3
+376
+2528
+pył zawieszony PM10
+PM10
+376
+2532
+dwutlenek siarki
+SO2
+379
+2554
+tlenek węgla
+CO
+379
+2559
+dwutlenek azotu
+NO2
+379
+2563
+pył zawieszony PM10
+PM10
+379
+2566
+dwutlenek siarki
+SO2
+379
+19721
+pył zawieszony PM2.5
+PM2.5
+379
+14633
+ozon
+O3
+379
+21803
+benzen
+C6H6
+382
+2589
+tlenek węgla
+CO
+382
+2594
+dwutlenek azotu
+NO2
+382
+2596
+ozon
+O3
+382
+2601
+dwutlenek siarki
+SO2
+382
+14619
+benzen
+C6H6
+382
+14618
+pył zawieszony PM10
+PM10
+382
+20221
+pył zawieszony PM2.5
+PM2.5
+145
+850
+dwutlenek azotu
+NO2
+145
+853
+pył zawieszony PM10
+PM10
+145
+855
+dwutlenek siarki
+SO2
+206
+1401
+dwutlenek azotu
+NO2
+206
+1403
+ozon
+O3
+206
+1405
+pył zawieszony PM10
+PM10
+206
+1409
+dwutlenek siarki
+SO2
+208
+1414
+benzen
+C6H6
+208
+1416
+tlenek węgla
+CO
+208
+1421
+dwutlenek azotu
+NO2
+208
+1426
+pył zawieszony PM10
+PM10
+208
+21163
+pył zawieszony PM2.5
+PM2.5
+225
+1534
+tlenek węgla
+CO
+225
+1539
+dwutlenek azotu
+NO2
+225
+1544
+pył zawieszony PM10
+PM10
+225
+19698
+pył zawieszony PM2.5
+PM2.5
+225
+18023
+benzen
+C6H6
+9791
+15988
+ozon
+O3
+9791
+20302
+pył zawieszony PM10
+PM10
+9791
+15982
+dwutlenek azotu
+NO2
+9791
+21264
+dwutlenek siarki
+SO2
+142
+806
+tlenek węgla
+CO
+142
+809
+dwutlenek azotu
+NO2
+142
+812
+pył zawieszony PM10
+PM10
+142
+814
+dwutlenek siarki
+SO2
+143
+828
+pył zawieszony PM10
+PM10
+143
+831
+dwutlenek siarki
+SO2
+143
+824
+dwutlenek azotu
+NO2
+164
+1061
+dwutlenek azotu
+NO2
+164
+1063
+ozon
+O3
+164
+1048
+benzen
+C6H6
+190
+1283
+dwutlenek azotu
+NO2
+190
+1285
+ozon
+O3
+190
+1289
+dwutlenek siarki
+SO2
+232
+1600
+benzen
+C6H6
+232
+1607
+tlenek węgla
+CO
+232
+1635
+dwutlenek azotu
+NO2
+232
+1640
+ozon
+O3
+232
+1650
+dwutlenek siarki
+SO2
