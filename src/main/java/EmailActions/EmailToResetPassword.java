@@ -1,5 +1,6 @@
 package EmailActions;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import javax.mail.*;
@@ -12,6 +13,7 @@ import java.util.Random;
 public class EmailToResetPassword implements Runnable {
     public String resetPasswordCode ="";
     private String resetPasswordEmail;
+    private Button sendResetPasswordCodeButton;
     @Override
     public void run() {
         try {
@@ -26,7 +28,8 @@ public class EmailToResetPassword implements Runnable {
 
 
 
-    public EmailToResetPassword(TextField resetPasswordEmailTextField) {
+    public EmailToResetPassword(TextField resetPasswordEmailTextField,Button sendResetPasswordCodeButton) {
+        this.sendResetPasswordCodeButton=sendResetPasswordCodeButton;
         this.resetPasswordEmail= resetPasswordEmailTextField.getText();
         setResetPasswordCode();
         this.resetPasswordCode=getResetPasswordCode();
@@ -44,7 +47,7 @@ public class EmailToResetPassword implements Runnable {
 
     public void sendResetPasswordEmail() throws MessagingException {
 
-
+sendResetPasswordCodeButton.setDisable(true);
         // Temat wiadomości
        String SubjectOfEmail = "Reset hasła";
         // Treść wiadomości
@@ -77,6 +80,7 @@ public class EmailToResetPassword implements Runnable {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+        sendResetPasswordCodeButton.setDisable(false);
     }
 
 

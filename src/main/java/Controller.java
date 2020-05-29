@@ -1,5 +1,5 @@
 import AnotherClasses.AddUserMeasureHelper;
-import ViewControll.IDStationFinder;
+import AnotherClasses.IDStationFinder;
 import Repositories.*;
 import Repositories.FromDB.*;
 import ViewControll.ActualDustyPlantsView;
@@ -13,6 +13,7 @@ import Repositories.UserMeasuresPLNamesRepository;
 import OWM.WeatherMeasureOWM;
 import OWM.WeatherMeasuresFactory;
 import AnotherClasses.RegisterHelper;
+import AnotherClasses.TextFieldRestrict;
 import ViewControll.UserSettingsView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,7 +33,9 @@ import java.text.ParseException;
 
 
 public class Controller {
-    UserSettingsRepository userSettingsRepository;
+    int resetPasswordCodeLimit=0;
+    int registerCodeLimit=0;
+    AppSettingsRepository appSettingsRepository;
     DustyPlantsRepository dustyPlantsRepository;
     OWMStationsRepository OWMStationsRepository;
     UserStationsRepository userStationsRepository;
@@ -41,7 +44,6 @@ public class Controller {
     OWMClaudinesTranslatorRepository owmClaudinesTranslatorRepository;
     UserMeasuresPLNamesRepository userMeasuresPLNamesRepository;
     IDStationFinder idStationFinder=new IDStationFinder();
-    StationBrowser stationBrowser=new StationBrowser();
     String resetPasswordCode;
     String registerCode;
     RegisterHelper registerHelper = new RegisterHelper();
@@ -51,7 +53,7 @@ public class Controller {
 
 
     JDBC jdbc = new JDBC(); //Do połączenia z baza
-    NewJDBCQuery newJDBCQuery; //Do wykonywania zapytań do bazy
+    JDBCQuery jdbcQuery; //Do wykonywania zapytań do bazy
 
     //ELEMENTY LOGOWANIA I REJESTRACJI
     @FXML
@@ -151,7 +153,7 @@ public class Controller {
     @FXML
     ListView<String> OWMStationsListView;
     @FXML
-    TextField OWMStationBrowserTextField;
+    TextField OWMStationsBrowserTextField;
     @FXML
     TableView<WeatherMeasureOWM> measuresFromOWMTableView;
     @FXML
@@ -199,27 +201,15 @@ public class Controller {
 
 
     @FXML
-    TextField TakeMeasureFromUserBrowserTextField;
+    TextField takeMeasureFromUserBrowserTextField;
 
     @FXML
-    TextField AddMesureFromUserBrowserTextField;
+    TextField addMesureFromUserBrowserTextField;
 
     @FXML
     ComboBox<String> claudinessFromIserComboBox;
 
 
-    @FXML
-    TextField settingsMaxTemperatureTextField;
-    @FXML
-    TextField settingsMinTemperatureTextField;
-    @FXML
-    TextField settingsMaxPressureTextField;
-    @FXML
-    TextField settingsMinPressureTextField;
-    @FXML
-    TextField settingsMaxWindSpeedTextField;
-    @FXML
-    TextField settingsMinWindSpeedTextField;
     @FXML
     ListView<String> sensorsListView;
 
@@ -244,6 +234,12 @@ public class Controller {
     TextField GIOSStationsBrowserTextField;
     @FXML
     ListView<String>GIOSStationsListView;
+
+    //RESET CODE
+    @FXML
+    Button sendResetPasswordCodeButton;
+    @FXML
+    Button sendRegistrationCodeButton;
     @FXML
     void initialize() throws IOException, SQLException, APIException, ParseException {
         startConectionWithDataBase(); //Łączymy się z bazą w celu uwierzytelnienia i dalszej pracy aplikacji
@@ -251,21 +247,20 @@ public class Controller {
         addDataFromRepositioriesToView();
         activeRestrictionsOnTextFields();
         activeStationsBrowsers();
-
     }
 
     private void startConectionWithDataBase() throws SQLException { //Połączenie aplikacji z bazą danych
         jdbc.getDbConnection();
-        newJDBCQuery= new NewJDBCQuery(jdbc);
+        jdbcQuery = new JDBCQuery(jdbc);
     }
     private void takeDataFromDBToRepositories() throws SQLException {
-         userSettingsRepository=new UserSettingsRepository();
-         dustyPlantsRepository=new DustyPlantsRepository( newJDBCQuery.getdustyplantsTable());
-         OWMStationsRepository = new OWMStationsRepository(newJDBCQuery.getstationsTable("owmstations"));
-         userStationsRepository =new UserStationsRepository(newJDBCQuery.getstationsTable("userstations"));
-         giosStationsRepository=new GIOSStationsRepository(newJDBCQuery.getstationsTable("giosstations"));
-         giosSensorsRepository=new GIOSSensorsRepository(newJDBCQuery.getGiosSensorsFromDataBase());
-         owmClaudinesTranslatorRepository=new OWMClaudinesTranslatorRepository(newJDBCQuery.getCloudinessTranslatorTableENGNames(),newJDBCQuery.getCloudinessTranslatorTablePLNames());
+         appSettingsRepository =new AppSettingsRepository();
+         dustyPlantsRepository=new DustyPlantsRepository( jdbcQuery.getdustyplantsTable());
+         OWMStationsRepository = new OWMStationsRepository(jdbcQuery.getstationsTable("owmstations"));
+         userStationsRepository =new UserStationsRepository(jdbcQuery.getstationsTable("usersstations"));
+         giosStationsRepository=new GIOSStationsRepository(jdbcQuery.getstationsTable("giosstations"));
+         giosSensorsRepository=new GIOSSensorsRepository(jdbcQuery.getGiosSensorsFromDataBase());
+         owmClaudinesTranslatorRepository=new OWMClaudinesTranslatorRepository(jdbcQuery.getCloudinessTranslatorTableENGNames(), jdbcQuery.getCloudinessTranslatorTablePLNames());
          userMeasuresPLNamesRepository=new UserMeasuresPLNamesRepository();
     }
     private void addDataFromRepositioriesToView(){
@@ -284,28 +279,29 @@ public class Controller {
 
     }
     private void activeRestrictionsOnTextFields(){
-        textFieldRestrict.onlyDigitsInTextField(settingsMinTemperatureTextField);
-        textFieldRestrict.onlyDigitsInTextField(settingsMaxTemperatureTextField);
-        textFieldRestrict.onlyPlusDigitsInTextField(settingsMinPressureTextField);
-        textFieldRestrict.onlyPlusDigitsInTextField(settingsMaxPressureTextField);
-        textFieldRestrict.onlyPlusDigitsInTextField(settingsMinWindSpeedTextField);
-        textFieldRestrict.onlyPlusDigitsInTextField(settingsMaxWindSpeedTextField);
+        textFieldRestrict.limitCharsForTextField(addMesureFromUserBrowserTextField,40);
+        textFieldRestrict.limitCharsForTextField(OWMStationsBrowserTextField,40);
+        textFieldRestrict.limitCharsForTextField(takeMeasureFromUserBrowserTextField,40);
+        textFieldRestrict.limitCharsForTextField(GIOSStationsBrowserTextField,40);
+        textFieldRestrict.onlyTextInTextField(addMesureFromUserBrowserTextField);
+        textFieldRestrict.onlyTextInTextField(takeMeasureFromUserBrowserTextField);
+        textFieldRestrict.onlyTextInTextField(OWMStationsBrowserTextField);
+        textFieldRestrict.onlyTextInTextField(GIOSStationsBrowserTextField);
     }
     private void activeStationsBrowsers(){
         StationBrowser stationBrowser=new StationBrowser();
-        stationBrowser.searchByNameOnWriteInTextField(OWMStationBrowserTextField,OWMStationsRepository.getStationNames(),OWMStationsListView);
-        stationBrowser.searchByNameOnWriteInTextField(AddMesureFromUserBrowserTextField,userStationsRepository.getStationNames(),stationsToAddMeasureListView);
-        stationBrowser.searchByNameOnWriteInTextField(TakeMeasureFromUserBrowserTextField,userStationsRepository.getStationNames(), stationsToTakeMaeasureListView);
+        stationBrowser.searchByNameOnWriteInTextField(OWMStationsBrowserTextField,OWMStationsRepository.getStationNames(),OWMStationsListView);
+        stationBrowser.searchByNameOnWriteInTextField(addMesureFromUserBrowserTextField,userStationsRepository.getStationNames(),stationsToAddMeasureListView);
+        stationBrowser.searchByNameOnWriteInTextField(takeMeasureFromUserBrowserTextField,userStationsRepository.getStationNames(), stationsToTakeMaeasureListView);
         stationBrowser.searchByNameOnWriteInTextField(GIOSStationsBrowserTextField,giosStationsRepository.getStationNames(),GIOSStationsListView);
     }
     //FUNKCJE DOTYCZĄCE LOGOWANIA I REJESTRACJI
     @FXML
     void loginButton() throws SQLException { //Funkcja zajmuje się uwierzytelnianiem i przełącza na główny ekran aplikacji
-        if (newJDBCQuery.loginUser(userSettingsRepository,loginEmailTextField, passwordPasswordField) == true) {
-            UserSettingsView userSettingsView=new UserSettingsView(userSettingsRepository,settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField);
+        if (jdbcQuery.loginUser(appSettingsRepository,loginEmailTextField, passwordPasswordField) == true) {
             registerAndLoginStackPane.setVisible(false);
             mainViewTabPane.setVisible(true);
-        } else if (newJDBCQuery.loginUser(userSettingsRepository,loginEmailTextField, passwordPasswordField) == false) {
+        } else if (jdbcQuery.loginUser(appSettingsRepository,loginEmailTextField, passwordPasswordField) == false) {
             badEmailOrPasswordLabel.setVisible(true);
         }
 
@@ -319,7 +315,8 @@ public class Controller {
 
     @FXML
     void sendResetPasswordCode() {
-        EmailToResetPassword emailToResetPassword = new EmailToResetPassword(emailToResetPasswordTextField);
+
+        EmailToResetPassword emailToResetPassword = new EmailToResetPassword(emailToResetPasswordTextField,sendResetPasswordCodeButton);
         if (registerHelper.isEmail(emailToResetPasswordTextField) == true) {
             Thread threadResetPasswordEmail = new Thread(emailToResetPassword);
             threadResetPasswordEmail.start();
@@ -330,6 +327,16 @@ public class Controller {
         } else {
             badEmailResetPasswordLabel.setVisible(true);
         }
+    }
+    @FXML
+    void sendResetPasswordCodeAgain(){
+        EmailToResetPassword emailToResetPassword = new EmailToResetPassword(emailToResetPasswordTextField,sendResetPasswordCodeButton);
+        Thread threadResetPasswordEmail = new Thread(emailToResetPassword);
+        threadResetPasswordEmail.start();
+        changePassword1VBox.setVisible(false);
+        changePassword2VBox.setVisible(true);
+        resetPasswordCode = emailToResetPassword.getResetPasswordCode();
+        badCodeResetPasswordLabel.setVisible(false);
     }
 
     @FXML
@@ -351,7 +358,7 @@ public class Controller {
     void changePasswordButton() throws SQLException {
         if (registerHelper.isPasswordStrength(resetPasswordPasswordField, badPasswordLabel) == true) {
             if (resetPasswordPasswordField.getText().equals(conifrmedResetPasswordPasswordField.getText())) {
-                if (newJDBCQuery.changeUserPassword(emailToResetPasswordTextField, resetPasswordPasswordField, conifrmedResetPasswordPasswordField, badPasswordLabel) == true) {
+                if (jdbcQuery.changeUserPassword(emailToResetPasswordTextField, resetPasswordPasswordField) == true) {
                     changePassword3VBox.setVisible(false);
                     loginVBox.setVisible(true);
                 }
@@ -364,7 +371,7 @@ public class Controller {
     @FXML
     void registerButton() throws SQLException { //Funkcja dodaje nowego użytkownika do bazy i przechodzi do logowania
         if (registerCode.equals(registrationCodeTextField.getText())) {
-            if(newJDBCQuery.addNewUser(registrationEmailTextField, registrationPasswordPasswordField) == true) {
+            if(jdbcQuery.addNewUser(registrationEmailTextField, registrationPasswordPasswordField) == true) {
                 loginVBox.setVisible(true);
                 register2VBox.setVisible(false);
             }
@@ -378,11 +385,11 @@ public class Controller {
     void sendRegistrationCode() throws SQLException {
         if (registerHelper.isEmail(registrationEmailTextField) == true
                 && registerHelper.isPasswordStrength(registrationPasswordPasswordField, registrationAlertLabel) == true
-                && newJDBCQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText()) == false
+                && jdbcQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText()) == false
                 && registrationPasswordPasswordField.getText().equals(registrationConfirmedPasswordPasswordField.getText()) == true) {
             registerVBox.setVisible(false);
             register2VBox.setVisible(true);
-            EmailToRegister emailToRegister = new EmailToRegister(registrationEmailTextField);
+            EmailToRegister emailToRegister = new EmailToRegister(registrationEmailTextField,sendRegistrationCodeButton);
             Thread threadRegisterEmail = new Thread(emailToRegister);
             threadRegisterEmail.start();
             registerCode = emailToRegister.getRegistrationCode();
@@ -390,7 +397,7 @@ public class Controller {
         } else if (registerHelper.isEmail(registrationEmailTextField) == false) {
             registrationAlertLabel.setText("Nie prawidłowy adres E-mail");
             registrationAlertLabel.setVisible(true);
-        } else if (newJDBCQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText()) == true) {
+        } else if (jdbcQuery.isAccountAlreadyEmailInDataBase(registrationEmailTextField.getText()) == true) {
             registrationAlertLabel.setText("Konto jest już zarejstrowane");
             registrationAlertLabel.setVisible(true);
         } else if (registerHelper.isPasswordStrength(registrationPasswordPasswordField, registrationAlertLabel) == false) {
@@ -398,6 +405,16 @@ public class Controller {
             registrationAlertLabel.setText("Hasła nie są jednakowe");
             registrationAlertLabel.setVisible(true);
         }
+    }
+    @FXML
+    void sendResetRegistrationCodeAgain(){
+        registerVBox.setVisible(false);
+        register2VBox.setVisible(true);
+        EmailToRegister emailToRegister = new EmailToRegister(registrationEmailTextField,sendRegistrationCodeButton);
+        Thread threadRegisterEmail = new Thread(emailToRegister);
+        threadRegisterEmail.start();
+        registerCode = emailToRegister.getRegistrationCode();
+        registrationCodeAlertLabel.setVisible(false);
     }
     @FXML
     void switchOnLoginButton() {
@@ -412,8 +429,8 @@ public class Controller {
     //FUNKCJE DOTYCZĄCE DODANIA POMIARU PRZEZ UŻYTKOWNIKA
     @FXML
     void addMeasureFromUserButton() throws SQLException {
-        AddUserMeasureHelper addUserMeasureHelper=new AddUserMeasureHelper(userSettingsRepository);
-        newJDBCQuery.addMeasuresFromUserToDataBase(addUserMeasureHelper,loginEmailTextField,pressureTextField,
+        AddUserMeasureHelper addUserMeasureHelper=new AddUserMeasureHelper(appSettingsRepository);
+        jdbcQuery.addMeasuresFromUserToDataBase(addUserMeasureHelper,loginEmailTextField,pressureTextField,
                 temperatureTextField, windSpeedTextField, humidityTextField, claudinessFromIserComboBox,
                 idStationFinder.getIDSelectedStation(stationsToAddMeasureListView,userStationsRepository.getStations()),
                 addMesureAlertLabel);
@@ -441,35 +458,35 @@ public class Controller {
         clearAllTablesWithMeasuresFromUser(); //Czyścimy poprzednie tabele
         if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Temperatura powietrza")) {
             temperatureTableView.setVisible(true);
-            ObservableList<TemperatureFromUser> listOfTemperatureResults = FXCollections.observableArrayList(userMeasuresRepository.showTemperaturesFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getTemperaturesFromUserList()));
+            ObservableList<TemperatureFromUser> listOfTemperatureResults = FXCollections.observableArrayList(userMeasuresRepository.showTemperaturesFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), jdbcQuery.getTemperaturesFromUserList()));
             dateTempUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNameTemp.setCellValueFactory(new PropertyValueFactory<>("userName"));
             temperature.setCellValueFactory(new PropertyValueFactory<>("temperature"));
             temperatureTableView.setItems(listOfTemperatureResults);
         } else if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Wilgotność powietrza")) {
             humidityTableView.setVisible(true);
-            ObservableList<HumidityFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showHumidityFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getHumidityFromUserList()));
+            ObservableList<HumidityFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showHumidityFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), jdbcQuery.getHumidityFromUserList()));
             dateHumidityUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNameHumidity.setCellValueFactory(new PropertyValueFactory<>("userName"));
             humidity.setCellValueFactory(new PropertyValueFactory<>("humidity"));
             humidityTableView.setItems(listOfHumidityResults);
         } else if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Prędkość wiatru")) {
             windSpeedTableView.setVisible(true);
-            ObservableList<WindSpeedFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showWindSpeedFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getWindSpeedFromUserList()));
+            ObservableList<WindSpeedFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showWindSpeedFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), jdbcQuery.getWindSpeedFromUserList()));
             dateWindSpeedUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNameWindSpeed.setCellValueFactory(new PropertyValueFactory<>("userName"));
             windSpeed.setCellValueFactory(new PropertyValueFactory<>("windSpeed"));
             windSpeedTableView.setItems(listOfHumidityResults);
         } else if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Ciśnienie")) {
             pressureTableView.setVisible(true);
-            ObservableList<PressureFromUser> listOfPressureResults = FXCollections.observableArrayList(userMeasuresRepository.showPressureFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getPressureFromUserList()));
+            ObservableList<PressureFromUser> listOfPressureResults = FXCollections.observableArrayList(userMeasuresRepository.showPressureFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), jdbcQuery.getPressureFromUserList()));
             datePressureUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNamePressure.setCellValueFactory(new PropertyValueFactory<>("userName"));
             pressure.setCellValueFactory(new PropertyValueFactory<>("pressure"));
             pressureTableView.setItems(listOfPressureResults);
         } else if (measuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Zachmurzenie")) {
             claudinessTableView.setVisible(true);
-            ObservableList<ClaudinessFromUser> listOfClaudinessResults = FXCollections.observableArrayList(userMeasuresRepository.showClaudinessFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), newJDBCQuery.getCloudinessFromUserList()));
+            ObservableList<ClaudinessFromUser> listOfClaudinessResults = FXCollections.observableArrayList(userMeasuresRepository.showClaudinessFromUsersInCity(idStationFinder.getIDSelectedStation(stationsToTakeMaeasureListView,userStationsRepository.getStations()), jdbcQuery.getCloudinessFromUserList()));
             dateClaudinessUser.setCellValueFactory(new PropertyValueFactory<>("date"));
             userNameClaudiness.setCellValueFactory(new PropertyValueFactory<>("userName"));
             claudiness.setCellValueFactory(new PropertyValueFactory<>("claudiness"));
@@ -489,20 +506,6 @@ public class Controller {
             dateOWMColumn.setCellValueFactory(new PropertyValueFactory<>("dateOfMeasure"));
             measuresFromOWMTableView.setItems(listOfWeatherMeasures);
         }
-
-
-
-    @FXML
-    void changeUserSettingsButton() throws SQLException {
-       newJDBCQuery.changeUserSettings(userSettingsRepository,settingsMaxTemperatureTextField,settingsMinTemperatureTextField,
-               settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField,
-               loginEmailTextField);
-    }
-    @FXML
-    void loadDefaultSettingsButton() throws SQLException {
-        newJDBCQuery.loadDefaultSettingsForUser(userSettingsRepository,loginEmailTextField);
-        UserSettingsView userSettingsView=new UserSettingsView(userSettingsRepository,settingsMaxTemperatureTextField,settingsMinTemperatureTextField,settingsMinWindSpeedTextField,settingsMaxWindSpeedTextField,settingsMinPressureTextField,settingsMaxPressureTextField);
-    }
     @FXML
     void onClickGIOSStation() throws IOException, JSONException {
         GIOSTableView.getItems().clear();

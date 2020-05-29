@@ -1,16 +1,17 @@
 package AnotherClasses;
 
-import Repositories.FromDB.UserSettingsRepository;
+import Repositories.FromDB.AppSettingsRepository;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 
 public class AddUserMeasureHelper {
-    public AddUserMeasureHelper(UserSettingsRepository userSettingsRepository) {
-        this.userSettingsRepository = userSettingsRepository;
-    }
+
     StringBuilder stringBuilderWithAlertToLabel =new StringBuilder();
-    private UserSettingsRepository userSettingsRepository;
+    private AppSettingsRepository appSettingsRepository;
+    public AddUserMeasureHelper(AppSettingsRepository appSettingsRepository) {
+        this.appSettingsRepository = appSettingsRepository;
+    }
     public boolean veryficicationComplete(TextField pressureTextField, TextField temperatureTextField, TextField windTextField,
                                           TextField humidityTextField,Label addMesureAlertLabel) {
         boolean temperature= verificationTemperature(temperatureTextField);
@@ -49,10 +50,10 @@ public class AddUserMeasureHelper {
         }
         try {
             Double temperature = Double.parseDouble(temperatureTextField.getText());
-            if(temperature>= userSettingsRepository.getMinTemperature()){
+            if(temperature>= appSettingsRepository.getMinTemperature()){
                 minValue=true;
             }
-            if(temperature>= userSettingsRepository.getMaxTemperature()){
+            if(temperature>= appSettingsRepository.getMaxTemperature()){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(temperatureTextField)==true) {
@@ -83,10 +84,10 @@ public class AddUserMeasureHelper {
         }
         try {
             Double windSpeed = Double.parseDouble(windSpeedTextField.getText());
-            if(windSpeed>= userSettingsRepository.getMinWindSpeed()){
+            if(windSpeed>= appSettingsRepository.getMinWindSpeed()){
                 minValue=true;
             }
-            if(windSpeed>= userSettingsRepository.getMaxWindSpeed()){
+            if(windSpeed>= appSettingsRepository.getMaxWindSpeed()){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(windSpeedTextField)==true) {
@@ -115,10 +116,10 @@ public class AddUserMeasureHelper {
         }
         try {
             Double pressure = Double.parseDouble(pressureTextField.getText());
-            if(pressure>= userSettingsRepository.getMinPressure()){
+            if(pressure>= appSettingsRepository.getMinPressure()){
                 minValue=true;
             }
-            if(pressure>= userSettingsRepository.getMaxPressure()){
+            if(pressure>= appSettingsRepository.getMaxPressure()){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(pressureTextField)==true) {
@@ -149,10 +150,10 @@ public class AddUserMeasureHelper {
         }
         try {
             Double humidity = Double.parseDouble(humidityTextField.getText());
-            if(humidity>= userSettingsRepository.getMinHumidity()){
+            if(humidity>= appSettingsRepository.getMinHumidity()){
                 minValue=true;
             }
-            if(humidity>= userSettingsRepository.getMaxHumidity()){
+            if(humidity>= appSettingsRepository.getMaxHumidity()){
                 maxValue=true;
             }
             if(minValue==true && maxValue==false && allCharsAreDigits(humidityTextField)==true) {

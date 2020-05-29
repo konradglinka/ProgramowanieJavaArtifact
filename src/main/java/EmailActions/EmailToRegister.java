@@ -1,5 +1,6 @@
 package EmailActions;
 
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -18,14 +19,15 @@ public class EmailToRegister implements Runnable {
         }
     }
 
-    public EmailToRegister(TextField registrationEmailTextField) {
+    public EmailToRegister(TextField registrationEmailTextField, Button sendRegisterCodeButton) {
+        this.sendRegisterCodeButton=sendRegisterCodeButton;
         this.registrationEmail= registrationEmailTextField.getText();
         setRegistrationCode();
         this.registrationCode=getRegistrationCode();
     }
 
     String registrationEmail;
-
+    Button sendRegisterCodeButton;
 
     String registrationCode="";
     // Adres email aplikacji która wysyła maila
@@ -38,11 +40,11 @@ public class EmailToRegister implements Runnable {
 
     public void sendRegistrationEmail() throws MessagingException {
 
+        sendRegisterCodeButton.setDisable(true);
         // Temat wiadomości
        String SubjectOfEmail = "Potwierdzenie rejestracji";
         // Treść wiadomości
         String CONTENT = "Aby potwierdzić rejestracje wpisz kod: "+getRegistrationCode();
-
         Properties prop = new Properties();
         prop.put("mail.smtp.host", "smtp.gmail.com");
         prop.put("mail.smtp.port", "587");
@@ -70,6 +72,7 @@ public class EmailToRegister implements Runnable {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+        sendRegisterCodeButton.setDisable(false);
     }
 
 

@@ -117,6 +117,8 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
+                        <Label text="Nie otrzymałeś kodu na podany adres E-mail?" />
+                        <Button fx:id="sendRegistrationCodeButton" mnemonicParsing="false" onAction="#sendResetRegistrationCodeAgain" text="Wyślij kod ponownie" />
                         <Label text="Masz już konto ?" />
                         <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Logowanie" />
                      </children>
@@ -179,6 +181,8 @@
                   </VBox>
                   <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
                      <children>
+                        <Label text="Nie otrzymałeś kodu na podany adres E-mail?" />
+                        <Button fx:id="sendResetPasswordCodeButton" mnemonicParsing="false" onAction="#sendResetPasswordCodeAgain" text="Wyślij kod ponownie" />
                         <Label text="Znasz hasło ?" />
                         <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
                      </children>
@@ -235,7 +239,7 @@
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="OWMStationBrowserTextField" />
+                                    <TextField fx:id="OWMStationsBrowserTextField" promptText="Wpisz nazwe miasta" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <ListView fx:id="OWMStationsListView" onMouseClicked="#onClickOnOWMStationsListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
@@ -250,6 +254,9 @@
                               <TableColumn fx:id="pressureColumn" prefWidth="91.0" text="Ciśnienie (hpa)" />
                               <TableColumn fx:id="dateOWMColumn" maxWidth="1.7976931348623157E308" prefWidth="184.0" text="Data" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children>
                   </HBox>
@@ -268,7 +275,7 @@
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="GIOSStationsBrowserTextField" promptText="wpisz nazwe miasta" />
+                                    <TextField fx:id="GIOSStationsBrowserTextField" promptText="Wpisz nazwe miasta" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <ListView fx:id="GIOSStationsListView" onMouseClicked="#onClickGIOSStation" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
@@ -289,6 +296,9 @@
                                         <TableColumn fx:id="GIOSAirIndexNameColumn" prefWidth="75.0" text="Sensor" />
                                         <TableColumn fx:id="GIOSAirIndexValueColumn" prefWidth="224.0" text="Polski indeks jakości powietrza" />
                                       </columns>
+                                       <columnResizePolicy>
+                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                       </columnResizePolicy>
                                     </TableView>
                                  </children>
                               </VBox>
@@ -299,6 +309,9 @@
                             <TableColumn fx:id="GIOSValueColumn" editable="false" prefWidth="234.0" text="Wartość (µg/m3, dla CO (mg/m3))" />
                             <TableColumn fx:id="GIOSDateColumn" editable="false" prefWidth="565.0" text="Data" />
                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children>
                   </HBox>
@@ -2598,7 +2611,7 @@
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="TakeMeasureFromUserBrowserTextField" />
+                                    <TextField fx:id="takeMeasureFromUserBrowserTextField" promptText="Wpisz nazwe miasta" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <ListView fx:id="stationsToTakeMaeasureListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
@@ -2694,7 +2707,7 @@
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="AddMesureFromUserBrowserTextField" />
+                                    <TextField fx:id="addMesureFromUserBrowserTextField" promptText="Wpisz nazwe miasta" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <ListView fx:id="stationsToAddMeasureListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
@@ -2773,7 +2786,7 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <Label fx:id="addMesureAlertLabel" text="fbdssb" textFill="RED" visible="false" wrapText="true">
+                              <Label fx:id="addMesureAlertLabel" textFill="RED" visible="false" wrapText="true">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -2788,109 +2801,6 @@
                   </HBox>
                </content>
             </Tab>
-            <Tab text="Ustawienia aplikacji">
-               <content>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Ustawienia dotyczące dodawania pomiaru:">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <VBox prefHeight="371.0">
-                                 <children>
-                                    <Label text="Maksymalna temperatura powietrza:">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                       <VBox.margin>
-                                          <Insets right="20.0" />
-                                       </VBox.margin>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="10.0" text="Minimalna temperatura powietrza:">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="35.0" text="Maksymalne ciśnienie atmosferyczne:">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="60.0" text="Minimalne ciśnienie atmosferyczne:">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="85.0" text="Maksymalna prędkość wiatru:">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="110.0" text="Minimalna prędkość wiatru:">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox maxWidth="40.0" prefHeight="371.0" prefWidth="166.0">
-                                 <children>
-                                    <Label text="C">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="C">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label text="hpa">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="60.0" text="hpa">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="85.0" text="m/s">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                    <Label layoutX="10.0" layoutY="110.0" text="m/s">
-                                       <font>
-                                          <Font size="16.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </VBox>
-                              <VBox fx:id="setingsMaxTempratureTextField" prefHeight="371.0" prefWidth="166.0">
-                                 <children>
-                                    <TextField fx:id="settingsMaxTemperatureTextField" />
-                                    <TextField fx:id="settingsMinTemperatureTextField" layoutX="10.0" layoutY="10.0" />
-                                    <TextField fx:id="settingsMaxPressureTextField" layoutX="10.0" layoutY="10.0" />
-                                    <TextField fx:id="settingsMinPressureTextField" layoutX="10.0" layoutY="35.0" />
-                                    <TextField fx:id="settingsMaxWindSpeedTextField" layoutX="10.0" layoutY="60.0" />
-                                    <TextField fx:id="settingsMinWindSpeedTextField" layoutX="10.0" layoutY="85.0" />
-                                 </children>
-                              </VBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="BOTTOM_CENTER" prefWidth="200.0">
-                           <children>
-                              <Button alignment="CENTER" mnemonicParsing="false" onAction="#changeUserSettingsButton" prefHeight="40.0" prefWidth="10000.0" text="Zapisz ustawienia" HBox.hgrow="ALWAYS" />
-                              <Button alignment="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#loadDefaultSettingsButton" prefHeight="40.0" prefWidth="10000.0" text="Przywróć ustawienia początkowe" />
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
-               </content></Tab>
         </tabs>
       </TabPane>
    </children>
