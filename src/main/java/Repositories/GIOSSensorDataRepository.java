@@ -25,7 +25,7 @@ public class GIOSSensorDataRepository {
         Values[]tmp=GIOSDataList.get(0).getValues();
         for(int i=0; i<tmp.length;i++){
             if(!(tmp[i].getValue()==null)) {
-                listOfValues.add(new SensorData(tmp[i].getDate().replace(" ", "         "),(double)(Math.round(Double.parseDouble(tmp[i].getValue())*100.00))/100.00));
+                listOfValues.add(new SensorData(tmp[i].getDate().replace(" ", "      "),(double)(Math.round(Double.parseDouble(tmp[i].getValue())*100.00))/100.00));
             }
         }
         return listOfValues;

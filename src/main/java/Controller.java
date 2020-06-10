@@ -1,8 +1,8 @@
-import AnotherClasses.AddUserMeasureHelper;
-import AnotherClasses.IDStationFinder;
-import OWM.DataFromOwmPresenter;
+import AnotherClasses.*;
+import Presenters.DataFromGiosSensorPresenter;
+import Presenters.DataFromGiosStationPresenter;
+import Presenters.DataFromOwmPresenter;
 import Objects.FromDB.*;
-import Repositories.*;
 import Repositories.FromDB.*;
 import ViewControll.ActualDustyPlantsView;
 import EmailActions.EmailToRegister;
@@ -13,8 +13,6 @@ import Objects.SensorData;
 import Repositories.UserMeasuresPLNamesRepository;
 import OWM.WeatherMeasureOWM;
 import OWM.WeatherMeasuresFactory;
-import AnotherClasses.RegisterHelper;
-import AnotherClasses.TextFieldRestrict;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -46,7 +44,7 @@ public class Controller {
     WeatherMeasuresFactory weatherMeasuresFactory;
     TextFieldRestrict textFieldRestrict=new TextFieldRestrict();
     UserMeasuresRepository userMeasuresRepository = new UserMeasuresRepository(); //Do tworzenia tabel z pomiarami dla wybranych miast
-
+    StationBrowser stationBrowser=new StationBrowser();
 
     JDBC jdbc = new JDBC(); //Do połączenia z baza
     JDBCQuery jdbcQuery; //Do wykonywania zapytań do bazy
@@ -197,18 +195,18 @@ public class Controller {
     TextField addMesureFromUserBrowserTextField;
     @FXML
     ComboBox<String> claudinessFromIserComboBox;
-    @FXML
-    ListView<String> sensorsListView;
+
 
     //gios
+    @FXML
+    ListView<String> sensorsListView;
     @FXML
     TableView<SensorData> GIOSTableView;
     @FXML
     TableColumn<SensorData, String> GIOSValueColumn;
     @FXML
     TableColumn<SensorData, String> GIOSDateColumn;
-    public Controller() throws IOException {
-    }
+
     @FXML
     TableColumn<AirIndexLevel,String>GIOSAirIndexValueColumn;
     @FXML
@@ -294,7 +292,7 @@ public class Controller {
     }
 
     private void activeStationsBrowsers(){
-        StationBrowser stationBrowser=new StationBrowser();
+
         stationBrowser.searchByNameOnWriteInTextField(OWMStationsBrowserTextField, owmStationsRepository.getStationNames(),OWMStationsListView);
         stationBrowser.searchByNameOnWriteInTextField(addMesureFromUserBrowserTextField, usersStationsRepository.getStationNames(), usersStationsToAddMeasureListView);
         stationBrowser.searchByNameOnWriteInTextField(takeMeasureFromUserBrowserTextField, usersStationsRepository.getStationNames(), usersStationsToTakeMaeasureListView);
@@ -434,12 +432,22 @@ public class Controller {
     //FUNKCJE DOTYCZĄCE DODANIA POMIARU PRZEZ UŻYTKOWNIKA
     @FXML
     void addMeasureFromUserButton() throws SQLException {
-        appSettingsRepository=new AppSettingsRepository(jdbcQuery.getAppSettings());
-        AddUserMeasureHelper addUserMeasureHelper=new AddUserMeasureHelper(appSettingsRepository);
-        jdbcQuery.addMeasuresFromUserToDataBase(addUserMeasureHelper,loginEmailTextField, addPressureFromUserTextField,
-                addTemperatureFromUserTextField, addWindSpeedFromUserTextField, addHumidityFromUserTextField, claudinessFromIserComboBox,
-                idStationFinder.getIDSelectedStation(usersStationsToAddMeasureListView, usersStationsRepository.getStations()),
-                addMesureAlertLabel);
+        try {
+            appSettingsRepository = new AppSettingsRepository(jdbcQuery.getAppSettings());
+            AddUserMeasureHelper addUserMeasureHelper = new AddUserMeasureHelper(appSettingsRepository);
+            jdbcQuery.addMeasuresFromUserToDataBase(addUserMeasureHelper, loginEmailTextField, addPressureFromUserTextField,
+                    addTemperatureFromUserTextField, addWindSpeedFromUserTextField, addHumidityFromUserTextField, claudinessFromIserComboBox,
+                    idStationFinder.getIDSelectedStation(usersStationsToAddMeasureListView, usersStationsRepository.getStations()),
+                    addMesureAlertLabel);
+        }
+        catch (NullPointerException e) //jeżeli użytkownik nie zaznaczył stacji
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nie wybrano stacji pomiarowej");
+            alert.setHeaderText("");
+            alert.setContentText("Wybierz stacje pomiarową z menu po lewej stronie");
+            alert.showAndWait();
+        }
 
     }
     //FUNKCJE DOTYCZĄCE POBRANIA POMIARU PRZEZ UŻYTKOWNIKA
@@ -462,43 +470,54 @@ public class Controller {
 
     @FXML
     void showMeasuresFromUserButton() throws SQLException { //Funkcja odpowiadająca za wypełnienie tabeli pomiarami po kliknieciu przycisku
-        turnOffAllMeasuresFromUser(); //Wyłączamy poprzedni widok
-        clearAllTablesWithMeasuresFromUser(); //Czyścimy poprzednie tabele
-        if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Temperatura powietrza")) {
-            temperatureTableView.setVisible(true);
-            ObservableList<TemperatureFromUser> listOfTemperatureResults = FXCollections.observableArrayList(userMeasuresRepository.showTemperaturesFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getTemperaturesFromUserList()));
-            dateTempUser.setCellValueFactory(new PropertyValueFactory<>("date"));
-            userNameTemp.setCellValueFactory(new PropertyValueFactory<>("userName"));
-            temperature.setCellValueFactory(new PropertyValueFactory<>("temperature"));
-            temperatureTableView.setItems(listOfTemperatureResults);
-        } else if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Wilgotność powietrza")) {
-            humidityTableView.setVisible(true);
-            ObservableList<HumidityFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showHumidityFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getHumidityFromUserList()));
-            dateHumidityUser.setCellValueFactory(new PropertyValueFactory<>("date"));
-            userNameHumidity.setCellValueFactory(new PropertyValueFactory<>("userName"));
-            humidity.setCellValueFactory(new PropertyValueFactory<>("humidity"));
-            humidityTableView.setItems(listOfHumidityResults);
-        } else if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Prędkość wiatru")) {
-            windSpeedTableView.setVisible(true);
-            ObservableList<WindSpeedFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showWindSpeedFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getWindSpeedFromUserList()));
-            dateWindSpeedUser.setCellValueFactory(new PropertyValueFactory<>("date"));
-            userNameWindSpeed.setCellValueFactory(new PropertyValueFactory<>("userName"));
-            windSpeed.setCellValueFactory(new PropertyValueFactory<>("windSpeed"));
-            windSpeedTableView.setItems(listOfHumidityResults);
-        } else if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Ciśnienie")) {
-            pressureTableView.setVisible(true);
-            ObservableList<PressureFromUser> listOfPressureResults = FXCollections.observableArrayList(userMeasuresRepository.showPressureFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getPressureFromUserList()));
-            datePressureUser.setCellValueFactory(new PropertyValueFactory<>("date"));
-            userNamePressure.setCellValueFactory(new PropertyValueFactory<>("userName"));
-            pressure.setCellValueFactory(new PropertyValueFactory<>("pressure"));
-            pressureTableView.setItems(listOfPressureResults);
-        } else if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Zachmurzenie")) {
-            claudinessTableView.setVisible(true);
-            ObservableList<ClaudinessFromUser> listOfClaudinessResults = FXCollections.observableArrayList(userMeasuresRepository.showClaudinessFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getCloudinessFromUserList()));
-            dateClaudinessUser.setCellValueFactory(new PropertyValueFactory<>("date"));
-            userNameClaudiness.setCellValueFactory(new PropertyValueFactory<>("userName"));
-            claudiness.setCellValueFactory(new PropertyValueFactory<>("claudiness"));
-            claudinessTableView.setItems(listOfClaudinessResults);
+        try {
+            turnOffAllMeasuresFromUser(); //Wyłączamy poprzedni widok
+            clearAllTablesWithMeasuresFromUser(); //Czyścimy poprzednie tabele
+
+            if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Temperatura powietrza")) {
+                temperatureTableView.setVisible(true);
+                ObservableList<TemperatureFromUser> listOfTemperatureResults = FXCollections.observableArrayList(userMeasuresRepository.showTemperaturesFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getTemperaturesFromUserList()));
+                dateTempUser.setCellValueFactory(new PropertyValueFactory<>("date"));
+                userNameTemp.setCellValueFactory(new PropertyValueFactory<>("userName"));
+                temperature.setCellValueFactory(new PropertyValueFactory<>("temperature"));
+                temperatureTableView.setItems(listOfTemperatureResults);
+            } else if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Wilgotność powietrza")) {
+                humidityTableView.setVisible(true);
+                ObservableList<HumidityFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showHumidityFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getHumidityFromUserList()));
+                dateHumidityUser.setCellValueFactory(new PropertyValueFactory<>("date"));
+                userNameHumidity.setCellValueFactory(new PropertyValueFactory<>("userName"));
+                humidity.setCellValueFactory(new PropertyValueFactory<>("humidity"));
+                humidityTableView.setItems(listOfHumidityResults);
+            } else if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Prędkość wiatru")) {
+                windSpeedTableView.setVisible(true);
+                ObservableList<WindSpeedFromUser> listOfHumidityResults = FXCollections.observableArrayList(userMeasuresRepository.showWindSpeedFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getWindSpeedFromUserList()));
+                dateWindSpeedUser.setCellValueFactory(new PropertyValueFactory<>("date"));
+                userNameWindSpeed.setCellValueFactory(new PropertyValueFactory<>("userName"));
+                windSpeed.setCellValueFactory(new PropertyValueFactory<>("windSpeed"));
+                windSpeedTableView.setItems(listOfHumidityResults);
+            } else if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Ciśnienie")) {
+                pressureTableView.setVisible(true);
+                ObservableList<PressureFromUser> listOfPressureResults = FXCollections.observableArrayList(userMeasuresRepository.showPressureFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getPressureFromUserList()));
+                datePressureUser.setCellValueFactory(new PropertyValueFactory<>("date"));
+                userNamePressure.setCellValueFactory(new PropertyValueFactory<>("userName"));
+                pressure.setCellValueFactory(new PropertyValueFactory<>("pressure"));
+                pressureTableView.setItems(listOfPressureResults);
+            } else if (takeMeasuresFromUserComboBox.getSelectionModel().getSelectedItem().equals("Zachmurzenie")) {
+                claudinessTableView.setVisible(true);
+                ObservableList<ClaudinessFromUser> listOfClaudinessResults = FXCollections.observableArrayList(userMeasuresRepository.showClaudinessFromUsersInCity(idStationFinder.getIDSelectedStation(usersStationsToTakeMaeasureListView, usersStationsRepository.getStations()), jdbcQuery.getCloudinessFromUserList()));
+                dateClaudinessUser.setCellValueFactory(new PropertyValueFactory<>("date"));
+                userNameClaudiness.setCellValueFactory(new PropertyValueFactory<>("userName"));
+                claudiness.setCellValueFactory(new PropertyValueFactory<>("claudiness"));
+                claudinessTableView.setItems(listOfClaudinessResults);
+            }
+        }
+          catch (NullPointerException e) //jeżeli użytkownik nie zaznaczył stacji
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Nie wybrano stacji pomiarowej");
+            alert.setHeaderText("");
+            alert.setContentText("Wybierz stacje pomiarową z menu po lewej stronie");
+            alert.showAndWait();
         }
     }
     //DO POBRANIA POMIAROW Z OWM
@@ -509,26 +528,22 @@ public class Controller {
                 owmStationsRepository,owmClaudinesTranslatorRepository);
         Thread showOwmDataThread =new Thread(dataFromOwmPresenter);
         showOwmDataThread.start();
+
         }
 
     @FXML
-    void onClickGIOSStation() throws IOException, JSONException {
-        GIOSTableView.getItems().clear();
-        GIOSAirIndexTableView.getItems().clear();
+    void onClickGIOSStation() throws IOException, JSONException, InterruptedException {
         sensorsListView.getItems().clear();
         sensorsListView.getItems().addAll(giosSensorsRepository.getSensorsForSelectedStation(idStationFinder.getIDSelectedStation(GIOSStationsListView,giosStationsRepository.getStations())));
-        GIOSAirIndexRepository giosAirIndexRepository =new GIOSAirIndexRepository();
-        GIOSAirIndexNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        GIOSAirIndexValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-        GIOSAirIndexTableView.getItems().addAll(giosAirIndexRepository.getAirIndexData(idStationFinder.getIDSelectedStation(GIOSStationsListView,giosStationsRepository.getStations())));
+        DataFromGiosStationPresenter dataFromGiosStationPresenter=new DataFromGiosStationPresenter(GIOSAirIndexValueColumn,GIOSAirIndexNameColumn,GIOSAirIndexTableView,GIOSStationsListView,GIOSTableView,sensorsListView,giosSensorsRepository,giosStationsRepository,idStationFinder);
+        Thread dataFromGiosStationThread=new Thread(dataFromGiosStationPresenter);
+        dataFromGiosStationThread.start();
     }
     @FXML
     void onClickGIOSSensor() throws IOException, JSONException, ParseException {
-        GIOSTableView.getItems().clear();
-        GIOSSensorDataRepository GIOSSensorDataRepository =new GIOSSensorDataRepository();
-        GIOSDateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-        GIOSValueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
-        GIOSTableView.getItems().addAll(GIOSSensorDataRepository.getDataFromSensor(giosSensorsRepository.getSelectedSensorID(sensorsListView)));
+        DataFromGiosSensorPresenter dataFromGiosSensorPresenter =new DataFromGiosSensorPresenter(giosSensorsRepository,GIOSTableView,GIOSValueColumn,GIOSDateColumn,sensorsListView);
+        Thread dataFromGiosSensorThread=new Thread(dataFromGiosSensorPresenter);
+        dataFromGiosSensorThread.start();
     }
     @FXML
     void pressEnterToTypePassword(ActionEvent ae) {
@@ -583,6 +598,8 @@ public class Controller {
         GIOSStationsListView.getItems().clear();
         giosStationsRepository=new GIOSStationsRepository(jdbcQuery.getstationsTable("giosstations"));
         GIOSStationsListView.getItems().addAll(giosStationsRepository.getStationNames());
+        stationBrowser.searchByNameOnWriteInTextField(GIOSStationsBrowserTextField,giosStationsRepository.getStationNames(),GIOSStationsListView);
+        GIOSStationsBrowserTextField.setText("");
 
     }
     @FXML
@@ -590,6 +607,8 @@ public class Controller {
         OWMStationsListView.getItems().clear();
         owmStationsRepository = new OWMStationsRepository(jdbcQuery.getstationsTable("owmstations"));
        OWMStationsListView.getItems().addAll(owmStationsRepository.getStationNames());
+        stationBrowser.searchByNameOnWriteInTextField(OWMStationsBrowserTextField, owmStationsRepository.getStationNames(),OWMStationsListView);
+        OWMStationsBrowserTextField.setText("");
     }
     @FXML
     void onClickRefreshUsersStations() throws SQLException {
@@ -598,7 +617,15 @@ public class Controller {
         usersStationsRepository = new UserStationsRepository(jdbcQuery.getstationsTable("usersstations"));
         usersStationsToTakeMaeasureListView.getItems().addAll(usersStationsRepository.getStationNames());
         usersStationsToAddMeasureListView.getItems().addAll(usersStationsRepository.getStationNames());
-
+        stationBrowser.searchByNameOnWriteInTextField(addMesureFromUserBrowserTextField, usersStationsRepository.getStationNames(), usersStationsToAddMeasureListView);
+        stationBrowser.searchByNameOnWriteInTextField(takeMeasureFromUserBrowserTextField, usersStationsRepository.getStationNames(), usersStationsToTakeMaeasureListView);
+        addHumidityFromUserTextField.setText("");
+        takeMeasureFromUserBrowserTextField.setText("");
+    }
+    @FXML
+    void onClickOpenDocumentationButton() throws IOException {
+        OpenFileHelper openFileHelper =new OpenFileHelper();
+        openFileHelper.openPdfFile(getClass().getResource("Dokumentacja_uzytkownika.pdf").getPath());
     }
 
 }

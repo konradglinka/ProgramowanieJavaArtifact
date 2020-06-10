@@ -12,6 +12,7 @@ sourceCompatibility = 1.11
 repositories {
     mavenCentral()
 }
+compileJava.options.encoding = "UTF-8"
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
