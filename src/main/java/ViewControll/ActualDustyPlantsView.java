@@ -1,7 +1,7 @@
 package ViewControll;
 
 
-import Objects.DustyPlant;
+import Objects.FromDB.DustyPlant;
 import Repositories.FromDB.DustyPlantsRepository;
 import javafx.scene.control.ListView;
 

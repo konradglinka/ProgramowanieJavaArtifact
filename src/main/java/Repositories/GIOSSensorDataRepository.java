@@ -1,9 +1,9 @@
 package Repositories;
 
-import GIOS.GIOSData.GIOSData;
+import ObjectsForMapper.GIOSData.GIOSData;
 import AnotherClasses.JSONReader;
 import Objects.SensorData;
-import GIOS.GIOSData.Values;
+import ObjectsForMapper.GIOSData.Values;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

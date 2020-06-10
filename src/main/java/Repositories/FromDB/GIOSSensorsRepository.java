@@ -1,13 +1,13 @@
 package Repositories.FromDB;
 
-import Objects.GIOSSensor;
+import Objects.FromDB.GIOSSensor;
 import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class GIOSSensorsRepository {
-    private ArrayList<GIOSSensor> sensors;
+    private final ArrayList<GIOSSensor> sensors;
     private int selectedStationID=0;
     public GIOSSensorsRepository(ArrayList<GIOSSensor> sensorsArrayList){
     this.sensors = sensorsArrayList;

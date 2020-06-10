@@ -1,14 +1,14 @@
 package Repositories.FromDB;
 
-import Objects.Station;
+import Objects.FromDB.Station;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class OWMStationsRepository {
+public final class OWMStationsRepository {
 
-    private ArrayList<Station> stations;
-    private ArrayList<String> stationsNamesWithCoordinates = new ArrayList<>();
+    private final ArrayList<Station> stations;
+    private final  ArrayList<String> stationsNamesWithCoordinates = new ArrayList<>();
     public OWMStationsRepository(ArrayList<Station> stations) {
         this.stations = stations;
         for (int k = 0; k < stations.size(); k++) {

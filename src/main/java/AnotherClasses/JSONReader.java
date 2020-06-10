@@ -7,7 +7,7 @@ import java.io.*;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-public class JSONReader {
+public class JSONReader { //Klasa czyta JSONa z URL
     public String readJsonFromUrl(String url) throws IOException, JSONException {
         InputStream is = new URL(url).openStream();
         try {
@@ -19,7 +19,7 @@ public class JSONReader {
             is.close();
         }
     }
-    private static String readAll(Reader rd) throws IOException {
+    private String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
         while ((cp = rd.read()) != -1) {

@@ -1,6 +1,6 @@
 import AnotherClasses.AddUserMeasureHelper;
 import AnotherClasses.MD5;
-import Objects.*;
+import Objects.FromDB.*;
 import Repositories.FromDB.AppSettingsRepository;
 import javafx.scene.control.*;
 
@@ -12,7 +12,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Optional;
+
 
 import static java.util.Calendar.getInstance;
 
@@ -64,24 +64,19 @@ public class JDBCQuery {
         Statement stmt =connection.createStatement();
         ResultSet resultSet = stmt.executeQuery(loginUserQuerySQL);
         if (resultSet.next()) {
-            loadAppSettings(appSettingsRepository);
+           appSettingsRepository=new AppSettingsRepository(getAppSettings());
             return true;
         }
         return false;
     }
 
-    private void loadAppSettings(AppSettingsRepository appSettingsRepository) throws SQLException {
+    public AppSettings getAppSettings() throws SQLException {
         String loadSettingsAboutActualUser="SELECT * FROM appsettings";
         Statement stmt =connection.createStatement();
         ResultSet resultSet = stmt.executeQuery(loadSettingsAboutActualUser);
-            while (resultSet.next()) {
-            appSettingsRepository.setMinTemperature(resultSet.getDouble(2));
-            appSettingsRepository.setMaxTemperature(resultSet.getDouble(3));
-            appSettingsRepository.setMinWindSpeed(resultSet.getDouble(4));
-            appSettingsRepository.setMaxWindSpeed(resultSet.getDouble(5));
-            appSettingsRepository.setMinPressure(resultSet.getDouble(6));
-            appSettingsRepository.setMaxPressure(resultSet.getDouble(7));
-        }
+        resultSet.next();
+        AppSettings appSettings=new AppSettings(resultSet.getDouble(3),resultSet.getDouble(2),resultSet.getDouble(5),resultSet.getDouble(4),resultSet.getDouble(6),resultSet.getDouble(7));
+        return appSettings;
     }
     //ZMIANA HASLA UŻYTKOWNIKA
     public boolean changeUserPassword(TextField emailToPasswordChange,PasswordField passwordFieldToChange) throws SQLException {
@@ -112,7 +107,7 @@ public class JDBCQuery {
             String changeUserSettingsQuerySQL = "UPDATE usersettings SET MINTEMP=" + minTempVal + ",MAXTEMP=" + maxTempVal + ",MAXWIND=" + maxWindVal + ",MINWIND=" + minWindVal + ",MINPRESSURE=" + minPressureVal + ",MAXPRESSURE=" + maxPressureVal + " WHERE IDUSER='" +getUserID(email) + "'";
             Statement stmt = connection.createStatement();
             stmt.executeUpdate(changeUserSettingsQuerySQL);
-            loadAppSettings(appSettingsRepository,email);
+            getAppSettings(appSettingsRepository,email);
         }
     }
     */
@@ -128,11 +123,11 @@ public class JDBCQuery {
         }
         return dustyPlants;
     }
-    //POBIERAMY DANE O STACJACH OWM/USEROW/GIOS
+    //POBIERAMY DANE O STACJACH OWM/USEROW/ObjectsForMapper
     public ArrayList<Station> getstationsTable(String nameOfTable) throws SQLException {
         //nameOfTable zawiera nazwe tabeli z jakiej chcemy pobrac stacje
         //userstations - stacje do pomiarow od użytkowników
-        //giosstations - stacje GIOS
+        //giosstations - stacje ObjectsForMapper
         //owmstations -stacje OWM
         ArrayList<Station> stations =new ArrayList<>();
         String loadSettingsAboutActualUser="SELECT * FROM "+nameOfTable;
@@ -143,7 +138,7 @@ public class JDBCQuery {
         }
         return stations;
     }
-    //POBIERAMY DANE O SENSORACH GIOS
+    //POBIERAMY DANE O SENSORACH ObjectsForMapper
     public ArrayList<GIOSSensor> getGiosSensorsFromDataBase() throws SQLException {
         ArrayList<GIOSSensor>giosSensors=new ArrayList<>();
         String loadSettingsAboutActualUser="SELECT * FROM giossensors";

@@ -4,14 +4,14 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
-public class OWMClaudinesTranslatorRepository {
+public final class OWMClaudinesTranslatorRepository {
     private ArrayList<String> englishStringArraylist;
     private ArrayList<String> polishStringArraylist;
 
-   public ArrayList<String> getEnglishStringArraylist() {
+   public final ArrayList<String> getEnglishStringArraylist() {
         return englishStringArraylist;
     }
-   public ArrayList<String> getPolishStringArraylist() {
+   public final ArrayList<String> getPolishStringArraylist() {
         return polishStringArraylist;
     }
     public OWMClaudinesTranslatorRepository(ArrayList<String> englishStringArraylist, ArrayList<String> polishStringArraylist) {

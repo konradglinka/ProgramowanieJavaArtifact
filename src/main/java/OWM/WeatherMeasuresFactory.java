@@ -22,9 +22,7 @@ public class WeatherMeasuresFactory {
 
     public void fillMeasuresist(OWMClaudinesTranslatorRepository owmClaudinesTranslatorRepository) throws FileNotFoundException, APIException, ParseException {
         for(int i=0 ;i<=howManyMeasures;i++) {
-
             weatherMeasuresListOWM.add(i,new WeatherMeasureOWM(dataFromOWM.tempInCity(i), dataFromOWM.windSpeedInCity(i), dataFromOWM.humidityInCity(i), dataFromOWM.pressureInCity(i), owmClaudinesTranslatorRepository.translateEnglishToPolish(dataFromOWM.claudinessInCity(i)), dataFromOWM.dateOfMeasure(i)));
-
         }
         }
 

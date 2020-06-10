@@ -1,14 +1,14 @@
 package Repositories.FromDB;
 
-import Objects.Station;
+import Objects.FromDB.Station;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class UserStationsRepository {
+public final class UserStationsRepository {
 
-    private ArrayList<Station> stations;
-    private ArrayList<String> stationNames = new ArrayList<>();
+    private final ArrayList<Station> stations;
+    private final  ArrayList<String> stationNames = new ArrayList<>();
     public UserStationsRepository(ArrayList<Station> stations) {
         this.stations = stations;
         for (int k = 0; k < stations.size(); k++) {

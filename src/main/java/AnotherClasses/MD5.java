@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class MD5 {
-    public String getMD5Password(String input)
+    public String getMD5Password(String input) //Klasa odpowiada za szyfrowanie hasła MD5
     {
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");

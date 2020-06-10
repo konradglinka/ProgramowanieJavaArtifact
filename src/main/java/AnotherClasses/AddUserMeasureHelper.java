@@ -7,8 +7,8 @@ import javafx.scene.control.TextField;
 
 public class AddUserMeasureHelper {
 
-    StringBuilder stringBuilderWithAlertToLabel =new StringBuilder();
-    private AppSettingsRepository appSettingsRepository;
+    StringBuilder stringBuilderWithAlertToLabel =new StringBuilder(); //Zawiera komunikat o nieprawidłowym pomiarze
+    private AppSettingsRepository appSettingsRepository; //Przechowuje aktualne ustawienia wartości granicznych
     public AddUserMeasureHelper(AppSettingsRepository appSettingsRepository) {
         this.appSettingsRepository = appSettingsRepository;
     }
@@ -30,133 +30,68 @@ public class AddUserMeasureHelper {
         {
             addMesureAlertLabel.setVisible(false);
             stringBuilderWithAlertToLabel.delete(0, stringBuilderWithAlertToLabel.length());
-            return true;
+            return true; //Jeśli  przeszło weryfikacje  dodajemy pomiar
         }
         else{
             addMesureAlertLabel.setVisible(true);
             addMesureAlertLabel.setText(stringBuilderWithAlertToLabel.toString());
             stringBuilderWithAlertToLabel.delete(0, stringBuilderWithAlertToLabel.length());
-            return false;
+            return false; //Jeśli nie przeszło weryfikacji nie dodajemy pomiaru i wyświetlamy alert
         }
     }
     private boolean verificationTemperature(TextField temperatureTextField){
-
-        boolean maxValue=false;
-        boolean minValue=false;
         if (temperatureTextField.getText().equals(""))
         {
             temperatureTextField.setStyle("");
             return true;
         }
-        try {
             Double temperature = Double.parseDouble(temperatureTextField.getText());
-            if(temperature>= appSettingsRepository.getMinTemperature()){
-                minValue=true;
-            }
-            if(temperature>= appSettingsRepository.getMaxTemperature()){
-                maxValue=true;
-            }
-            if(minValue==true && maxValue==false && allCharsAreDigits(temperatureTextField)==true) {
+            if(temperature>= appSettingsRepository.getAppSettings().getMinTemperature() && temperature>= appSettingsRepository.getAppSettings().getMaxTemperature()&& allCharsAreDigits(temperatureTextField)==true) {
                 temperatureTextField.setStyle("");
                 return true;
             }
             else{
                 temperatureTextField.setStyle("-fx-background-color:red;");
-
-                stringBuilderWithAlertToLabel.append("Podana temperatura nie mieści się w wartościach podanych w ustawieniach\n");
+                stringBuilderWithAlertToLabel.append("Podana temperatura nie mieści się w wartościach granicznych \n");
             return false;}
-        }
-        catch(Exception e)
-        {
-            temperatureTextField.setStyle("-fx-background-color:red;");
-
-            stringBuilderWithAlertToLabel.append("Podana wartość temperatury jest nieprawidłowa\n");
-            return false;
-        }
-
     }
     private boolean verificationWindSpeed(TextField windSpeedTextField){
-        boolean maxValue=false;
-        boolean minValue=false;
         if (windSpeedTextField.getText().equals("")) {
             windSpeedTextField.setStyle("");
             return true;
         }
-        try {
             Double windSpeed = Double.parseDouble(windSpeedTextField.getText());
-            if(windSpeed>= appSettingsRepository.getMinWindSpeed()){
-                minValue=true;
-            }
-            if(windSpeed>= appSettingsRepository.getMaxWindSpeed()){
-                maxValue=true;
-            }
-            if(minValue==true && maxValue==false && allCharsAreDigits(windSpeedTextField)==true) {
+            if(windSpeed>= appSettingsRepository.getAppSettings().getMinWindSpeed()&&windSpeed<= appSettingsRepository.getAppSettings().getMaxWindSpeed()&& allCharsAreDigits(windSpeedTextField)==true) {
                 windSpeedTextField.setStyle("");
                 return true;
             }
             else{
                 windSpeedTextField.setStyle("-fx-background-color:red;");
-                stringBuilderWithAlertToLabel.append("Podana prędkość wiatru nie mieści się w wartościach podanych w ustawieniach\n");
+                stringBuilderWithAlertToLabel.append("Podana prędkość wiatru nie mieści się w wartościach granicznych \n");
                 return false;}
-        }
-        catch(Exception e)
-        {
-            windSpeedTextField.setStyle("-fx-background-color:red;");
-            stringBuilderWithAlertToLabel.append("Podana prędkość wiatru jest nieprawidłowa\n");
-            return false;
-        }
-
     }
    private boolean verificationPressure(TextField pressureTextField){
-        boolean maxValue=false;
-        boolean minValue=false;
         if (pressureTextField.getText().equals("")) {
             pressureTextField.setStyle("");
             return true;
         }
-        try {
             Double pressure = Double.parseDouble(pressureTextField.getText());
-            if(pressure>= appSettingsRepository.getMinPressure()){
-                minValue=true;
-            }
-            if(pressure>= appSettingsRepository.getMaxPressure()){
-                maxValue=true;
-            }
-            if(minValue==true && maxValue==false && allCharsAreDigits(pressureTextField)==true) {
+            if(pressure>= appSettingsRepository.getAppSettings().getMinPressure() && pressure>= appSettingsRepository.getAppSettings().getMaxPressure() && allCharsAreDigits(pressureTextField)==true) {
                 pressureTextField.setStyle("");
-
                 return true;
             }
             else{
                 pressureTextField.setStyle("-fx-background-color:red;");
-
                 stringBuilderWithAlertToLabel.append("Podane ćiśnienie powietrza nie mieści się w wartościach podanych w ustawieniach\n");
                 return false;}
-        }
-        catch(Exception e)
-        {
-            pressureTextField.setStyle("-fx-background-color:red;");
-            stringBuilderWithAlertToLabel.append("Podana wartość ćisnienia jest nieprawidłowa\n");
-            return false;
-        }
-
     }
     private boolean verificationHumidity(TextField humidityTextField){
-        boolean maxValue=false;
-        boolean minValue=false;
         if (humidityTextField.getText().equals("")) {
             humidityTextField.setStyle("");
             return true;
         }
-        try {
             Double humidity = Double.parseDouble(humidityTextField.getText());
-            if(humidity>= appSettingsRepository.getMinHumidity()){
-                minValue=true;
-            }
-            if(humidity>= appSettingsRepository.getMaxHumidity()){
-                maxValue=true;
-            }
-            if(minValue==true && maxValue==false && allCharsAreDigits(humidityTextField)==true) {
+            if(humidity>= appSettingsRepository.getAppSettings().getMinHumidity() && humidity>= appSettingsRepository.getAppSettings().getMaxHumidity()&& allCharsAreDigits(humidityTextField)==true) {
                 humidityTextField.setStyle("");
                 return true;
             }
@@ -164,14 +99,6 @@ public class AddUserMeasureHelper {
                 humidityTextField.setStyle("-fx-background-color:red;");
                 stringBuilderWithAlertToLabel.append("Podana wilgotność musi mieścić się w przedziale procentowym od 0 do 100\n");
                 return false;}
-        }
-        catch(Exception e)
-        {
-            humidityTextField.setStyle("-fx-background-color:red;");
-            stringBuilderWithAlertToLabel.append("Podana wartosć wilgotności jest nieprawidłowa\n");
-            return false;
-        }
-
     }
 
     private boolean allCharsAreDigits (TextField mesureTextField){

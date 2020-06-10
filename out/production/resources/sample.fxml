@@ -11,248 +11,60 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
    <children>
-      <StackPane fx:id="registerAndLoginStackPane" maxWidth="400.0" prefHeight="150.0" prefWidth="200.0">
-         <children>
-            <VBox fx:id="loginVBox" alignment="CENTER" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Logowanie" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label fx:id="badEmailOrPasswordLabel" text="Nieprawidłowy E-mail lub hasło" textFill="RED" visible="false">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="E-mail" />
-                        <TextField fx:id="loginEmailTextField" maxWidth="300.0" onAction="#pressEnterToTypePassword" text="konradglkm@gmail.com" />
-                        <Label text="Hasło" />
-                        <PasswordField fx:id="passwordPasswordField" onAction="#pressEnterToLogin" text="zaq1@WSX" />
-                        <Button mnemonicParsing="false" onAction="#loginButton" text="Zaloguj" />
-                     </children></VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Button mnemonicParsing="false" onAction="#switchOnForgotPasswordButton" text="Zapomnialem hasła">
-                           <VBox.margin>
-                              <Insets bottom="15.0" />
-                           </VBox.margin></Button>
-                        <Label text="Nie posiadasz konta ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnRegisterButton" text="Rejestracja" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox fx:id="registerVBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Rejestracja" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label fx:id="registrationAlertLabel" text="Hasła nie są jednakowe" textFill="RED" visible="false">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="E-mail" />
-                        <TextField fx:id="registrationEmailTextField" maxWidth="300.0" onAction="#pressEnterToTypeRegistrationPassword" text="konradgjd@gmail.com" />
-                        <Label text="Hasło" />
-                        <PasswordField fx:id="registrationPasswordPasswordField" onAction="#pressEnterToTypeConfirmedRegistrationPassword" text="zaq12wsX" />
-                        <Label layoutX="145.0" layoutY="64.0" text="Powtórz hasło" />
-                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" layoutX="10.0" layoutY="73.0" onAction="#pressEnterToSendRegistrationCode" text="zaq12wsX" />
-                        <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#sendRegistrationCode" text="Zarejestruj" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Masz już konto ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Logowanie" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox fx:id="register2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Rejestracja" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label fx:id="registrationCodeAlertLabel" text="Hasła nie są jednakowe" textFill="RED" visible="false">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Aby potwierdzić rejestracje wpisz kod przesłany na podany wcześniej adres e-mail" textAlignment="CENTER" wrapText="true" />
-                        <TextField fx:id="registrationCodeTextField" alignment="CENTER" maxWidth="300.0" onAction="#pressEnterToRegister" />
-                        <Button layoutX="132.0" layoutY="94.0" mnemonicParsing="false" onAction="#registerButton" text="Zarejestruj" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Nie otrzymałeś kodu na podany adres E-mail?" />
-                        <Button fx:id="sendRegistrationCodeButton" mnemonicParsing="false" onAction="#sendResetRegistrationCodeAgain" text="Wyślij kod ponownie" />
-                        <Label text="Masz już konto ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Logowanie" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox fx:id="changePassword1VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Zresetuj hasło" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label fx:id="badEmailResetPasswordLabel" text="Nieprawidłowy E-mail" textFill="RED" visible="false">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Podaj adres E-mail dla którego chcesz zresetować hasło, zostanie na niego wysłany kod do resetowania hasła" textAlignment="CENTER" wrapText="true" />
-                        <TextField fx:id="emailToResetPasswordTextField" alignment="CENTER" maxWidth="300.0" onAction="#pressEnterToSendPasswordCode" text="konradgjd@gmail.com" />
-                        <Button mnemonicParsing="false" onAction="#sendResetPasswordCode" text="Wyślij kod" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Znasz hasło ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox fx:id="changePassword2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Zresetuj hasło" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label fx:id="badCodeResetPasswordLabel" text="Nie prawidłowy kod" textFill="RED" visible="false">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Wpisz otrzymany kod aby zresetować hasło" textAlignment="CENTER" wrapText="true" />
-                        <TextField fx:id="resetCodeTextField" alignment="CENTER" maxWidth="300.0" onAction="#pressEnterToResetPassword" />
-                        <Button mnemonicParsing="false" onAction="#goToChangePasswordAfterEnterCodeButton" text="Zresetuj hasło" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Nie otrzymałeś kodu na podany adres E-mail?" />
-                        <Button fx:id="sendResetPasswordCodeButton" mnemonicParsing="false" onAction="#sendResetPasswordCodeAgain" text="Wyślij kod ponownie" />
-                        <Label text="Znasz hasło ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-            <VBox fx:id="changePassword3VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0" visible="false">
-               <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Zmiana hasła" textAlignment="CENTER">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label fx:id="badPasswordLabel" text="Nieprawidłowe hasło" textFill="RED" visible="false">
-                           <font>
-                              <Font size="16.0" />
-                           </font>
-                        </Label>
-                        <Label text="Hasło" textAlignment="CENTER" wrapText="true" />
-                        <PasswordField fx:id="resetPasswordPasswordField" onAction="#pressEnterToTypeResetConfirmedPassword" />
-                        <Label layoutX="145.0" layoutY="43.0" text="Powtórz hasło" textAlignment="CENTER" wrapText="true" />
-                        <PasswordField fx:id="conifrmedResetPasswordPasswordField" layoutX="10.0" layoutY="52.0" onAction="#pressEnterToChangePassword" />
-                        <Button mnemonicParsing="false" onAction="#changePasswordButton" text="Zmień hasło" />
-                     </children>
-                  </VBox>
-                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
-                     <children>
-                        <Label text="Znasz hasło ?" />
-                        <Button mnemonicParsing="false" onAction="#switchOnLoginButton" text="Powrót do logowania" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-         </children>
-      </StackPane>
-      <TabPane fx:id="mainViewTabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" visible="false">
+
+      <TabPane fx:id="mainViewTabPane" prefHeight="200.0" prefWidth="200.0" stylesheets="@FXCSS/normalTabPane.css" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Stan powietrza">
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox minWidth="200.0">
+                        <VBox minWidth="210.0" style="-fx-background-color: #61a2ff; -fx-border-color: black; -fx-border-width: 1.5;">
                            <children>
-                              <Label text="Wybierz miasto">
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Wybierz stacje" textFill="WHITE">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="OWMStationsBrowserTextField" promptText="Wpisz nazwe miasta" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="OWMStationsBrowserTextField" alignment="CENTER" promptText="Wpisz nazwe miasta" style="-fx-border-color: black; -fx-border-width: 1.5;" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></TextField>
                                  </children>
                               </HBox>
-                              <ListView fx:id="OWMStationsListView" onMouseClicked="#onClickOnOWMStationsListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="OWMStationsListView" onMouseClicked="#onClickOwmStationsListView" prefHeight="300.0" prefWidth="120.0" style="-fx-border-color: black; -fx-border-width: 1.5;" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickRefreshOwmStationsButton" style="-fx-border-color: black; -fx-border-width: 1.5;" stylesheets="@FXCSS/buttonAdd.css" text="Odśwież liste stacji" VBox.vgrow="ALWAYS">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/updateIcon.png" />
+                                       </image></ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </VBox>
-                        <TableView fx:id="measuresFromOWMTableView" HBox.hgrow="ALWAYS">
+                        <TableView fx:id="measuresFromOWMTableView" stylesheets="@FXCSS/tableView.css" HBox.hgrow="ALWAYS">
                           <columns>
-                            <TableColumn fx:id="tempColumn" prefWidth="100.0" text="Temperatura (C)" />
-                            <TableColumn fx:id="windColumn" prefWidth="109.0" text="Prędkość wiatru (m/s)" />
-                              <TableColumn fx:id="humidityColumn" prefWidth="91.0" text="Wilgotność (%)" />
-                              <TableColumn fx:id="claudinessColumn" prefWidth="170.0" text="Zachmurzenie" />
-                              <TableColumn fx:id="pressureColumn" prefWidth="91.0" text="Ciśnienie (hpa)" />
-                              <TableColumn fx:id="dateOWMColumn" maxWidth="1.7976931348623157E308" prefWidth="184.0" text="Data" />
+                            <TableColumn fx:id="tempColumn" maxWidth="-1.0" minWidth="180.0" prefWidth="-1.0" text="Temperatura (C)" />
+                            <TableColumn fx:id="windColumn" maxWidth="-1.0" minWidth="180.0" prefWidth="-1.0" text="Prędkość wiatru (m/s)" />
+                              <TableColumn fx:id="humidityColumn" maxWidth="-1.0" minWidth="180.0" prefWidth="-1.0" text="Wilgotność (%)" />
+                              <TableColumn fx:id="claudinessColumn" maxWidth="-1.0" minWidth="180.0" prefWidth="-1.0" text="Zachmurzenie" />
+                              <TableColumn fx:id="pressureColumn" maxWidth="-1.0" minWidth="180.0" prefWidth="-1.0" text="Ciśnienie (hpa)" />
+                              <TableColumn fx:id="dateOWMColumn" maxWidth="1.7976931348623157E308" minWidth="200.0" prefWidth="-1.0" text="Data" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -266,45 +78,56 @@
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox minWidth="200.0">
+                        <VBox minWidth="200.0" style="-fx-background-color: #61a2ff; -fx-border-color: black; -fx-border-width: 1.5;">
                            <children>
-                              <Label text="Wybierz miasto">
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Wybierz stacje" textFill="WHITE">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="GIOSStationsBrowserTextField" promptText="Wpisz nazwe miasta" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="GIOSStationsBrowserTextField" alignment="CENTER" promptText="Wpisz nazwe miasta" style="-fx-border-color: black; -fx-border-width: 1.5;" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></TextField>
                                  </children>
                               </HBox>
-                              <ListView fx:id="GIOSStationsListView" onMouseClicked="#onClickGIOSStation" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
-                           </children>
-                        </VBox>
-                        <VBox prefHeight="200.0" prefWidth="300.0">
-                           <children>
-                              <Label text="Wybierz sensor">
+                              <ListView fx:id="GIOSStationsListView" onMouseClicked="#onClickGIOSStation" prefHeight="300.0" prefWidth="120.0" style="-fx-border-color: black; -fx-border-width: 1.5;" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickRefreshGiosStationsAndSensorsButton" style="-fx-border-color: black; -fx-border-witdh: 1.5;" stylesheets="@FXCSS/buttonAdd.css" text="Odśwież liste stacji">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/updateIcon.png" />
+                                       </image></ImageView>
+                                 </graphic>
                                  <font>
                                     <Font size="16.0" />
                                  </font>
+                              </Button>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="200.0" prefWidth="300.0" style="-fx-border-color: black; -fx-border-width: 1.5; -fx-background-color: #61a2ff;">
+                           <children>
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Wybierz sensor" textFill="WHITE">
+                                 <font>
+                                    <Font name="System Bold" size="16.0" />
+                                 </font>
                               </Label>
-                              <ListView fx:id="sensorsListView" onMouseClicked="#onClickGIOSSensor" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                              <VBox fx:id="GIOSAirIndexName" prefHeight="242.0" prefWidth="300.0">
+                              <ListView fx:id="sensorsListView" onMouseClicked="#onClickGIOSSensor" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 1.5;" stylesheets="@FXCSS/listView.css" VBox.vgrow="ALWAYS" />
+                              <VBox fx:id="GIOSAirIndexName" prefHeight="242.0">
                                  <children>
-                                    <TableView fx:id="GIOSAirIndexTableView" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                    <TableView fx:id="GIOSAirIndexTableView" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 1.5;" VBox.vgrow="ALWAYS">
                                       <columns>
-                                        <TableColumn fx:id="GIOSAirIndexNameColumn" prefWidth="75.0" text="Sensor" />
-                                        <TableColumn fx:id="GIOSAirIndexValueColumn" prefWidth="224.0" text="Polski indeks jakości powietrza" />
+                                        <TableColumn fx:id="GIOSAirIndexNameColumn" prefWidth="107.0" text="Sensor" />
+                                        <TableColumn fx:id="GIOSAirIndexValueColumn" prefWidth="187.0" text="Polski indeks jakości powietrza" />
                                       </columns>
-                                       <columnResizePolicy>
-                                          <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                       </columnResizePolicy>
                                     </TableView>
                                  </children>
                               </VBox>
                            </children>
                         </VBox>
-                        <TableView fx:id="GIOSTableView" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                        <TableView fx:id="GIOSTableView" prefHeight="200.0" prefWidth="200.0" stylesheets="@FXCSS/tableView.css" HBox.hgrow="ALWAYS">
                           <columns>
                             <TableColumn fx:id="GIOSValueColumn" editable="false" prefWidth="234.0" text="Wartość (µg/m3, dla CO (mg/m3))" />
                             <TableColumn fx:id="GIOSDateColumn" editable="false" prefWidth="565.0" text="Data" />
@@ -319,7 +142,7 @@
             </Tab>
             <Tab text="Kalendarz pylenia roślin">
                <content>
-                  <VBox>
+                  <VBox style="-fx-background-color: #61a2ff;">
                      <children>
                         <HBox fillHeight="false" VBox.vgrow="ALWAYS">
                            <children>
@@ -2511,9 +2334,9 @@
                               </TableView>
                               <VBox fillWidth="false" maxHeight="50.0" maxWidth="1.7976931348623157E308">
                                  <children>
-                                    <Label text="Legenda" VBox.vgrow="ALWAYS">
+                                    <Label text="Legenda" textFill="WHITE" VBox.vgrow="ALWAYS">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
                                     <TableView maxWidth="150.0">
@@ -2541,9 +2364,9 @@
                                           </TableColumn>
                                        </columns>
                                     </TableView>
-                                    <Label text="ZK- znaczenie kliniczne">
+                                    <Label text="ZK- znaczenie kliniczne" textFill="WHITE">
                                        <font>
-                                          <Font size="16.0" />
+                                          <Font name="System Bold" size="16.0" />
                                        </font>
                                     </Label>
                                     <HBox>
@@ -2581,7 +2404,7 @@
                         </HBox>
                         <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
                            <children>
-                              <Label text="Aktualnie pylące rośliny">
+                              <Label text="Aktualnie pylące rośliny" textFill="WHITE">
                                  <font>
                                     <Font name="System Bold" size="16.0" />
                                  </font>
@@ -2593,7 +2416,7 @@
                               <ListView fx:id="actualDustyPlantsListView" minHeight="100.0" style="-fx-fixed-cell-size: 37;" VBox.vgrow="ALWAYS" />
                            </children>
                         </VBox>
-                        <Label text="dane: Ośrodek Badania Alergenów Środowiskowych Sp. z.o.o" />
+                        <Label text="Źródło danych: Ośrodek Badania Alergenów Środowiskowych Sp. z.o.o" textFill="WHITE" />
                      </children>
                   </VBox>
                </content>
@@ -2602,34 +2425,48 @@
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox>
+                        <VBox style="-fx-border-color: black; -fx-background-color: #61a2ff; -fx-border-width: 1.5;">
                            <children>
-                              <Label text="Wybierz miasto">
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Wybierz stacje" textFill="WHITE">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="takeMeasureFromUserBrowserTextField" promptText="Wpisz nazwe miasta" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="takeMeasureFromUserBrowserTextField" alignment="CENTER" promptText="Wpisz nazwe miasta" style="-fx-border-color: black; -fx-border-width: 1.5;" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></TextField>
                                  </children>
                               </HBox>
-                              <ListView fx:id="stationsToTakeMaeasureListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="usersStationsToTakeMaeasureListView" prefHeight="300.0" prefWidth="120.0" style="-fx-border-color: black; -fx-border-width: 1.5;" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickRefreshUsersStations" style="-fx-border-color: black; -fx-border-width: 1.5;" stylesheets="@FXCSS/buttonAdd.css" text="Odśwież liste stacji">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/updateIcon.png" />
+                                       </image></ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </VBox>
                         <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                            <children>
                               <HBox VBox.vgrow="NEVER">
                                  <children>
-                                    <ComboBox fx:id="measuresFromUserComboBox" prefWidth="5000.0" HBox.hgrow="ALWAYS" />
-                                    <Button minWidth="300.0" mnemonicParsing="false" onAction="#showMeasuresFromUserButton" text="Pokaż pomiary" />
+                                    <ComboBox fx:id="takeMeasuresFromUserComboBox" prefHeight="35.0" prefWidth="5000.0" HBox.hgrow="ALWAYS" />
+                                    <Button minWidth="300.0" mnemonicParsing="false" onAction="#showMeasuresFromUserButton" prefHeight="35.0" stylesheets="@FXCSS/buttonAdd.css" text="Pokaż pomiary" />
                                  </children>
                               </HBox>
                               <StackPane prefHeight="150.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <TableView fx:id="temperatureTableView" prefHeight="200.0" prefWidth="200.0">
+                                    <TableView fx:id="temperatureTableView" prefHeight="200.0" prefWidth="200.0" stylesheets="@FXCSS/tableView.css">
                                        <placeholder>
-                                          <Label text="Brak dostępnych danych dla wybranego miasta">
+                                          <Label>
                                              <font>
                                                 <Font name="System Bold" size="16.0" />
                                              </font>
@@ -2646,7 +2483,7 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView fx:id="windSpeedTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+                                    <TableView fx:id="windSpeedTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@FXCSS/tableView.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="dateWindSpeedUser" prefWidth="151.0" text="Data pomiaru" />
                                           <TableColumn fx:id="userNameWindSpeed" prefWidth="124.0" text="Autor pomiaru" />
@@ -2656,7 +2493,7 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView fx:id="pressureTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+                                    <TableView fx:id="pressureTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@FXCSS/tableView.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="datePressureUser" prefWidth="151.0" text="Data pomiaru" />
                                           <TableColumn fx:id="userNamePressure" prefWidth="124.0" text="Autor pomiaru" />
@@ -2666,7 +2503,7 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView fx:id="humidityTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+                                    <TableView fx:id="humidityTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@FXCSS/tableView.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="dateHumidityUser" prefWidth="151.0" text="Data pomiaru" />
                                           <TableColumn fx:id="userNameHumidity" prefWidth="124.0" text="Autor pomiaru" />
@@ -2676,7 +2513,7 @@
                                           <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                        </columnResizePolicy>
                                     </TableView>
-                                    <TableView fx:id="claudinessTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" visible="false">
+                                    <TableView fx:id="claudinessTableView" layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@FXCSS/tableView.css" visible="false">
                                        <columns>
                                           <TableColumn fx:id="dateClaudinessUser" prefWidth="151.0" text="date" />
                                           <TableColumn fx:id="userNameClaudiness" prefWidth="124.0" text="userName" />
@@ -2698,90 +2535,84 @@
                <content>
                   <HBox prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <VBox>
+                        <VBox style="-fx-background-color: #61a2ff; -fx-border-color: black; -fx-border-width: 1.5;">
                            <children>
-                              <Label text="Wybierz miasto">
+                              <Label alignment="CENTER" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Wybierz stacje" textFill="WHITE">
                                  <font>
-                                    <Font size="16.0" />
+                                    <Font name="System Bold" size="16.0" />
                                  </font>
                               </Label>
                               <HBox prefWidth="200.0">
                                  <children>
-                                    <TextField fx:id="addMesureFromUserBrowserTextField" promptText="Wpisz nazwe miasta" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="addMesureFromUserBrowserTextField" alignment="CENTER" promptText="Wpisz nazwe miasta" style="-fx-border-color: black; -fx-border-width: 1.5;" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font></TextField>
                                  </children>
                               </HBox>
-                              <ListView fx:id="stationsToAddMeasureListView" prefHeight="300.0" prefWidth="120.0" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="usersStationsToAddMeasureListView" prefHeight="300.0" prefWidth="120.0" style="-fx-border-color: black; -fx-border-width: 1.5;" VBox.vgrow="ALWAYS" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onClickRefreshUsersStations" style="-fx-border-color: black; -fx-border-width: 1.5;" stylesheets="@FXCSS/buttonAdd.css" text="Odśwież liste stacji">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@Icons/updateIcon.png" />
+                                       </image></ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </VBox>
-                        <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #61a2ff;" HBox.hgrow="ALWAYS">
                            <children>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox alignment="CENTER" maxWidth="530.0" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: #61a2ff;">
                                  <children>
-                                    <VBox prefHeight="371.0" prefWidth="166.0">
+                                    <VBox prefHeight="371.0" style="-fx-background-color: white;">
                                        <children>
-                                          <Label text="Temperatura powietrza">
+                                          <Label maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Temperatura powietrza (C)">
+                                             <font>
+                                                <Font size="16.0" />
+                                             </font>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                             <padding>
+                                                <Insets right="10.0" />
+                                             </padding>
+                                          </Label>
+                                          <Label layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Wilgotność powietrza (%)">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Wilgotnosć powietrza">
+                                          <Label layoutX="10.0" layoutY="139.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Ciśnienie (hPa)">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label text="Ciśnienie">
+                                          <Label layoutX="10.0" layoutY="168.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Prędkość wiatru (m/s)">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
-                                          <Label layoutX="10.0" layoutY="60.0" text="Prędkość wiatru">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="85.0" text="Zachmurzenie">
+                                          <Label layoutX="10.0" layoutY="197.0" maxWidth="1.7976931348623157E308" style="-fx-border-color: black; -fx-border-width: 1.5;" text="Zachmurzenie">
                                              <font>
                                                 <Font size="16.0" />
                                              </font>
                                           </Label>
                                        </children>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
                                     </VBox>
-                                    <VBox maxWidth="40.0" prefHeight="371.0" prefWidth="166.0">
+                                    <VBox maxWidth="300.0" prefHeight="371.0" prefWidth="166.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Label text="C">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="\%">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="hpa">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="60.0" text="m/s">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                          <Label layoutX="10.0" layoutY="85.0">
-                                             <font>
-                                                <Font size="16.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                    </VBox>
-                                    <VBox prefHeight="371.0" prefWidth="166.0" HBox.hgrow="ALWAYS">
-                                       <children>
-                                          <TextField fx:id="temperatureTextField" text="12" />
-                                          <TextField fx:id="humidityTextField" text="58" />
-                                          <TextField fx:id="pressureTextField" layoutX="10.0" layoutY="35.0" text="1020" />
-                                          <TextField fx:id="windSpeedTextField" layoutX="10.0" layoutY="35.0" text="10" />
-                                          <ComboBox fx:id="claudinessFromIserComboBox" maxWidth="1.7976931348623157E308" prefWidth="194.0" />
+                                          <TextField fx:id="addTemperatureFromUserTextField" stylesheets="@FXCSS/textFieldBorder.css" text="12" />
+                                          <TextField fx:id="addHumidityFromUserTextField" stylesheets="@FXCSS/textFieldBorder.css" text="58" />
+                                          <TextField fx:id="addPressureFromUserTextField" layoutX="10.0" layoutY="35.0" stylesheets="@FXCSS/textFieldBorder.css" text="1020" />
+                                          <TextField fx:id="addWindSpeedFromUserTextField" layoutX="10.0" layoutY="35.0" stylesheets="@FXCSS/textFieldBorder.css" text="10" />
+                                          <ComboBox fx:id="claudinessFromIserComboBox" maxWidth="1.7976931348623157E308" prefWidth="194.0" style="-fx-border-width: 1.5; -fx-border-color: black;" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -2791,9 +2622,19 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <HBox alignment="BOTTOM_CENTER" fillHeight="false" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <HBox alignment="BOTTOM_CENTER" fillHeight="false" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#addMeasureFromUserButton" prefHeight="40.0" prefWidth="10000.0" text="Prześlij pomiar" HBox.hgrow="ALWAYS" />
+                                    <Button alignment="CENTER" mnemonicParsing="false" onAction="#addMeasureFromUserButton" prefHeight="40.0" prefWidth="512.0" stylesheets="@FXCSS/buttonAdd.css" text="Prześlij pomiar" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="16.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@Icons/addIcon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Button>
                                  </children>
                               </HBox>
                            </children></VBox>
@@ -2801,7 +2642,464 @@
                   </HBox>
                </content>
             </Tab>
+            <Tab text="Dokumentacja użytkownika">
+               <content>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #61a2ff;">
+                     <children>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" stylesheets="@FXCSS/buttonAdd.css" text="Otwórz dokumentacje użytkownika" textAlignment="CENTER" wrapText="true">
+                           <graphic>
+                              <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@Icons/translateIcon.png" />
+                                 </image></ImageView>
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
         </tabs>
       </TabPane>
+      <StackPane fx:id="registerAndLoginStackPane" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: #61a2ff;" visible="false">
+         <children>
+            <VBox fx:id="loginVBox" alignment="CENTER" maxWidth="300.0" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Logowanie" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="badEmailOrPasswordLabel" text="Nieprawidłowy E-mail lub hasło" textFill="RED" visible="false">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="E-mail">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="loginEmailTextField" alignment="CENTER" maxWidth="300.0" onAction="#pressEnterToTypePassword" text="konradglkm@gmail.com">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <Label text="Hasło">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <PasswordField fx:id="passwordPasswordField" alignment="CENTER" onAction="#pressEnterToLogin" text="zaq1@WSX">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </PasswordField>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#loginButton" prefHeight="50.0" prefWidth="100.0" stylesheets="@FXCSS/buttonAdd.css" text="Zaloguj">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchOnForgotPasswordButton" prefHeight="30.0" stylesheets="@FXCSS/buttonRemove.css" text="Zapomnialem hasła">
+                           <VBox.margin>
+                              <Insets bottom="15.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                        <Label text="Nie posiadasz konta ?">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchOnRegisterButton" prefHeight="30.0" stylesheets="@FXCSS/buttonAdd.css" text="Rejestracja">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="registerVBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="400.0" prefHeight="200.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Rejestracja" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="registrationAlertLabel" text="Hasła nie są jednakowe" textFill="RED" visible="false" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="E-mail">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="registrationEmailTextField" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#pressEnterToTypeRegistrationPassword" text="konradglkm@gmail.com" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </TextField>
+                        <Label text="Hasło">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <PasswordField fx:id="registrationPasswordPasswordField" alignment="CENTER" onAction="#pressEnterToTypeConfirmedRegistrationPassword" text="zaq1@WSX">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </PasswordField>
+                        <Label layoutX="145.0" layoutY="64.0" text="Powtórz hasło">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </Label>
+                        <PasswordField fx:id="registrationConfirmedPasswordPasswordField" alignment="CENTER" layoutX="10.0" layoutY="73.0" onAction="#pressEnterToSendRegistrationCode" text="zaq1@WSX">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </PasswordField>
+                        <Button layoutX="132.0" layoutY="94.0" maxWidth="1.7976931348623157E308" minHeight="50.0" mnemonicParsing="false" onAction="#sendRegistrationCode" prefHeight="50.0" stylesheets="@FXCSS/buttonAdd.css" text="Zarejestruj">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Masz już konto ?">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Button maxWidth="1.7976931348623157E308" minHeight="30.0" mnemonicParsing="false" onAction="#switchOnLoginButton" stylesheets="@FXCSS/buttonAdd.css" text="Logowanie">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="register2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Rejestracja" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="registrationCodeAlertLabel" text="Hasła nie są jednakowe" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label minHeight="50.0" text="Aby potwierdzić rejestracje wpisz kod przesłany na podany wcześniej adres e-mail" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="registrationCodeTextField" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#pressEnterToRegister">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="132.0" layoutY="94.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#registerButton" prefHeight="50.0" stylesheets="@FXCSS/buttonAdd.css" text="Zarejestruj">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Nie otrzymałeś kodu na podany adres E-mail?">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="sendRegistrationCodeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#sendResetRegistrationCodeAgain" stylesheets="@FXCSS/buttonRemove.css" text="Wyślij kod ponownie">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Label text="Masz już konto ?">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchOnLoginButton" stylesheets="@FXCSS/buttonAdd.css" text="Logowanie">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="changePassword1VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zresetuj hasło" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="badEmailResetPasswordLabel" text="Nieprawidłowy E-mail" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Podaj adres E-mail dla którego chcesz zresetować hasło, zostanie na niego wysłany kod do resetowania hasła" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="emailToResetPasswordTextField" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#pressEnterToSendPasswordCode" text="konradgjd@gmail.com">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </TextField>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#sendResetPasswordCode" prefHeight="50.0" stylesheets="@FXCSS/buttonAdd.css" text="Wyślij kod">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Znasz hasło ?">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchOnLoginButton" stylesheets="@FXCSS/buttonAdd.css" text="Powrót do logowania">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="changePassword2VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zresetuj hasło" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="badCodeResetPasswordLabel" text="Nie prawidłowy kod" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Wpisz otrzymany kod aby zresetować hasło" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="resetCodeTextField" alignment="CENTER" maxWidth="1.7976931348623157E308" onAction="#pressEnterToResetPassword">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </TextField>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#goToChangePasswordAfterEnterCodeButton" prefHeight="50.0" stylesheets="@FXCSS/buttonAdd.css" text="Zresetuj hasło">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Nie otrzymałeś kodu na podany adres E-mail?">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="sendResetPasswordCodeButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#sendResetPasswordCodeAgain" stylesheets="@FXCSS/buttonRemove.css" text="Wyślij kod ponownie">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                        <Label text="Znasz hasło ?">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchOnLoginButton" stylesheets="@FXCSS/buttonAdd.css" text="Powrót do logowania">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+            <VBox fx:id="changePassword3VBox" alignment="CENTER" layoutX="160.0" layoutY="10.0" maxWidth="400.0" prefHeight="200.0" prefWidth="100.0" visible="false">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="100.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Zmiana hasła" textAlignment="CENTER" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label fx:id="badPasswordLabel" text="Nieprawidłowe hasło" textFill="RED" visible="false">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Label text="Hasło" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <PasswordField fx:id="resetPasswordPasswordField" onAction="#pressEnterToTypeResetConfirmedPassword">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </PasswordField>
+                        <Label layoutX="145.0" layoutY="43.0" text="Powtórz hasło" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <PasswordField fx:id="conifrmedResetPasswordPasswordField" layoutX="10.0" layoutY="52.0" onAction="#pressEnterToChangePassword">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </PasswordField>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#changePasswordButton" prefHeight="50.0" stylesheets="@FXCSS/buttonAdd.css" text="Zmień hasło">
+                           <VBox.margin>
+                              <Insets top="10.0" />
+                           </VBox.margin>
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </VBox>
+                  <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Label text="Znasz hasło ?">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchOnLoginButton" stylesheets="@FXCSS/buttonAdd.css" text="Powrót do logowania">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </StackPane>
    </children>
 </StackPane>

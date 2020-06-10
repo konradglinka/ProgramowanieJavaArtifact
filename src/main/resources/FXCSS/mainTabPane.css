@@ -1,0 +1,17 @@
+.tab-pane
+{
+-fx-tab-min-height: 40;
+}
+.tab-pane .tab{
+-fx-background-color: linear-gradient(#61a2ff, #2A5058);
+-fx-text-base-color:white;
+}
+
+
+
+.tab-pane .tab:hover{
+     -fx-background-color: linear-gradient(	#62b3ff, #3b5261);
+}
+.tab-pane .tab:selected{
+    -fx-background-color: linear-gradient(	#aa98a9, #2a3439);
+}

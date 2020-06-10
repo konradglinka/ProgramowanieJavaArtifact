@@ -1,15 +1,14 @@
 package Repositories.FromDB;
 
-import Objects.Station;
-import javafx.scene.control.ListView;
+import Objects.FromDB.Station;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 
 public class GIOSStationsRepository {
-    private ArrayList<Station> stations;
-    private ArrayList<String> stationsNamesWithCoordinates = new ArrayList<>();
+    private final ArrayList<Station> stations;
+    private final ArrayList<String> stationsNamesWithCoordinates = new ArrayList<>();
 
     public GIOSStationsRepository(ArrayList<Station> stationsArrayList) {
         this.stations = stationsArrayList;

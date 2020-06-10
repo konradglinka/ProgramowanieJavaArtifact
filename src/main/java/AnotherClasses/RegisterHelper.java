@@ -32,20 +32,10 @@ public class RegisterHelper {
             alertLabel.setVisible(true);
             alertLabel.setText("Hasło musi mieć minimum 8 znaków");
         }
-        if(password.length()<=35){
-            maximalSizeOfPassword=false;
-
-        }
-        else {
-            maximalSizeOfPassword=true;
-            alertLabel.setVisible(true);
-            alertLabel.setText("Hasło może mieć maksymalnie 35 znaków");
-        }
         password=password.toUpperCase();
         for(int i=0; i<password.length();i++) {
             if ((int) (password.charAt(i)) >= 65 && (int) (password.charAt(i)) <= 90) {
                 haveLetter=true;
-
             } else if ((int) (password.charAt(i)) >= 48 && (int) (password.charAt(i)) <= 57) {
                 haveNumber=true;
             }
@@ -53,8 +43,6 @@ public class RegisterHelper {
             {
                 specialMark=true;
             }
-
-
         }
         if(specialMark==false){
             alertLabel.setVisible(true);
@@ -77,12 +65,11 @@ public class RegisterHelper {
         return false;
     }
 
-    public boolean isEmail(TextField emailTextField){
+    public boolean isEmail(TextField emailTextField){ //Funkcja sprawdza czy podany adres email może być prawidłowy
         String email= emailTextField.getText();
         boolean haveMonkey=false;
         boolean havePoint=false;
         boolean minimalSize=false;
-        boolean maximalSize=false;
         boolean pointIsAfterMonkey=false;
         boolean startWithMonkey=false;
         boolean lettersBeetwenMonkeyAndPoint=false;
@@ -93,34 +80,25 @@ public class RegisterHelper {
         {
             minimalSize=true;
         }
-        if (email.length()>40)
-        {
-            maximalSize=true;
-        }
         for(int i=0;i<email.length();i++){
 
             if(email.charAt(i)=='@')
             {
-
                 haveMonkey=true;
                 whereIsMonkey=i;
-
             }
             if(email.charAt(i)=='.')
             {
                 havePoint=true;
                 whereIsPoint=i;
-
             }
         }
         if(whereIsMonkey<whereIsPoint){
             pointIsAfterMonkey=true;
-
         }
         if(whereIsPoint-whereIsMonkey>1)
 
         {
-
             lettersBeetwenMonkeyAndPoint=true;
         }
         if(whereIsMonkey==0){
@@ -132,7 +110,7 @@ public class RegisterHelper {
 
         }
 
-        if(haveMonkey==true && havePoint==true && minimalSize==true && maximalSize==false && pointIsAfterMonkey==true &&startWithMonkey==false&&lettersBeetwenMonkeyAndPoint==true&&textAfterPoint==true)
+        if(haveMonkey==true && havePoint==true && minimalSize==true  && pointIsAfterMonkey==true &&startWithMonkey==false&&lettersBeetwenMonkeyAndPoint==true&&textAfterPoint==true)
         {
             return true;
         }

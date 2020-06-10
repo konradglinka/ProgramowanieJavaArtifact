@@ -12,11 +12,7 @@ import java.util.Random;
 public class EmailToRegister implements Runnable {
     @Override
     public void run() {
-        try {
             sendRegistrationEmail();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
     }
 
     public EmailToRegister(TextField registrationEmailTextField, Button sendRegisterCodeButton) {
@@ -30,15 +26,16 @@ public class EmailToRegister implements Runnable {
     Button sendRegisterCodeButton;
 
     String registrationCode="";
+
     // Adres email aplikacji która wysyła maila
-    private static final String FROM = "weatherappkma@gmail.com";
+    private static final String FROM = Secret.getEmail();
     // Hasło do konta aplikacji która wysyła maila
-    private static final String PASSWORD = "c7kj92rmz";
+    private static final String PASSWORD = Secret.getPassword();
 
 
 
 
-    public void sendRegistrationEmail() throws MessagingException {
+    public void sendRegistrationEmail() {
 
         sendRegisterCodeButton.setDisable(true);
         // Temat wiadomości
@@ -80,10 +77,9 @@ public class EmailToRegister implements Runnable {
     public void setRegistrationCode(){
         this.registrationCode="";
         Random random = new Random();
-        this.registrationCode+=random.nextInt(10);
-        this.registrationCode+=random.nextInt(10);
-        this.registrationCode+=random.nextInt(10);
-        this.registrationCode+=random.nextInt(10);
+        while (registrationCode.length()<4) {
+            this.registrationCode += random.nextInt(10);
+        }
 
     }
 public String getRegistrationCode(){

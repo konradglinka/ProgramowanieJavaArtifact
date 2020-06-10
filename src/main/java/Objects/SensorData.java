@@ -2,8 +2,8 @@ package Objects;
 
 
 public class SensorData {
-    String date;
-    double value;
+    private String date;
+    private double value;
 
     public SensorData(String date, double value) {
         this.date = date;
@@ -20,9 +20,5 @@ public class SensorData {
 
     public double getValue() {
         return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
     }
 }

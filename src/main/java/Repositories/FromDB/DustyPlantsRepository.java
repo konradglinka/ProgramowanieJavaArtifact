@@ -1,15 +1,16 @@
 package Repositories.FromDB;
 
-import Objects.DustyPlant;
+import Objects.FromDB.DustyPlant;
 
 import java.util.ArrayList;
 
-public class DustyPlantsRepository {
+public final class DustyPlantsRepository {
+    private  final ArrayList<DustyPlant>dustyPlantArraylist;
     public DustyPlantsRepository(ArrayList<DustyPlant> dustyPlantArraylist) {
         this.dustyPlantArraylist = dustyPlantArraylist;
     }
 
-    ArrayList<DustyPlant>dustyPlantArraylist=new ArrayList<>();
+
     public ArrayList<DustyPlant> getDustyPlantArraylist() {
         return dustyPlantArraylist;
     }

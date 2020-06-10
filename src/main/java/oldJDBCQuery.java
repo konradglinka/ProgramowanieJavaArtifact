@@ -1,7 +1,7 @@
 /*
 import AnotherClasses.MD5;
-import Objects.DustyPlant;
-import Objects.GIOSSensor;
+import Objects.FromDB.DustyPlant;
+import Objects.FromDB.GIOSSensor;
 import AnotherClasses.AddUserMeasureHelper;
 import Repositories.FromDB.AppSettingsRepository;
 import Objects.*;
@@ -303,7 +303,7 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
         return ENGNames;
     }
 /*
-    //GIOS DATABASES
+    //ObjectsForMapper DATABASES
     public void addValuesToGiosStationsTable() throws IOException {
         ListOfGIOSCitiesFactory listOfGIOSCitiesFactory=new ListOfGIOSCitiesFactory();
         Statement stmt = null;
@@ -402,8 +402,8 @@ public ArrayList<ClaudinessFromUser> getClaudinessFromUserList() throws SQLExcep
         return dustyPlants;
     }
     /*public void addValuesToOWMStationsTable() throws IOException {
-        OWMStationsRepository OWMStationsRepository=new OWMStationsRepository();
-        ArrayList<Station>list=OWMStationsRepository.getStations();
+        owmStationsRepository owmStationsRepository=new owmStationsRepository();
+        ArrayList<Station>list=owmStationsRepository.getStations();
         Statement stmt = null;
         try {
             stmt = connection.createStatement();

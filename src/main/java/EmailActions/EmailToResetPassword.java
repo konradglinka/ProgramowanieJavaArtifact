@@ -11,19 +11,13 @@ import java.util.Random;
 
 
 public class EmailToResetPassword implements Runnable {
-    public String resetPasswordCode ="";
+    private String resetPasswordCode ="";
     private String resetPasswordEmail;
     private Button sendResetPasswordCodeButton;
     @Override
     public void run() {
-        try {
+            sendResetPasswordEmail();}
 
-
-            sendResetPasswordEmail();
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-    }
 
 
 
@@ -38,14 +32,14 @@ public class EmailToResetPassword implements Runnable {
 
 
     // Adres email aplikacji która wysyła maila
-    private static final String FROM = "weatherappkma@gmail.com";
+    private static final String FROM = Secret.getEmail();
     // Hasło do konta aplikacji która wysyła maila
-    private static final String PASSWORD = "c7kj92rmz";
+    private static final String PASSWORD = Secret.getPassword();
 
 
 
 
-    public void sendResetPasswordEmail() throws MessagingException {
+    public void sendResetPasswordEmail()  {
 
 sendResetPasswordCodeButton.setDisable(true);
         // Temat wiadomości
@@ -88,14 +82,9 @@ sendResetPasswordCodeButton.setDisable(true);
     public void setResetPasswordCode(){
         this.resetPasswordCode ="";
         Random random = new Random();
-        this.resetPasswordCode +=random.nextInt(10);
-        this.resetPasswordCode +=random.nextInt(10);
-        this.resetPasswordCode +=random.nextInt(10);
-        this.resetPasswordCode +=random.nextInt(10);
-        this.resetPasswordCode +=random.nextInt(10);
-        this.resetPasswordCode +=random.nextInt(10);
-        this.resetPasswordCode +=random.nextInt(10);
-        this.resetPasswordCode +=random.nextInt(10);
+        while (resetPasswordCode.length()<8) {
+            this.resetPasswordCode += random.nextInt(10);
+        }
 
     }
 public String getResetPasswordCode(){

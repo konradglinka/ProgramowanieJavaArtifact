@@ -1,10 +1,10 @@
 package Repositories.FromDB;
 
-import Objects.*;
+import Objects.FromDB.*;
 
 import java.util.ArrayList;
 
-public class UserMeasuresRepository { //Klasa zawiera metody zwracjące lity konkretnych pomiarów dla wybranego miasta
+public class UserMeasuresRepository { //Klasa zawiera metody zwracające listy konkretnych pomiarów dla wybranego miasta
     // (Wyciaga z listy ze wszystkimi miastami pomiary tylko dla danego miasta)
 
     public ArrayList<TemperatureFromUser> showTemperaturesFromUsersInCity(int ID, ArrayList<TemperatureFromUser>

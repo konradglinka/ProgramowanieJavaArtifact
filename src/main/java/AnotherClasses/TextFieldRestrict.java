@@ -5,8 +5,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
 
-public class TextFieldRestrict {
-    public void limitCharsForTextField(TextField textField, int LIMIT) { //Method dont let user write more than LIMIT chars
+public class TextFieldRestrict { //Klasa posiada metody które regulują co znajduję się w polach textowych
+    public void limitCharsForTextField(TextField textField, int LIMIT) { //maksymalna ilość znaków w polu
         textField.lengthProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 if (newValue.intValue() > oldValue.intValue()) {
@@ -18,7 +18,7 @@ public class TextFieldRestrict {
         });
     }
     public void onlyPlusDigitsInTextField (TextField textField){
-        textField.textProperty().addListener(new ChangeListener<String>() { //Method let user write only numbers or .
+        textField.textProperty().addListener(new ChangeListener<String>() { // Tylko dodanie liczby w polu
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
@@ -29,7 +29,7 @@ public class TextFieldRestrict {
         });
     }
     public void onlyDigitsInTextField (TextField textField){
-        textField.textProperty().addListener(new ChangeListener<String>() { //Method let user write only numbers or .
+        textField.textProperty().addListener(new ChangeListener<String>() { //Tylko liczby w polu
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
@@ -43,7 +43,7 @@ public class TextFieldRestrict {
         });
     }
     public void onlyTextInTextField (TextField textField) {
-        textField.textProperty().addListener(new ChangeListener<String>() { //Method let user write only numbers or .
+        textField.textProperty().addListener(new ChangeListener<String>() { //Tylko tekst w polu
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue,
                                 String newValue) {
